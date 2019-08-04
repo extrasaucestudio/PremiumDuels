@@ -21,6 +21,8 @@ class UsersTableSeeder extends Seeder
             'uid' => 111,
             'title_id' => 2,
             'elo' => 2500,
+            'active' => true,
+            'country_code' => 'de',
         ]);
 
         DB::table('users')->insert([
@@ -31,6 +33,9 @@ class UsersTableSeeder extends Seeder
             'uid' => 112,
             'title_id' => 2,
             'elo' => 2500,
+            'active' => true,
+            'country_code' => 'ru',
+
         ]);
 
     }
