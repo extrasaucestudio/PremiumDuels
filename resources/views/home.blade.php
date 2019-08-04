@@ -29,11 +29,14 @@
             </div>
 
             <br>
-            <h1 style="text-align: center">Next Rank: {{$nextRank->name}} <img style=" width: 85px;
+            <h1 style="text-align: center">Next Rank: @if(!is_object($nextRank)) None @else {{$nextRank->name}} @endif
+                @if(is_object($nextRank))
+                <img style=" width: 85px;
                 float: center;" src="{{$nextRank->image}}"></h1>
             <progress id="js-progressbar" class="uk-progress" value="{{$user->elo}}"
                 max="{{$nextRank->elo}}"></progress>
-
+            @endif
+            </h1>
 
 
             <div class="uk-child-width-1-2@s uk-grid-match" uk-grid>

@@ -24,16 +24,24 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index(Request $request, $user = null)
     {
-        $user = \Auth::user();
+        if (\Request::is('home')) { 
+            $user = \Auth::user();
+          } else {
+          $user = User::Where('name', $user)->first();
+          if(!$user) return \Redirect::to('/');
+          }
+
+   
+
         $users = User::OrderBy('elo', 'DESC')->get();
 
         $duels = Duel::Where('winner_id', $user->id)->orWhere('loser_id', $user->id)->count();
 
 
     
-        $winratio = 'None';
+        $winratio = '0%';
         if($user->DuelsWon->count() != 0 || $user->DuelsWon->count() != null) {
             $winratio = floor($user->DuelsWon->count()/$duels*100) . '%';
         } 

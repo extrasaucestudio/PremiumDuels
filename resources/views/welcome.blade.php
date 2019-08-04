@@ -26,7 +26,7 @@
 
 
         <form style=" width: 50%;" class="uk-search uk-search-default searchPlayers">
-            <input style="background-color: white;" type="text" name="user_name" id="user_name"
+            <input autocomplete="off" style="background-color: white;" type="text" name="user_name" id="user_name"
                 class="uk-search-input autocomplete" type="search" placeholder="Search for user...">
 
 
@@ -36,24 +36,41 @@
 
         <div class="uk-child-width-1-3@m uk-grid-small uk-grid-match" uk-grid>
             <div>
-                <div class="uk-card uk-card-default uk-card-body">
+                <div class="uk-card uk-card-default uk-card-body uk-animation-scale-up">
                     <h3 class="uk-card-title">Players Registered</h3>
                     <p id="PlayersNum">0</p>
                 </div>
             </div>
             <div>
-                <div class="uk-card uk-card-primary uk-card-body">
-                    <h3 class="uk-card-title">Duels Finished</h3>
-                    <p id="DuelsNum">0</p>
+                <div class="uk-card uk-card-primary uk-card-body uk-animation-scale-up">
+                    <h3 class="uk-card-title">FT7 Finished</h3>
+                    <p id="DuelsNum">{{$duels->count()}}</p>
                 </div>
             </div>
             <div>
-                <div class="uk-card uk-card-secondary uk-card-body">
+                <div class="uk-card uk-card-secondary uk-card-body uk-animation-scale-up">
                     <h3 class="uk-card-title">Online</h3>
                     <p>0/64</p>
                 </div>
             </div>
         </div>
+
+        <ul class="uk-list uk-container uk-container-xsmall latest_duels uk-animation-slide-right-medium"
+            style="text-align: center">
+            <h1 class="myH1">Latest Duels</h1>
+            <li>
+                @foreach ($duels->take(3) as $duel)
+                <h1 style="color: #FFFF40">
+                    <div href="#" class="duel_winner">{{$duel->Duel_winner->name}}
+                    </div><img src="images/vs.png" class="vsIcon">
+                    <div href="#" class=" duel_loser">
+                        {{$duel->Duel_loser->name}}</div>
+                </h1>
+                @endforeach
+
+            </li>
+
+        </ul>
 
         <div class="leaderboard">
             <h1 class="myH1">Leaderboard</h1>
@@ -68,8 +85,8 @@
                 <tbody>
 
                     @foreach ($users as $user)
-                    <tr>
-                        <td>{{$user->name}}</td>
+                    <tr class="uk-animation-scale-up">
+                        <td><a href="/user/{{$user->name}}">{{$user->name}}</a></td>
                         <td>{{$user->Title->name}} &nbsp <img class="rank_img_leaderboard"
                                 src="{{$user->Title->image}}"> </td>
                         <td>{{$user->elo}}</td>
@@ -123,7 +140,7 @@
 
     animateValue("PlayersNum", 0, {{$users->count()}}, 200);
 
-    animateValue("DuelsNum", 0, 200, 200);
+    animateValue("DuelsNum", 0, {{$duels}}, 200);
 
 </script>
 

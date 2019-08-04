@@ -23,7 +23,7 @@
 }
 
 .leaderboard {
-    padding-top: 50vh;
+    padding-top: 30vh;
     display: inline-block;
     width: 100%;
 }
@@ -45,4 +45,36 @@
 
 body {
     background-color: #2e2e2e !important;
+}
+
+.latest_duels {
+    padding-top: 30vh;
+    display: block;
+}
+
+.duel_winner {
+    color: red;
+    display: inline;
+}
+
+@media (max-width: 600px) {
+    .duel_winner {
+        font-size: 25px;
+    }
+    .duel_loser {
+        font-size: 25px;
+    }
+    .vsIcon {
+        width: 10px;
+    }
+}
+
+.duel_loser {
+    color: green;
+    display: inline;
+}
+
+.vsIcon {
+    float: center;
+    width: 50px;
 }

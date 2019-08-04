@@ -21,7 +21,7 @@
         <div class="uk-box-shadow-medium uk-navbar-container uk-navbar-primary" uk-navbar="mode: click">
             <div class="uk-container uk-container-expand uk-width-1-1">
 
-                <nav class="uk-navbar">
+                <nav class="uk-navbar uk-animation-slide-top">
 
                     <div class="uk-navbar-left">
                         <!-- Branding Image -->

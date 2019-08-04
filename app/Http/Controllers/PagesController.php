@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\Title;
+use App\Duel;
 
 
 
@@ -14,7 +15,9 @@ class PagesController extends Controller
     public function welcome()
     {
         $users = User::all();
-        return view('welcome', compact('users'));
+        $duels = Duel::orderBy('created_at', 'DESC')->get();
+    
+        return view('welcome', compact('users', 'duels'));
     }
 
     public function search()
