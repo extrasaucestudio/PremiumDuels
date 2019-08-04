@@ -26050,6 +26050,7 @@ iframe.uk-cover {
 
 .home {
   background-color: #fcba03;
+  z-index: 1;
 }
 
 .inline {

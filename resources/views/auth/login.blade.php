@@ -16,13 +16,12 @@
 
                     <div>
                         <label class="uk-form-label">ID</label>
-                        <input id="email" type="email"
-                            class="uk-input{{ $errors->has('email') ? ' uk-form-danger' : '' }}" name="email"
-                            value="{{ old('email') }}" required autofocus>
+                        <input id="uid" type="text" class="uk-input{{ $errors->has('uid') ? ' uk-form-danger' : '' }}"
+                            name="uid" value="{{ old('uid') }}" required autofocus>
 
-                        @if ($errors->has('email'))
+                        @if ($errors->has('uid'))
                         <div class="uk-alert-danger" uk-alert>
-                            {{ $errors->first('email') }}
+                            {{ $errors->first('uid') }}
                         </div>
                         @endif
                     </div>

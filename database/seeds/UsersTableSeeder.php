@@ -15,7 +15,7 @@ class UsersTableSeeder extends Seeder
             'name' => Str::random(10),
             'email' => Str::random(10).'@gmail.com',
             'password' => bcrypt('password'),
-            'uid' => 777,
+            'uid' => 111,
             'title_id' => 2,
             'elo' => 2500,
         ]);
@@ -23,7 +23,7 @@ class UsersTableSeeder extends Seeder
             'name' => Str::random(10),
             'email' => Str::random(10).'@gmail.com',
             'password' => bcrypt('password'),
-            'uid' => 777,
+            'uid' => 112,
             'title_id' => 2,
             'elo' => 2500,
         ]);
@@ -31,7 +31,7 @@ class UsersTableSeeder extends Seeder
             'name' => Str::random(10),
             'email' => Str::random(10).'@gmail.com',
             'password' => bcrypt('password'),
-            'uid' => 777,
+            'uid' => 113,
             'title_id' => 3,
             'elo' => 3000,
         ]);
@@ -39,7 +39,7 @@ class UsersTableSeeder extends Seeder
             'name' => Str::random(10),
             'email' => Str::random(10).'@gmail.com',
             'password' => bcrypt('password'),
-            'uid' => 777,
+            'uid' => 114,
             'title_id' => 3,
             'elo' => 3000,
         ]);
@@ -47,7 +47,7 @@ class UsersTableSeeder extends Seeder
             'name' => Str::random(10),
             'email' => Str::random(10).'@gmail.com',
             'password' => bcrypt('password'),
-            'uid' => 777,
+            'uid' => 115,
             'title_id' => 3,
             'elo' => 3000,
         ]);

@@ -18,7 +18,8 @@
     <div id="app">
 
 
-        <div class="uk-box-shadow-medium uk-navbar-container uk-navbar-primary" uk-navbar="mode: click">
+        <div class="uk-box-shadow-medium uk-navbar-container uk-navbar-primary" uk-navbar="mode: click"
+            style="z-index: 2;">
             <div class="uk-container uk-container-expand uk-width-1-1">
 
                 <nav class="uk-navbar uk-animation-slide-top">
