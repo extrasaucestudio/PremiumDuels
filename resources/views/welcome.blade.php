@@ -38,7 +38,7 @@
             <div>
                 <div class="uk-card uk-card-default uk-card-body uk-animation-scale-up">
                     <h3 class="uk-card-title">Players Registered</h3>
-                    <p id="PlayersNum">0</p>
+                    <p id="PlayersNum">{{$users->count()}}</p>
                 </div>
             </div>
             <div>
@@ -50,7 +50,7 @@
             <div>
                 <div class="uk-card uk-card-secondary uk-card-body uk-animation-scale-up">
                     <h3 class="uk-card-title">Online</h3>
-                    <p>0/64</p>
+                    <p>{{$serverData[5]}}/{{$serverData[6]}}</p>
                 </div>
             </div>
         </div>
@@ -60,11 +60,14 @@
             <h1 class="myH1">Latest Duels</h1>
             <li>
                 @foreach ($duels->take(3) as $duel)
-                <h1 style="color: #FFFF40">
-                    <div href="#" class="duel_winner">{{$duel->Duel_winner->name}}
+                <h1 style="color: #FFFF40" style="    overflow: hidden;
+                white-space: nowrap;">
+                    <div href="#" class="duel_winner"><span style="margin-right: 25px"
+                            class="flag-icon flag-icon-{{$duel->Duel_winner->country_code}}"></span>{{$duel->Duel_winner->name}}
                     </div><img src="images/vs.png" class="vsIcon">
                     <div href="#" class=" duel_loser">
-                        {{$duel->Duel_loser->name}}</div>
+                        {{$duel->Duel_loser->name}}<span style="margin-left: 25px"
+                            class="flag-icon flag-icon-{{$duel->Duel_loser->country_code}}"></span></div>
                 </h1>
                 @endforeach
 
@@ -86,7 +89,8 @@
 
                     @foreach ($users as $user)
                     <tr class="uk-animation-scale-up">
-                        <td><a href="/user/{{$user->name}}">{{$user->name}}</a></td>
+                        <td><a href="/user/{{$user->name}}">{{$user->name}} <span
+                                    class="flag-icon flag-icon-{{$user->country_code}}"></span></a></td>
                         <td>{{$user->Title->name}} &nbsp <img class="rank_img_leaderboard"
                                 src="{{$user->Title->image}}"> </td>
                         <td>{{$user->elo}}</td>
@@ -119,33 +123,6 @@
 </body>
 
 </html>
-
-
-<script>
-    function animateValue(id, start, end, duration) {
-        if(end == 0) return
-        var range = end - start;
-        var current = start;
-        var increment = end > start ? 1 : -1;
-        var stepTime = Math.abs(Math.floor(duration / range));
-        var obj = document.getElementById(id);
-        var timer = setInterval(function () {
-            current += increment;
-            obj.innerHTML = current;
-            if (current == end) {
-                clearInterval(timer);
-            }
-        }, stepTime);
-    }
-
-    animateValue("PlayersNum", 0, {{$users->count()}}, 200);
-
-    animateValue("DuelsNum", 0, {{$duels}}, 200);
-
-</script>
-
-
-
 
 <script>
     $(document).ready(function(){
@@ -185,5 +162,28 @@
    }
 });
 
+
+
+    function animateValue(id, start, end, duration) {
+        if(end == 0) return
+        var range = end - start;
+        var current = start;
+        var increment = end > start ? 1 : -1;
+        var stepTime = Math.abs(Math.floor(duration / range));
+        var obj = document.getElementById(id);
+        var timer = setInterval(function () {
+            current += increment;
+            obj.innerHTML = current;
+            if (current == end) {
+                clearInterval(timer);
+            }
+        }, stepTime);
+    }
+
+    animateValue("PlayersNum", 0, {{$users->count()}}, 200);
+
+animateValue("DuelsNum", 0, {{$duels->count()}}, 200);
+
+$('.searchPlayers').val('');
 
 </script>

@@ -16,8 +16,33 @@ class PagesController extends Controller
     {
         $users = User::all();
         $duels = Duel::orderBy('created_at', 'DESC')->get();
-    
-        return view('welcome', compact('users', 'duels'));
+
+
+        function getPlayersOnServer()
+        {
+            $myFile = 'http://www.mnbcentral.net/min';
+        
+            $str = 'TR_Avrasya_RPG';
+     
+             function getLineWithString($fileName, $str) {
+                 $lines = file($fileName);
+                 foreach ($lines as $lineNumber => $line) {
+                     if (strpos($line, $str) !== false) {
+                         return $line;
+                     }
+                 }
+                 return -1;
+             }
+     
+             $data = explode(",", getLineWithString($myFile, $str));
+      return $data;
+        }
+
+
+        $serverData = getPlayersOnServer();
+
+
+        return view('welcome', compact('users', 'duels', 'serverData'));
     }
 
     public function search()
@@ -53,15 +78,12 @@ class PagesController extends Controller
 
 
 
-    public function test()
+    public function test(Request $request)
     {
-       $elo = 1800;
 
-       $titles = Title::Where('elo', '<=', $elo)->orderBy('elo', 'DESC')->first();
-       
 
-       $user = User::first();
-       return '1|' . $user->Title->name . '|';
-      
+
+        
+
     }
 }

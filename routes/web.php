@@ -23,3 +23,4 @@ Route::get('/test', 'PagesController@test');
 
 
 Route::get('/api/check', 'WarbandApiController@check');
+Route::get('/api/ft7', 'WarbandApiController@FT7');

@@ -17,6 +17,10 @@ class CreateDuelsTable extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('winner_id')->unsigned();
             $table->bigInteger('loser_id')->unsigned();
+            $table->integer('winner_score');
+            $table->integer('loser_score');
+            $table->integer('winner_elo_plus');
+            $table->integer('loser_elo_minus');
             $table->timestamps();
         });
 

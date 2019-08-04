@@ -61,7 +61,10 @@ class HomeController extends Controller
         if(!$nextRank) {
             $nextRank = 'None';
         } 
-        return view('home', compact('user', 'duels', 'rank', 'nextRank', 'winratio'));
+
+        $LastDuels = Duel::Where('winner_id', $user->id)->orWhere('loser_id', $user->id)->orderBy('created_at', 'DESC')->get();
+
+        return view('home', compact('user', 'duels', 'rank', 'nextRank', 'winratio', 'LastDuels'));
     }
 
 }

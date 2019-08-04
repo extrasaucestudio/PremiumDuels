@@ -10,8 +10,17 @@
 
             <br>
 
+
             <div class="stats uk-container-small uk-container">
+                <h1 style="text-align: center">
+                    {{$user->name}} from <span style="margin-left: 25px"
+                        class="flag-icon flag-icon-{{$user->country_code}}"></span>
+                </h1>
+                <br>
+
+
                 <dl class="uk-description-list uk-description-list-divider">
+
                     <dt>Kills: <b>{{$user->kills}}</b></dt>
                     <dd>Number of kills collected in FT7 Duels.</dd>
                     <dt>Deaths: <b>{{$user->deaths}}</b></dt>
@@ -66,6 +75,47 @@
                     </div>
                 </div>
             </div>
+            <br>
+
+            <div class="stats uk-container-xsmall uk-container">
+
+                <br>
+                <h1 class="myH1">Latest Duels</h1>
+                <table class="uk-table uk-table-hover uk-table-divider" style="color: black">
+                    <thead>
+                        <tr>
+                            <th>Username</th>
+                            <th></th>
+                            <th></th>
+                            <th>Username</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($LastDuels->take(5) as $duel)
+
+                        <tr @if($duel->Duel_loser->id == $user->id) style="background-color: rgba(255, 0, 0, 0.59)"
+                            @else
+                            style="background-color: rgba(0, 255, 0, 0.65)" @endif>
+
+                            <td><span style="padding-right: 50px"
+                                    class="flag-icon flag-icon-{{$duel->Duel_winner->country_code}}"></span>
+                                {{$duel->Duel_winner->name}} <img class="rank_img_leaderboard"
+                                    src="{{$duel->Duel_winner->Title->image}}"> </td>
+                            <td>{{$duel->winner_score}}<span style="color: green"> (+{{$duel->winner_elo_plus}})</span>
+                            </td>
+                            <td>{{$duel->loser_score}} <span style="color:crimson">({{$duel->loser_elo_minus}})</span>
+                            </td>
+                            <td style="float: right"> <span style="padding-right: 50px"
+                                    class="flag-icon flag-icon-{{$duel->Duel_loser->country_code}}">
+                                </span> {{$duel->Duel_loser->name}} <img class="rank_img_leaderboard"
+                                    src="{{$duel->Duel_winner->Title->image}}"></td>
+                        </tr>
+                        @endforeach
+
+                    </tbody>
+                </table>
+            </div>
+
         </div>
 
     </div>
