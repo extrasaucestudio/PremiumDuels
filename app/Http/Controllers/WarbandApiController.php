@@ -13,7 +13,7 @@ class WarbandApiController extends Controller
     public function check(Request $request)
     {
 
-        if(!$request->uid || !$request->username) return '-2';
+        if(!$request->uid || !$request->username) return '-2| Wrong query';
 
        $user = User::find($request->uid);
 
@@ -29,11 +29,11 @@ class WarbandApiController extends Controller
         $user->secret_key = $pass;
         $user->save();
 
-        return '1|' . $user->uid . '|' . $user->secret_key;
+        return '1|' . $request->uid . '|' . $user->secret_key;
        } else if(!$user->active){
            return '2|'. $user->uid . '|' .$user->secret_key;
        } else {
-           return '3|' . $user->uid . '|' . $user->elo;
+           return '3|' . $user->uid . '|' . $user->secret_key . '|' . $user->elo;
        }
 
     }
@@ -49,7 +49,7 @@ class WarbandApiController extends Controller
 
         if(!$winner || !$loser) return '-3|One of participants doesnt have account';
         if(!$winner->active) return '-4|Winner of duel have inactive account';
-        if(!$loser->active) return '-4|Loser of duel have inactive account';
+        if(!$loser->active) return '-6|Loser of duel have inactive account';
 
 
         $winner_player = new Player($winner->elo);
