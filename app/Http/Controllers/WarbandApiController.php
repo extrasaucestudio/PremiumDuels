@@ -31,8 +31,10 @@ class WarbandApiController extends Controller
 
         return '1|' . $request->uid . '|' . $user->secret_key;
        } else if(!$user->active){
+        $user->touch();
            return '2|'. $user->uid . '|' .$user->secret_key;
        } else {
+        $user->touch();
            return '3|' . $user->uid . '|' . $user->secret_key . '|' . $user->elo;
        }
 
@@ -98,6 +100,9 @@ if($loser_rating > $loser->elo) $loser_rating = $loser->elo;
        $loser->increment('deaths', $request->winner_score);
         $winner->save();
         $loser->save();
+
+        $winner->touch();
+        $loser->touch();
 
     return '5|' . $winner->uid . '|' . $loser->uid . '|' . $elo_plus . '|' . $elo_minus;
 

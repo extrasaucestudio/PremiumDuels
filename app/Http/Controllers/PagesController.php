@@ -14,7 +14,7 @@ class PagesController extends Controller
    
     public function welcome()
     {
-        $users = User::all();
+        $users = User::Where('active', 1)->orderBy('elo', 'DESC')->get();
         $duels = Duel::orderBy('created_at', 'DESC')->get();
 
 
@@ -59,7 +59,7 @@ class PagesController extends Controller
      if($request->get('query'))
      {
       $query = $request->get('query');
-      $users = User::where('name', 'LIKE', "%{$query}%")->get();
+      $users = User::where('name', 'LIKE', "%{$query}%")->Where('active', 1)->get();
 
 
     if($users->isEmpty()) return 1;

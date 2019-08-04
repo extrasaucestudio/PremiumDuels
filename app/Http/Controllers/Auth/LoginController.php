@@ -46,10 +46,13 @@ class LoginController extends Controller
 
     protected function authenticated($request, $user)
     {
+        if($user->active == false ){ 
         $geolocation = geoip($request->ip);
        $user->active = true;
        $user->country_code = strtolower($geolocation->getLocation()->iso_code);
+       $user->touch();
        $user->save();
+        }
     }
 
 
