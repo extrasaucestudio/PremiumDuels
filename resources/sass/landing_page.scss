@@ -54,7 +54,7 @@ body {
 }
 
 .duel_winner {
-    color: red;
+    color: red !important;
     display: inline;
 }
 
@@ -71,7 +71,7 @@ body {
 }
 
 .duel_loser {
-    color: green;
+    color: green !important;
     display: inline;
 }
 

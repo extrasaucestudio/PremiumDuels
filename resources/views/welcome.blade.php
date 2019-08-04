@@ -63,10 +63,11 @@
                 <h1 style="color: #FFFF40" style="    overflow: hidden;
                 white-space: nowrap;">
                     <div href="#" class="duel_winner"><span style="margin-right: 25px"
-                            class="flag-icon flag-icon-{{$duel->Duel_winner->country_code}}"></span>{{$duel->Duel_winner->name}}
+                            class="flag-icon flag-icon-{{$duel->Duel_winner->country_code}}"></span><a
+                            href="/user/{{$duel->Duel_winner->uid}}">{{$duel->Duel_winner->name}}</a>
                     </div><img src="images/vs.png" class="vsIcon">
-                    <div href="#" class=" duel_loser">
-                        {{$duel->Duel_loser->name}}<span style="margin-left: 25px"
+                    <div href="#" class=" duel_loser"><a href="/user/{{$duel->Duel_loser->uid}}">
+                            {{$duel->Duel_loser->name}}</a><span style="margin-left: 25px"
                             class="flag-icon flag-icon-{{$duel->Duel_loser->country_code}}"></span></div>
                 </h1>
                 @endforeach
@@ -89,7 +90,7 @@
 
                     @foreach ($users as $user)
                     <tr class="uk-animation-scale-up">
-                        <td><a href="/user/{{$user->name}}">{{$user->name}} <span
+                        <td><a href="/user/{{$user->uid}}">{{$user->name}} <span
                                     class="flag-icon flag-icon-{{$user->country_code}}"></span></a></td>
                         <td>{{$user->Title->name}} &nbsp <img class="rank_img_leaderboard"
                                 src="{{$user->Title->image}}"> </td>

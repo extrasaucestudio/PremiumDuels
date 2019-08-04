@@ -13,7 +13,7 @@
 
             <div class="stats uk-container-small uk-container">
                 <h1 style="text-align: center">
-                    {{$user->name}} from <span style="margin-left: 25px"
+                    {{$user->name}} <span style="margin-left: 25px"
                         class="flag-icon flag-icon-{{$user->country_code}}"></span>
                 </h1>
                 <br>
@@ -99,16 +99,16 @@
 
                             <td><span style="padding-right: 50px"
                                     class="flag-icon flag-icon-{{$duel->Duel_winner->country_code}}"></span>
-                                {{$duel->Duel_winner->name}} <img class="rank_img_leaderboard"
-                                    src="{{$duel->Duel_winner->Title->image}}"> </td>
+                                <a href="/user/{{$duel->Duel_winner->uid}}"> {{$duel->Duel_winner->name}}</a> <img
+                                    class="rank_img_leaderboard" src="{{$duel->Duel_winner->Title->image}}"> </td>
                             <td>{{$duel->winner_score}}<span style="color: green"> (+{{$duel->winner_elo_plus}})</span>
                             </td>
                             <td>{{$duel->loser_score}} <span style="color:crimson">({{$duel->loser_elo_minus}})</span>
                             </td>
                             <td style="float: right"> <span style="padding-right: 50px"
                                     class="flag-icon flag-icon-{{$duel->Duel_loser->country_code}}">
-                                </span> {{$duel->Duel_loser->name}} <img class="rank_img_leaderboard"
-                                    src="{{$duel->Duel_winner->Title->image}}"></td>
+                                </span> <a href="/user/{{$duel->Duel_loser->uid}}">{{$duel->Duel_loser->name}} </a><img
+                                    class="rank_img_leaderboard" src="{{$duel->Duel_winner->Title->image}}"></td>
                         </tr>
                         @endforeach
 

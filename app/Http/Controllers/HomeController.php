@@ -29,7 +29,7 @@ class HomeController extends Controller
         if (\Request::is('home')) { 
             $user = \Auth::user();
           } else {
-          $user = User::Where('name', $user)->first();
+          $user = User::find($user);
           if(!$user) return \Redirect::to('/');
           }
 
