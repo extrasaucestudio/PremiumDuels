@@ -41,4 +41,15 @@ class LoginController extends Controller
     {
         return "uid";
     }
+
+    
+
+    protected function authenticated($request, $user)
+    {
+       $user->active = true;
+       $user->save();
+    }
+
+
+     
 }
