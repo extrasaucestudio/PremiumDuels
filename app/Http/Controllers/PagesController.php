@@ -11,7 +11,7 @@ use App\Duel;
 
 class PagesController extends Controller
 {
-   
+
     public function welcome()
     {
         $users = User::Where('active', 1)->orderBy('elo', 'DESC')->get();
@@ -21,21 +21,22 @@ class PagesController extends Controller
         function getPlayersOnServer()
         {
             $myFile = 'http://www.mnbcentral.net/min';
-        
+
             $str = 'MasterFrog_Vasilisa';
-     
-             function getLineWithString($fileName, $str) {
-                 $lines = file($fileName);
-                 foreach ($lines as $lineNumber => $line) {
-                     if (strpos($line, $str) !== false) {
-                         return $line;
-                     }
-                 }
-                 return -1;
-             }
-     
-             $data = explode(",", getLineWithString($myFile, $str));
-      return $data;
+
+            function getLineWithString($fileName, $str)
+            {
+                $lines = file($fileName);
+                foreach ($lines as $lineNumber => $line) {
+                    if (strpos($line, $str) !== false) {
+                        return $line;
+                    }
+                }
+                return -1;
+            }
+
+            $data = explode(",", getLineWithString($myFile, $str));
+            return $data;
         }
 
 
@@ -49,31 +50,30 @@ class PagesController extends Controller
     {
         $users = User::all();
         return response()->json($users);
-
-        
-        
     }
 
     function fetch(Request $request)
     {
-     if($request->get('query'))
-     {
-      $query = $request->get('query');
-      $users = User::where('name', 'LIKE', "%{$query}%")->Where('active', 1)->get();
+        if ($request->get('query')) {
+            $query = $request->get('query');
+            $users = User::where('name', 'LIKE', "%{$query}%")->Where('active', 1)->get();
 
 
-    if($users->isEmpty()) return 1;
-    
-      $output = '<ul class="dropdown-menu" style="display:block; position:relative">';
-      foreach($users as $row)
-      {
-       $output .= '
-       <li><a href="/user/'. $row->uid.'">'.$row->name.'<img class="rank_img" src="'. $row->Title->image .'"></a></li>
+            if ($users->isEmpty()) return 1;
+
+            $output = '<ul class="dropdown-menu" style="display:block; position:relative">';
+            foreach ($users as $row) {
+                $gold = '';
+                if ($row->golden_account == true) {
+                    $gold = '&nbsp <i class="fas fa-coins"></i>';
+                }
+                $output .= '
+       <li><a class="uk-link-reset" href="/user/' . $row->uid . '">' . $row->name . $gold . '<img class="rank_img" src="' . $row->Title->image . '"></a></li>
        ';
-      }
-      $output .= '</ul>';
-      echo $output;
-     }
+            }
+            $output .= '</ul>';
+            echo $output;
+        }
     }
 
 
@@ -81,9 +81,7 @@ class PagesController extends Controller
     public function test(Request $request)
     {
 
-
-
-        
-
+        $user = User::first();
+        dd($user->SpecialTitle);
     }
 }

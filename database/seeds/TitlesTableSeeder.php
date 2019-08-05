@@ -15,12 +15,14 @@ class TitlesTableSeeder extends Seeder
             'name' => 'Red',
             'elo' => 1499,
             'image' => '/images/newbie.png',
+            'color' => 'red',
 
         ]);
         DB::table('titles')->insert([
             'name' => 'Green',
             'elo' => 1500,
             'image' => '/images/master.png',
+            'color' => 'green',
 
         ]);
 
@@ -28,6 +30,7 @@ class TitlesTableSeeder extends Seeder
             'name' => 'Yellow',
             'elo' => 2000,
             'image' => '/images/grandmaster.png',
+            'color' => 'yellow',
 
         ]);
 
@@ -35,12 +38,14 @@ class TitlesTableSeeder extends Seeder
             'name' => 'Blue',
             'elo' => 2500,
             'image' => '/images/grandmaster.png',
+            'color' => 'blue',
 
         ]);
         DB::table('titles')->insert([
             'name' => 'White',
             'elo' => 3000,
             'image' => '/images/grandmaster.png',
+            'color' => 'white',
 
         ]);
     }

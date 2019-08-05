@@ -5,7 +5,9 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <link href="https://fonts.googleapis.com/css?family=Arimo|Muli|Saira+Stencil+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Merriweather&display=swap" rel="stylesheet">
+    <link href="{{ asset('fontawesome/css/all.css') }}" rel="stylesheet">
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -26,9 +28,22 @@
                 <nav class="uk-navbar uk-animation-slide-top">
 
                     <div class="uk-navbar-left">
-                        <!-- Branding Image -->
-                        <a class="uk-navbar-item uk-logo" href="{{ url('/') }}">
+                        <img src="{{ asset('images/logo.png') }}" width="50px">
+                        <a class="uk-navbar-item uk-logo" style="font-family: 'Saira Stencil One', cursive;"
+                            href="{{ url('/') }}">
                             {{ config('app.name', 'Premium Duels') }}
+                        </a>
+                        <a class="uk-navbar-item " style="font-family: 'Saira Stencil One', cursive;"
+                            href="{{ url('/about') }}">
+                            About
+                        </a>
+                        <a class="uk-navbar-item " style="font-family: 'Saira Stencil One', cursive; color: gold"
+                            href="{{ url('/about') }}">
+                            Hall of Fame
+                        </a>
+                        <a class="uk-navbar-item " style="font-family: 'Saira Stencil One', cursive;"
+                            href="{{ url('/about') }}">
+                            Donate
                         </a>
                     </div>
 
@@ -39,8 +54,13 @@
 
                             @else
                             <li>
-                                <a href="#">{{ Auth::user()->name }} &nbsp;<span class="uk-badge">{{Auth::user()->elo}}
-                                        <img class="rank_img" src="{{Auth::user()->Title->image}}"></span> </a>
+                                <a @if(Auth::user()->golden_account == true)
+                                    class="golden_account" @endif
+                                    href="#"> {{ Auth::user()->name }} &nbsp;<span
+                                        class="uk-badge">{{Auth::user()->elo}}
+                                        <img class="rank_img" src="{{Auth::user()->Title->image}}"> </span>
+                                    @if(Auth::user()->golden_account == true) &nbsp; <i class="fas fa-coins"> </i>
+                                    @endif</a>
                                 <div class="uk-navbar-dropdown">
                                     <ul class="uk-nav uk-navbar-dropdown-nav">
                                         <li>
@@ -70,6 +90,7 @@
 
         @yield('content')
     </div>
+
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>

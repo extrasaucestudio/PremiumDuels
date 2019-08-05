@@ -24,3 +24,4 @@ Route::get('/test', 'PagesController@test');
 
 Route::get('/api/check', 'WarbandApiController@check');
 Route::get('/api/ft7', 'WarbandApiController@FT7');
+Route::post('api/title/change', 'UserSpecialTitlesController@change')->name('title_change');

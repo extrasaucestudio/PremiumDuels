@@ -14,11 +14,12 @@ class CreateTitlesTable extends Migration
     public function up()
     {
         Schema::create('titles', function (Blueprint $table) {
-  
+
             $table->bigIncrements('id')->unsigned();
             $table->string('name');
             $table->integer('elo');
             $table->text('image');
+            $table->string('color');
             $table->timestamps();
         });
 

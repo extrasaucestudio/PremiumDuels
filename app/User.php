@@ -57,4 +57,14 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Duel', 'loser_id', 'id');
     }
+
+    public function SpecialTitles()
+    {
+        return $this->hasMany('App\user_special_titles', 'user_id', 'id');
+    }
+
+    public function SpecialTitle()
+    {
+        return $this->belongsTo('App\user_special_titles', 'special_title_id', 'id');
+    }
 }

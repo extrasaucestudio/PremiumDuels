@@ -27,26 +27,26 @@ class HomeController extends Controller
      */
     public function index(Request $request, $user = null)
     {
-        if (\Request::is('home')) { 
+        if (\Request::is('home')) {
             $user = \Auth::user();
-          } else {
-          $user = User::find($user);
-        
-          if(!$user) return \Redirect::to('/');
-          }
+        } else {
+            $user = User::find($user);
 
-   
+            if (!$user) return \Redirect::to('/');
+        }
+
+
 
         $users = User::OrderBy('elo', 'DESC')->get();
 
         $duels = Duel::Where('winner_id', $user->id)->orWhere('loser_id', $user->id)->count();
 
 
-    
+
         $winratio = '0%';
-        if($user->DuelsWon->count() != 0 || $user->DuelsWon->count() != null) {
-            $winratio = floor($user->DuelsWon->count()/$duels*100) . '%';
-        } 
+        if ($user->DuelsWon->count() != 0 || $user->DuelsWon->count() != null) {
+            $winratio = floor($user->DuelsWon->count() / $duels * 100) . '%';
+        }
 
 
         $name = $user->name;
@@ -57,17 +57,17 @@ class HomeController extends Controller
 
         $nextRank = Title::Where('elo', '>', $user->elo)->orderBy('elo', 'DESC')->first();
 
-  
 
-       
-        if(!$nextRank) {
+
+
+        if (!$nextRank) {
             $nextRank = 'None';
-        } 
+        }
 
         $LastDuels = Duel::Where('winner_id', $user->id)->orWhere('loser_id', $user->id)->orderBy('created_at', 'DESC')->get();
 
 
-        if($me = Auth::user()){
+        if ($me = Auth::user()) {
             $WonAgainst = Duel::Where('winner_id', $me->id)->Where('loser_id', $user->id)->count();
             $LostAgainst = Duel::Where('winner_id', $user->id)->Where('loser_id', $me->id)->count();
         } else {
@@ -78,5 +78,4 @@ class HomeController extends Controller
 
         return view('home', compact('user', 'duels', 'rank', 'nextRank', 'winratio', 'LastDuels', 'WonAgainst', 'LostAgainst'));
     }
-
 }

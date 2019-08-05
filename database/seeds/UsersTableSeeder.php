@@ -12,10 +12,10 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
 
-        
+
         DB::table('users')->insert([
             'name' => Str::random(10),
-            'email' => Str::random(10).'@gmail.com',
+            'email' => Str::random(10) . '@gmail.com',
             'password' => bcrypt('password'),
             'secret_key' => 'password',
             'uid' => 111,
@@ -23,11 +23,12 @@ class UsersTableSeeder extends Seeder
             'elo' => 2500,
             'active' => true,
             'country_code' => 'de',
+            'golden_account' => true,
         ]);
 
         DB::table('users')->insert([
             'name' => Str::random(10),
-            'email' => Str::random(10).'@gmail.com',
+            'email' => Str::random(10) . '@gmail.com',
             'password' => bcrypt('password'),
             'secret_key' => 'password',
             'uid' => 112,
@@ -37,6 +38,5 @@ class UsersTableSeeder extends Seeder
             'country_code' => 'ru',
 
         ]);
-
     }
 }

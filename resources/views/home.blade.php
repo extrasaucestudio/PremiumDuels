@@ -12,9 +12,16 @@
 
 
             <div class="stats uk-container-small uk-container">
-                <h1 style="text-align: center; color: black">
-                    {{$user->name}} <span style="margin-left: 25px"
-                        class="flag-icon flag-icon-{{$user->country_code}}"></span>
+                <h1 @if($user->golden_account == true)class="golden_account" @endif style="text-align: center;
+                    color: black;font-family: 'Merriweather', serif;"">
+                    {{$user->name}} <span style=" margin-left: 25px"
+                        class="flag-icon flag-icon-{{$user->country_code}}"></span> <br>
+                    @if($user->special_title_id != null)
+
+                    <br>
+                    <b> <span
+                            style="font-family: 'Merriweather', serif;">{{$user->SpecialTitle->SpecialTitleData->name}}</span></b>
+                    @endif
                 </h1>
 
                 <br>
@@ -28,6 +35,31 @@
                     <br>
                     <br>
                 </p>
+
+                @if (\Request::is('home') && $user->SpecialTitles->count() > 0)
+
+
+                <div class="uk-form-select" data-uk-form-select>
+
+                    <form action="/api/title/change" method="POST">
+                        {{ csrf_field() }}
+                        <select name="title" id="Titles" onchange="this.form.submit()">
+                            <option value="none">Blank</option>
+                            @foreach ($user->SpecialTitles as $item)
+
+                            <option value="{{$item->id}}">{{$item->SpecialTitleData->name}}</option>
+
+                            @endforeach
+
+
+                        </select>
+                    </form>
+
+
+                </div>
+
+
+                @endif
 
 
 
@@ -50,7 +82,8 @@
             </div>
 
             <br>
-            <h1 style="text-align: center; color: black">Next Rank: @if(!is_object($nextRank)) None @else
+            <h1 style="text-align: center; font-family: 'Merriweather', serif; color: black">Next Rank:
+                @if(!is_object($nextRank)) None @else
                 {{$nextRank->name}} @endif
                 @if(is_object($nextRank))
                 <img style=" width: 85px;
@@ -93,7 +126,8 @@
             <div class="stats uk-container-xsmall uk-container">
 
                 <br>
-                <h1 class="myH1">Latest Duels</h1>
+                <h1 style="font-family: 'Merriweather', serif; color: black" class="myH1">Latest Duels</h1>
+
                 <table class="uk-table uk-table-hover uk-table-divider" style="color: black">
                     <thead>
                         <tr>
@@ -106,21 +140,23 @@
                     <tbody>
                         @foreach ($LastDuels->take(5) as $duel)
 
-                        <tr @if($duel->Duel_loser->id == $user->id) style="background-color: rgba(255, 0, 0, 0.59)"
+                        <tr @if($duel->Duel_loser->id == $user->id) style="background-color: rgba(255, 0, 0, 0.89)"
                             @else
-                            style="background-color: rgba(0, 255, 0, 0.65)" @endif>
+                            style="background-color: rgba(0,100,0 ,0.90 )" @endif>
 
                             <td><span style="padding-right: 50px"
                                     class="flag-icon flag-icon-{{$duel->Duel_winner->country_code}}"></span>
-                                <a href="/user/{{$duel->Duel_winner->uid}}"> {{$duel->Duel_winner->name}}</a> <img
+                                <a @if($duel->Duel_winner->golden_account == true) class="golden_account" @endif
+                                    href="/user/{{$duel->Duel_winner->uid}}"> {{$duel->Duel_winner->name}}</a> <img
                                     class="rank_img_leaderboard" src="{{$duel->Duel_winner->Title->image}}"> </td>
-                            <td>{{$duel->winner_score}}<span style="color: green"> (+{{$duel->winner_elo_plus}})</span>
+                            <td>{{$duel->winner_score}}<span style="color: white"> (+{{$duel->winner_elo_plus}})</span>
                             </td>
-                            <td>{{$duel->loser_score}} <span style="color:crimson">({{$duel->loser_elo_minus}})</span>
+                            <td>{{$duel->loser_score}} <span style="color:white">({{$duel->loser_elo_minus}})</span>
                             </td>
                             <td style="float: right"> <span style="padding-right: 50px"
                                     class="flag-icon flag-icon-{{$duel->Duel_loser->country_code}}">
-                                </span> <a href="/user/{{$duel->Duel_loser->uid}}">{{$duel->Duel_loser->name}} </a><img
+                                </span> <a @if($duel->Duel_loser->golden_account == true) class="golden_account" @endif
+                                    href="/user/{{$duel->Duel_loser->uid}}">{{$duel->Duel_loser->name}} </a><img
                                     class="rank_img_leaderboard" src="{{$duel->Duel_winner->Title->image}}"></td>
                         </tr>
                         @endforeach
@@ -136,6 +172,18 @@
 
 </div>
 
+
+<script>
+    SelectElement("Titles", {{$user->special_title_id}})
+
+function SelectElement(id, valueToSelect)
+{    
+    if(valueToSelect == null) valueToSelect = 'none';
+    var element = document.getElementById(id);
+    element.value = valueToSelect;
+}
+
+</script>
 
 
 

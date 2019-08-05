@@ -24,6 +24,8 @@ class CreateUsersTable extends Migration
             $table->integer('deaths')->default(0);
             $table->string('country_code')->default('pl');
             $table->bigInteger('title_id')->unsigned()->default(1);
+            $table->bigInteger('special_title_id')->nullable()->unsigned();
+            $table->boolean('golden_account')->default(false);
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
@@ -31,9 +33,6 @@ class CreateUsersTable extends Migration
             $table->rememberToken();
             $table->timestamps();
         });
-
- 
-
     }
 
     /**

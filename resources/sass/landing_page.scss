@@ -46,17 +46,24 @@
 }
 
 body {
-    background-color: #2e2e2e !important;
+    // background-color: #2e2e2e !important;
+    background: url("/images/bg.png") no-repeat center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
 
 .latest_duels {
-    padding-top: 30vh;
+    padding-top: 10vh;
     display: block;
 }
 
 .duel_winner {
-    color: red !important;
+    color: rgb(41, 138, 38) !important;
     display: inline;
+    font-family: "Saira Stencil One", cursive;
+    font-size: 30px;
 }
 
 @media (max-width: 600px) {
@@ -72,8 +79,10 @@ body {
 }
 
 .duel_loser {
-    color: green !important;
+    color: rgb(128, 0, 0) !important;
     display: inline;
+    font-family: "Saira Stencil One", cursive;
+    font-size: 30px;
 }
 
 .vsIcon {
@@ -84,4 +93,13 @@ body {
 .underDesc {
     color: #2e2e2e;
     font-weight: 10;
+}
+
+.landingCardsText {
+    font-family: "Muli", sans-serif;
+}
+
+.golden_account {
+    font-weight: bold;
+    color: gold !important;
 }
