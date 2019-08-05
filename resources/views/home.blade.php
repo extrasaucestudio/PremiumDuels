@@ -13,7 +13,7 @@
 
             <div class="stats uk-container-small uk-container">
                 <h1 @if($user->golden_account == true)class="golden_account" @endif style="text-align: center;
-                    color: black;font-family: 'Merriweather', serif;"">
+                    color: white;font-family: 'Merriweather', serif;"">
                     {{$user->name}} <span style=" margin-left: 25px"
                         class="flag-icon flag-icon-{{$user->country_code}}"></span> <br>
                     @if($user->special_title_id != null)
@@ -26,7 +26,7 @@
 
                 <br>
 
-                <p style="color: black; text-align: center"> @auth
+                <p style="color: white; text-align: center"> @auth
                     @if($WonAgainst != -1 && $LostAgainst != -1 && $user->uid != Auth::user()->uid)
                     <b style="color: orange">You</b> {{ $WonAgainst}} : {{$LostAgainst}} {{$user->name}}
                     @endif
@@ -65,24 +65,24 @@
 
                 <dl class="uk-description-list uk-description-list-divider">
 
-                    <dt>Kills: <b>{{$user->kills}}</b></dt>
+                    <dt class="uperDesc">Kills: <b>{{$user->kills}}</b></dt>
                     <dd class="underDesc">Number of kills collected in FT7 Duels.</dd>
-                    <dt>Deaths: <b>{{$user->deaths}}</b></dt>
+                    <dt class="uperDesc">Deaths: <b>{{$user->deaths}}</b></dt>
                     <dd class="underDesc">Number of deaths in FT7 Duels.</dd>
-                    <dt>Duels Played: <b>{{$duels}}</b></dt>
+                    <dt class="uperDesc">Duels Played: <b>{{$duels}}</b></dt>
                     <dd class="underDesc">Total ammount of played FT7 duels.</dd>
-                    <dt>Duels Won: <b>{{$user->DuelsWon->count()}}</b></dt>
+                    <dt class="uperDesc">Duels Won: <b>{{$user->DuelsWon->count()}}</b></dt>
                     <dd class="underDesc">Total ammount of winned FT7 duels.</dd>
-                    <dt>WinRatio: <b>{{$winratio}}</b></dt>
+                    <dt class="uperDesc">WinRatio: <b>{{$winratio}}</b></dt>
                     <dd class="underDesc">The ratio of winnings to losses in percents.</dd>
-                    <dt>ELO: <b>{{$user->elo}}</b></dt>
+                    <dt class="uperDesc">ELO: <b>{{$user->elo}}</b></dt>
                     <dd class="underDesc">Your ranking points calculated by our system.</dd>
                 </dl>
 
             </div>
 
             <br>
-            <h1 style="text-align: center; font-family: 'Merriweather', serif; color: black">Next Rank:
+            <h1 style="text-align: center; font-family: 'Merriweather', serif; color: white">Next Rank:
                 @if(!is_object($nextRank)) None @else
                 {{$nextRank->name}} @endif
                 @if(is_object($nextRank))
@@ -126,9 +126,9 @@
             <div class="stats uk-container-xsmall uk-container">
 
                 <br>
-                <h1 style="font-family: 'Merriweather', serif; color: black" class="myH1">Latest Duels</h1>
+                <h1 style="font-family: 'Merriweather', serif; color: white" class="myH1">Latest Duels</h1>
 
-                <table class="uk-table uk-table-hover uk-table-divider" style="color: black">
+                <table class="uk-table uk-table-hover uk-table-divider" style="color: white">
                     <thead>
                         <tr>
                             <th>Username</th>
@@ -137,28 +137,28 @@
                             <th>Username</th>
                         </tr>
                     </thead>
-                    <tbody style="border: 1px solid black;">
+                    <tbody style="border: 1px solid white;">
                         @foreach ($LastDuels->take(5) as $duel)
 
-                        <tr style="border: 1px solid black;">
+                        <tr style="border: 1px solid white;">
 
                             <td><span style="padding-right: 50px"
                                     class="flag-icon latestDuelFlag flag-icon-{{$duel->Duel_winner->country_code}}"></span>
                                 <a @if($duel->Duel_winner->golden_account == true) class="golden_account" @else
-                                    style="color:black" @endif
+                                    style="color:white" @endif
                                     href="/user/{{$duel->Duel_winner->uid}}"> {{$duel->Duel_winner->name}}</a> <img
                                     class="rank_img_leaderboard latestDuelElo"
                                     src="{{$duel->Duel_winner->Title->image}}"> </td>
-                            <td>{{$duel->winner_score}}<span class="latestDuelElo" style="color: black">
+                            <td>{{$duel->winner_score}}<span class="latestDuelElo" style="color: white">
                                     (+{{$duel->winner_elo_plus}})</span>
                             </td>
                             <td>{{$duel->loser_score}} <span class="latestDuelElo"
-                                    style="color:black">({{$duel->loser_elo_minus}})</span>
+                                    style="color:white">({{$duel->loser_elo_minus}})</span>
                             </td>
                             <td style="float: right"> <span style="padding-right: 50px"
                                     class="flag-icon latestDuelFlag flag-icon-{{$duel->Duel_loser->country_code}}">
                                 </span> <a @if($duel->Duel_loser->golden_account == true) class="golden_account" @else
-                                    style="color:black" @endif
+                                    style="color:white" @endif
                                     href="/user/{{$duel->Duel_loser->uid}}">{{$duel->Duel_loser->name}} </a><img
                                     class="rank_img_leaderboard latestDuelElo"
                                     src="{{$duel->Duel_winner->Title->image}}"></td>

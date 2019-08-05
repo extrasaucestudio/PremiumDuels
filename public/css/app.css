@@ -26049,8 +26049,8 @@ iframe.uk-cover {
 }
 
 .home {
-  background-color: white;
-  color: black;
+  background-color: #201f1f;
+  color: white;
   z-index: 1;
 }
 
@@ -26136,7 +26136,7 @@ body {
 }
 
 .underDesc {
-  color: #2e2e2e;
+  color: #fff7f7;
   font-weight: 10;
 }
 
@@ -26147,6 +26147,10 @@ body {
 .golden_account {
   font-weight: bold;
   color: gold !important;
+}
+
+.uperDesc {
+  color: white !important;
 }
 
 #discordData,
