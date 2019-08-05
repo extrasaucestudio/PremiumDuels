@@ -68,7 +68,7 @@ class PagesController extends Controller
       foreach($users as $row)
       {
        $output .= '
-       <li><a href="/user/'. $row->name.'">'.$row->name.'<img class="rank_img" src="'. $row->Title->image .'"></a></li>
+       <li><a href="/user/'. $row->uid.'">'.$row->name.'<img class="rank_img" src="'. $row->Title->image .'"></a></li>
        ';
       }
       $output .= '</ul>';
