@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Duel;
 use App\Title;
+use Auth;
 
 class HomeController extends Controller
 {
@@ -30,6 +31,7 @@ class HomeController extends Controller
             $user = \Auth::user();
           } else {
           $user = User::find($user);
+        
           if(!$user) return \Redirect::to('/');
           }
 
@@ -64,7 +66,17 @@ class HomeController extends Controller
 
         $LastDuels = Duel::Where('winner_id', $user->id)->orWhere('loser_id', $user->id)->orderBy('created_at', 'DESC')->get();
 
-        return view('home', compact('user', 'duels', 'rank', 'nextRank', 'winratio', 'LastDuels'));
+
+        if($me = Auth::user()){
+            $WonAgainst = Duel::Where('winner_id', $me->id)->Where('loser_id', $user->id)->count();
+            $LostAgainst = Duel::Where('winner_id', $user->id)->Where('loser_id', $me->id)->count();
+        } else {
+            $WonAgainst = -1;
+            $LostAgainst = -1;
+        }
+
+
+        return view('home', compact('user', 'duels', 'rank', 'nextRank', 'winratio', 'LastDuels', 'WonAgainst', 'LostAgainst'));
     }
 
 }

@@ -16,7 +16,19 @@
                     {{$user->name}} <span style="margin-left: 25px"
                         class="flag-icon flag-icon-{{$user->country_code}}"></span>
                 </h1>
+
                 <br>
+
+                <p style="color: black; text-align: center"> @auth
+                    @if($WonAgainst != -1 && $LostAgainst != -1 && $user->uid != Auth::user()->uid)
+                    <b style="color: orange">You</b> {{ $WonAgainst}} : {{$LostAgainst}} {{$user->name}}
+                    @endif
+                    @endauth
+                    <br>
+                    <br>
+                    <br>
+                </p>
+
 
 
                 <dl class="uk-description-list uk-description-list-divider">
@@ -38,7 +50,8 @@
             </div>
 
             <br>
-            <h1 style="text-align: center">Next Rank: @if(!is_object($nextRank)) None @else {{$nextRank->name}} @endif
+            <h1 style="text-align: center; color: black">Next Rank: @if(!is_object($nextRank)) None @else
+                {{$nextRank->name}} @endif
                 @if(is_object($nextRank))
                 <img style=" width: 85px;
                 float: center;" src="{{$nextRank->image}}"></h1>
