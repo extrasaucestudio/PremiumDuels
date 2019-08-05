@@ -102,7 +102,8 @@
 
         <div class="leaderboard">
             <h1 style="font-family: 'Saira Stencil One', cursive;" class="myH1">Leaderboard</h1>
-            <table style=" background-color: white" class=" uk-table uk-table-hover uk-table-divider ">
+            <table style=" background-color: #131212; border: 1px solid white;"
+                class=" uk-table uk-table-hover uk-table-divider ">
                 <thead>
                     <tr>
                         <th>Username</th>
@@ -110,20 +111,22 @@
                         <th>ELO</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody style="border: 1px solid white; background-color: #131212;">
 
                     @foreach ($users as $user)
 
-                    <tr class="uk-animation-scale-up">
+                    <tr style="border: 1px solid white; background-color: #131212;" class="uk-animation-scale-up">
 
-                        <td><a class="uk-link-reset" @if($user->golden_account == true) style="color: gold!important"
-                                @endif"
+                        <td><a class="uk-link-reset" @if($user->golden_account == true)
+                                style="color: gold!important"
+                                @else style="color: white!important" @endif
                                 href="/user/{{$user->uid}}">{{$user->name}}
                                 <span class="flag-icon flag-icon-{{$user->country_code}}"></span></a></td>
-                        <td>@if($user->SpecialTitle != null) {{$user->SpecialTitle->SpecialTitleData->name}} | @endif<b
+                        <td>@if($user->SpecialTitle != null) <span
+                                style="color:white">{{$user->SpecialTitle->SpecialTitleData->name}} | </span>@endif<b
                                 style="color: {{$user->Title->color}}">{{$user->Title->name}}</b> &nbsp <img
                                 class="rank_img_leaderboard" src="{{$user->Title->image}}"> </td>
-                        <td>{{$user->elo}}</td>
+                        <td><span style="color: white">{{$user->elo}}</span></td>
                     </tr>
                     @endforeach
 
