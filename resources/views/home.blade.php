@@ -137,10 +137,10 @@
                             <th>Username</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody style="border: 1px solid black;">
                         @foreach ($LastDuels->take(5) as $duel)
 
-                        <tr>
+                        <tr style="border: 1px solid black;">
 
                             <td><span style="padding-right: 50px"
                                     class="flag-icon latestDuelFlag flag-icon-{{$duel->Duel_winner->country_code}}"></span>
