@@ -22,7 +22,7 @@ class PagesController extends Controller
         {
             $myFile = 'http://www.mnbcentral.net/min';
         
-            $str = 'TR_Avrasya_RPG';
+            $str = 'MasterFrog_Vasilisa';
      
              function getLineWithString($fileName, $str) {
                  $lines = file($fileName);
