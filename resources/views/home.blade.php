@@ -34,17 +34,17 @@
                 <dl class="uk-description-list uk-description-list-divider">
 
                     <dt>Kills: <b>{{$user->kills}}</b></dt>
-                    <dd>Number of kills collected in FT7 Duels.</dd>
+                    <dd class="underDesc">Number of kills collected in FT7 Duels.</dd>
                     <dt>Deaths: <b>{{$user->deaths}}</b></dt>
-                    <dd>Number of deaths in FT7 Duels.</dd>
+                    <dd class="underDesc">Number of deaths in FT7 Duels.</dd>
                     <dt>Duels Played: <b>{{$duels}}</b></dt>
-                    <dd>Total ammount of played FT7 duels.</dd>
+                    <dd class="underDesc">Total ammount of played FT7 duels.</dd>
                     <dt>Duels Won: <b>{{$user->DuelsWon->count()}}</b></dt>
-                    <dd>Total ammount of winned FT7 duels.</dd>
+                    <dd class="underDesc">Total ammount of winned FT7 duels.</dd>
                     <dt>WinRatio: <b>{{$winratio}}</b></dt>
-                    <dd>The ratio of winnings to losses in percents.</dd>
+                    <dd class="underDesc">The ratio of winnings to losses in percents.</dd>
                     <dt>ELO: <b>{{$user->elo}}</b></dt>
-                    <dd>Your ranking points calculated by our system.</dd>
+                    <dd class="underDesc">Your ranking points calculated by our system.</dd>
                 </dl>
 
             </div>
