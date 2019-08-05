@@ -26049,7 +26049,8 @@ iframe.uk-cover {
 }
 
 .home {
-  background-color: #fcba03;
+  background-color: white;
+  color: black;
   z-index: 1;
 }
 

@@ -12,7 +12,7 @@
 
 
             <div class="stats uk-container-small uk-container">
-                <h1 style="text-align: center">
+                <h1 style="text-align: center; color: black">
                     {{$user->name}} <span style="margin-left: 25px"
                         class="flag-icon flag-icon-{{$user->country_code}}"></span>
                 </h1>
