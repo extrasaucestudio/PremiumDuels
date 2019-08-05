@@ -50,7 +50,8 @@
             <div>
                 <div class="uk-card uk-card-secondary uk-card-body uk-animation-scale-up">
                     @if($serverData)
-                    <h3 class="uk-card-title">Online - {{$serverData[0]}}</h3>
+                    <h3 class="uk-card-title">Online</h3>
+                    <p>{{$serverData[0]}}, {{$serverData[3]}}</p>
                     <p>{{$serverData[5]}}/{{$serverData[6]}}</p>
                     @else
                     <h3 class="uk-card-title">Offline</h3>
