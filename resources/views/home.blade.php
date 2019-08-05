@@ -140,9 +140,7 @@
                     <tbody>
                         @foreach ($LastDuels->take(5) as $duel)
 
-                        <tr @if($duel->Duel_loser->id == $user->id) style="background-color: rgba(255, 0, 0, 0.89)"
-                            @else
-                            style="background-color: rgba(0,100,0 ,0.90 )" @endif>
+                        <tr>
 
                             <td><span style="padding-right: 50px"
                                     class="flag-icon latestDuelFlag flag-icon-{{$duel->Duel_winner->country_code}}"></span>
