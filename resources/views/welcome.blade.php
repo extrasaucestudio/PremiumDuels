@@ -22,13 +22,14 @@
 
 <body>
 
-    <div id="cos" class="uk-container">
+    <div id="cos" class="uk-container ">
 
 
 
-        <form style=" width: 50%;" class="uk-search uk-search-default searchPlayers">
-            <input autocomplete="off" style="background-color: white;" type="text" name="user_name" id="user_name"
-                class="uk-search-input autocomplete" type="search" placeholder="Search for user...">
+        <form style=" width: 50%;" class="uk-search uk-search-default searchPlayers ">
+            <input maxlength="10" onfocus="this.value=''" autocomplete="off" style="background-color: white;"
+                type="text" name="user_name" id="user_name" class="uk-search-input autocomplete" type="search"
+                placeholder="Search for player...">
 
 
             <div id="UserList"></div>
@@ -37,7 +38,7 @@
 
         <div class="uk-child-width-1-3@m uk-grid-small uk-grid-match" uk-grid>
             <div>
-                <div class="uk-card uk-card-default uk-card-body uk-animation-scale-up">
+                <div class=" uk-card uk-card-default uk-card-body uk-animation-scale-up">
                     <h3 class="uk-card-title">Players Registered</h3>
                     <p id="PlayersNum">{{$users->count()}}</p>
                 </div>

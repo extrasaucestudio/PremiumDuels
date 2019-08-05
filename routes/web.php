@@ -19,6 +19,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/user/{user}', 'HomeController@index')->name('users_profile');
 Route::get('/', 'PagesController@welcome');
 Route::get('/autocomplete', 'PagesController@fetch')->name('autocomplete');
+Route::get('HallOfFame', 'PagesController@HallOfFame');
 Route::get('/test', 'PagesController@test');
 
 

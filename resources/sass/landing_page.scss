@@ -60,7 +60,7 @@ body {
 }
 
 .duel_winner {
-    color: rgb(41, 138, 38) !important;
+    color: rgb(240, 240, 240) !important;
     display: inline;
     font-family: "Saira Stencil One", cursive;
     font-size: 30px;
@@ -78,8 +78,30 @@ body {
     }
 }
 
+@media (max-width: 800px) {
+    .logo {
+        display: none;
+    }
+    .logoText {
+        display: none !important;
+    }
+    #eloBadge {
+        display: none;
+    }
+    #donatedBadgeCoin {
+        display: none;
+    }
+    .latestDuelElo {
+        display: none;
+    }
+    .latestDuelFlag {
+        display: none;
+        visibility: hidden;
+    }
+}
+
 .duel_loser {
-    color: rgb(128, 0, 0) !important;
+    color: rgb(255, 255, 255) !important;
     display: inline;
     font-family: "Saira Stencil One", cursive;
     font-size: 30px;

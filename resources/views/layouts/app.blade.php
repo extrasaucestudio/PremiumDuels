@@ -28,7 +28,7 @@
                 <nav class="uk-navbar uk-animation-slide-top">
 
                     <div class="uk-navbar-left">
-                        <img src="{{ asset('images/logo.png') }}" width="50px">
+                        <img src="{{ asset('images/logo.png') }}" class="logo" width="50px">
                         <a class="uk-navbar-item uk-logo" style="font-family: 'Saira Stencil One', cursive;"
                             href="{{ url('/') }}">
                             {{ config('app.name', 'Premium Duels') }}
@@ -38,8 +38,16 @@
                             About
                         </a>
                         <a class="uk-navbar-item " style="font-family: 'Saira Stencil One', cursive; color: gold"
-                            href="{{ url('/about') }}">
+                            href="{{ url('/HallOfFame') }}">
                             Hall of Fame
+                        </a>
+                        <a class="uk-navbar-item " style="font-family: 'Saira Stencil One', cursive"
+                            href="{{ url('/about') }}">
+                            Events
+                        </a>
+                        <a class="uk-navbar-item " style="font-family: 'Saira Stencil One', cursive"
+                            href="{{ url('/about') }}">
+                            School
                         </a>
                         <a class="uk-navbar-item " style="font-family: 'Saira Stencil One', cursive;"
                             href="{{ url('/about') }}">
@@ -56,10 +64,11 @@
                             <li>
                                 <a @if(Auth::user()->golden_account == true)
                                     class="golden_account" @endif
-                                    href="#"> {{ Auth::user()->name }} &nbsp;<span
+                                    href="#"> {{ Auth::user()->name }} &nbsp;<span id="eloBadge"
                                         class="uk-badge">{{Auth::user()->elo}}
                                         <img class="rank_img" src="{{Auth::user()->Title->image}}"> </span>
-                                    @if(Auth::user()->golden_account == true) &nbsp; <i class="fas fa-coins"> </i>
+                                    @if(Auth::user()->golden_account == true) &nbsp; <i id="donatedBadgeCoin"
+                                        class="fas fa-coins"> </i>
                                     @endif</a>
                                 <div class="uk-navbar-dropdown">
                                     <ul class="uk-nav uk-navbar-dropdown-nav">

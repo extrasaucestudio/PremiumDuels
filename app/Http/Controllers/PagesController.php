@@ -78,6 +78,14 @@ class PagesController extends Controller
 
 
 
+    public function HallOfFame()
+    {
+        return view('HallOfFame');
+    }
+
+
+
+
     public function test(Request $request)
     {
 
