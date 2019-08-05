@@ -144,19 +144,21 @@
 
                             <td><span style="padding-right: 50px"
                                     class="flag-icon latestDuelFlag flag-icon-{{$duel->Duel_winner->country_code}}"></span>
-                                <a @if($duel->Duel_winner->golden_account == true) class="golden_account" @endif
+                                <a @if($duel->Duel_winner->golden_account == true) class="golden_account" @else
+                                    style="color:black" @endif
                                     href="/user/{{$duel->Duel_winner->uid}}"> {{$duel->Duel_winner->name}}</a> <img
                                     class="rank_img_leaderboard latestDuelElo"
                                     src="{{$duel->Duel_winner->Title->image}}"> </td>
-                            <td>{{$duel->winner_score}}<span class="latestDuelElo" style="color: white">
+                            <td>{{$duel->winner_score}}<span class="latestDuelElo" style="color: black">
                                     (+{{$duel->winner_elo_plus}})</span>
                             </td>
                             <td>{{$duel->loser_score}} <span class="latestDuelElo"
-                                    style="color:white">({{$duel->loser_elo_minus}})</span>
+                                    style="color:black">({{$duel->loser_elo_minus}})</span>
                             </td>
                             <td style="float: right"> <span style="padding-right: 50px"
                                     class="flag-icon latestDuelFlag flag-icon-{{$duel->Duel_loser->country_code}}">
-                                </span> <a @if($duel->Duel_loser->golden_account == true) class="golden_account" @endif
+                                </span> <a @if($duel->Duel_loser->golden_account == true) class="golden_account" @else
+                                    style="color:black" @endif
                                     href="/user/{{$duel->Duel_loser->uid}}">{{$duel->Duel_loser->name}} </a><img
                                     class="rank_img_leaderboard latestDuelElo"
                                     src="{{$duel->Duel_winner->Title->image}}"></td>
