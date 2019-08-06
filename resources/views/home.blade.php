@@ -39,11 +39,11 @@
                 @if (\Request::is('home') && $user->SpecialTitles->count() > 0)
 
 
-                <div class="uk-form-select" data-uk-form-select>
+                <div class="uk-margin" data-uk-form-select>
 
                     <form action="/api/title/change" method="POST">
                         {{ csrf_field() }}
-                        <select name="title" id="Titles" onchange="this.form.submit()">
+                        <select class="uk-select uk-width-1-2" name="title" id="Titles" onchange="this.form.submit()">
                             <option value="none">Blank</option>
                             @foreach ($user->SpecialTitles as $item)
 
@@ -60,6 +60,10 @@
 
 
                 @endif
+
+
+
+
 
 
 

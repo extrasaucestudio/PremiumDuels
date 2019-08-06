@@ -163,7 +163,7 @@
 
 <script>
     discordInvite.init({
-  inviteCode: 'yHbqZX',
+  inviteCode: 'discord.gg/G9e7zA',
   title: 'Premium Duels',
 });
 discordInvite.render();

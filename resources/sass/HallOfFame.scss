@@ -1,0 +1,65 @@
+.GrandMasterItem {
+    text-align: center;
+}
+
+.crown {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 150px;
+    fill: goldenrod;
+}
+
+.caption {
+    display: block;
+    color: black;
+    font-family: "Merriweather", serif;
+    font-family: "Saira Stencil One", cursive;
+}
+
+.playersLeft {
+    padding-top: 5vh;
+    text-align: left;
+    color: white;
+    font-size: 30px;
+    font-family: "Lobster", cursive;
+    float: left;
+}
+
+.playersRight {
+    padding-top: 5vh;
+    text-align: right;
+    color: white;
+    font-size: 30px;
+    font-family: "Lobster", cursive;
+    float: right;
+}
+
+.flag-left {
+    margin-right: 50px;
+}
+
+.flag-right {
+    margin-left: 50px;
+}
+
+.glow {
+    font-size: 60px;
+    -webkit-animation: glow 1s ease-in-out infinite alternate;
+    -moz-animation: glow 1s ease-in-out infinite alternate;
+    animation: glow 1s ease-in-out infinite alternate;
+}
+
+@-webkit-keyframes glow {
+    from {
+        text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #f9d77e,
+            0 0 40px #f9d77e, 0 0 50px #f9d77e, 0 0 60px #f9d77e,
+            0 0 70px #f9d77e;
+    }
+
+    to {
+        text-shadow: 0 0 20px #fff, 0 0 30px #f9d77e, 0 0 40px #f9d77e,
+            0 0 50px #f9d77e, 0 0 60px #f9d77e, 0 0 70px #f9d77e,
+            0 0 80px #f9d77e;
+    }
+}

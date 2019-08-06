@@ -20,6 +20,12 @@ Route::get('/user/{user}', 'HomeController@index')->name('users_profile');
 Route::get('/', 'PagesController@welcome');
 Route::get('/autocomplete', 'PagesController@fetch')->name('autocomplete');
 Route::get('HallOfFame', 'PagesController@HallOfFame');
+Route::get('/donate', 'PagesController@donate')->name('donate');
+Route::get('/settings', 'HomeController@user_settings');
+Route::post('/user/settings', 'HomeController@ChangeSettings');
+Route::get('/tournaments', 'PagesController@Tournaments');
+Route::get('/about', 'PagesController@School');
+Route::get('/school', 'PagesController@School');
 Route::get('/test', 'PagesController@test');
 
 

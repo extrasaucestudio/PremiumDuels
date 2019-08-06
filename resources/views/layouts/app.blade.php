@@ -42,16 +42,16 @@
                             Hall of Fame
                         </a>
                         <a class="uk-navbar-item " style="font-family: 'Saira Stencil One', cursive"
-                            href="{{ url('/about') }}">
-                            Events
+                            href="{{ url('/tournaments') }}">
+                            Tournaments
                         </a>
                         <a class="uk-navbar-item " style="font-family: 'Saira Stencil One', cursive"
-                            href="{{ url('/about') }}">
+                            href="{{ url('/school') }}">
                             School
                         </a>
                         <a class="uk-navbar-item " style="font-family: 'Saira Stencil One', cursive;"
-                            href="{{ url('/about') }}">
-                            Donate
+                            href="{{ url('/donate') }}">
+                            Donate | Patreon
                         </a>
                     </div>
 
@@ -79,6 +79,9 @@
                                             </a>
                                             <a href="/home">
                                                 Profile
+                                            </a>
+                                            <a href="/settings">
+                                                Settings <i class="fas fa-cogs"></i>
                                             </a>
                                             <form id="logout-form" action="{{ route('logout') }}" method="POST"
                                                 style="display: none;">

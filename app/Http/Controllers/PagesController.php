@@ -83,6 +83,24 @@ class PagesController extends Controller
         return view('HallOfFame');
     }
 
+    public function donate()
+    {
+        return view('donate');
+    }
+
+    public function Tournaments()
+    {
+        return view('Tournaments');
+    }
+    public function About()
+    {
+        return view('About');
+    }
+    public function School()
+    {
+        return view('School');
+    }
+
 
 
 
