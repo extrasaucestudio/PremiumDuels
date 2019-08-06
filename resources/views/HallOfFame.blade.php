@@ -46,6 +46,16 @@
 
 
 <style>
+    html,
+    body {
+        background:
+            /* top, transparent black, faked with gradient */
+            linear-gradient(rgba(0, 0, 0, 0.7),
+            rgba(0, 0, 0, 0.7)),
+
+            url('/images/bg_hall.jpg') !important;
+    }
+
     .GrandMasterItem {
         text-align: center;
 
