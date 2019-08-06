@@ -42,19 +42,16 @@ class LoginController extends Controller
         return "uid";
     }
 
-    
+
 
     protected function authenticated($request, $user)
     {
-        if($user->active == false ){ 
-        $geolocation = geoip($request->ip);
-       $user->active = true;
-       $user->country_code = strtolower($geolocation->getLocation()->iso_code);
-       $user->touch();
-       $user->save();
+        if ($user->active == false) {
+            $geolocation = geoip($request->ip);
+            $user->active = true;
+            $user->country_code = strtolower($geolocation->getLocation()->iso_code);
+            $user->save();
         }
+        $user->touch();
     }
-
-
-     
 }

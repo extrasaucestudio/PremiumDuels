@@ -53,6 +53,7 @@
                             href="{{ url('/donate') }}">
                             Donate | Patreon
                         </a>
+
                     </div>
 
                     <div class="uk-navbar-right">
