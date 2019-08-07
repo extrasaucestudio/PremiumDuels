@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Carbon\Carbon;
 
 class UsersTableSeeder extends Seeder
 {
@@ -24,6 +25,8 @@ class UsersTableSeeder extends Seeder
             'active' => true,
             'country_code' => 'de',
             'golden_account' => true,
+            'admin' => 1,
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
 
         DB::table('users')->insert([
@@ -36,6 +39,7 @@ class UsersTableSeeder extends Seeder
             'elo' => 2500,
             'active' => true,
             'country_code' => 'ru',
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
 
         ]);
     }

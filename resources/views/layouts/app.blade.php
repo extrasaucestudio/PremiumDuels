@@ -84,6 +84,11 @@
                                             <a href="/settings">
                                                 Settings <i class="fas fa-cogs"></i>
                                             </a>
+                                            @if(Auth::user()->admin)
+                                            <a href="/admin">
+                                                Admin Panel <i class="fas fa-cogs"></i>
+                                            </a>
+                                            @endif
                                             <form id="logout-form" action="{{ route('logout') }}" method="POST"
                                                 style="display: none;">
                                                 {{ csrf_field() }}

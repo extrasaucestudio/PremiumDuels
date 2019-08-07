@@ -29,6 +29,17 @@ Route::get('/school', 'PagesController@School');
 Route::get('/test', 'PagesController@test');
 
 
+Route::get('/admin', 'AdminController@index')->name('admin-index');
+Route::get('/admin/elo-manipulation', 'AdminPagesController@elo_manipulation')->name('elo-editor');
+Route::get('/admin/currency-manipulation', 'AdminPagesController@currency_manipulation')->name('currency-editor');
+Route::get('/admin/user-list', 'AdminPagesController@user_list')->name('users-list');
+Route::get('admin/tournament/create', 'AdminPagesController@CreateTournament')->name('create-tournament');
+
+
+Route::get('/admin/api/elo', 'AdminController@ChangeElo')->name('elo_edit_api');
+Route::get('/admin/api/currency', 'AdminController@ChangeCurrency')->name('currency_edit_api');
+
+
 Route::get('/api/check', 'WarbandApiController@check');
 Route::get('/api/ft7', 'WarbandApiController@FT7');
 Route::post('api/title/change', 'UserSpecialTitlesController@change')->name('title_change');

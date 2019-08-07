@@ -26,6 +26,8 @@ class CreateUsersTable extends Migration
             $table->bigInteger('title_id')->unsigned()->default(1);
             $table->bigInteger('special_title_id')->nullable()->unsigned();
             $table->boolean('golden_account')->default(false);
+            $table->boolean('admin')->default(false);
+            $table->integer('currency')->default(0);
             $table->boolean('hidePass')->default(0);
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
