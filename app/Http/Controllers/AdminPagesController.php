@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\Tournament;
+use App\Item;
 
 
 
@@ -47,10 +48,17 @@ class AdminPagesController extends Controller
         return view('admin.Pages.tournament-edit', compact('user', 'tournament'));
     }
 
-    public function View_teTournaments()
+    public function View_Tournaments()
     {
         $user = auth()->user();
         $tournaments = Tournament::orderBy('created_at', 'DESC')->get();
         return view('admin.Pages.view-tournaments', compact('user', 'tournaments'));
+    }
+
+    public function View_Items()
+    {
+        $user = auth()->user();
+        $items = Item::orderBy('created_at', 'DESC')->get();
+        return view('admin.Pages.view-items', compact('user', 'items'));
     }
 }

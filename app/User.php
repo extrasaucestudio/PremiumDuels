@@ -67,4 +67,9 @@ class User extends Authenticatable
     {
         return $this->belongsTo('App\user_special_titles', 'special_title_id', 'id');
     }
+
+    public function UserItems()
+    {
+        return $this->hasMany('App\UserItems', 'user_id', 'id');
+    }
 }

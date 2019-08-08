@@ -38,9 +38,23 @@ Route::get('admin/tournament/create', 'AdminPagesController@CreateTournament')->
 Route::get('admin/tournament/edit/{id}', 'AdminPagesController@EditTournament')->name('edit-tournament');
 Route::post('admin/tournament/edit', 'AdminApiController@EditTournament')->name('edit-tournament-api');
 Route::post('admin/tournament/create', 'AdminApiController@CreateTournament')->name('create-tournament-api');
-Route::get('admin/tournaments/view', 'AdminPagesController@View_teTournaments')->name('view-tournaments');
+Route::get('admin/tournaments/view', 'AdminPagesController@View_Tournaments')->name('view-tournaments');
 Route::post('admin/tournament/delete', 'AdminApiController@DeleteTournament')->name('delete-tournament-api');
 Route::post('/admin/tournament/update/state', 'AdminApiController@UpdateTournamentState');
+
+//// Inventory System
+Route::get('/admin/item/create', 'ItemController@display_create');
+Route::post('/admin/item/create', 'ItemController@create')->name('item-create');
+Route::get('/admin/item/edit/{id}', 'ItemController@display_edit');
+Route::post('/admin/item/edit', 'ItemController@edit')->name('item-edit');
+Route::get('/admin/item/give/{id}', 'ItemController@display_give');
+Route::post('/admin/item/give', 'ItemController@give')->name('item-give');
+
+Route::get('/admin/items', 'AdminPagesController@View_Items');
+
+
+
+
 
 
 Route::get('/admin/api/elo', 'AdminController@ChangeElo')->name('elo_edit_api');

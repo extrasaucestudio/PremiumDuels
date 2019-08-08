@@ -108,6 +108,6 @@ class PagesController extends Controller
     {
 
         $user = User::first();
-        dd($user->SpecialTitle);
+        dd($user->UserItems);
     }
 }

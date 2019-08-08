@@ -84,9 +84,9 @@
                         <a class="collapse-item" href="{{route('view-tournaments')}}">View</a>
 
                         <h6 class="collapse-header">Inventory System</h6>
-                        <a class="collapse-item" href="£">Create</a>
+                        <a class="collapse-item" href="/admin/item/create">Create</a>
                         <a class="collapse-item" href="#">Give</a>
-                        <a class="collapse-item" href="#">Edit</a>
+                        <a class="collapse-item" href="/admin/items">View</a>
                     </div>
                 </div>
             </li>
