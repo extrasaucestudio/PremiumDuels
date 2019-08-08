@@ -48,7 +48,7 @@
                 @csrf
 
                 <label>User UID</label>
-                <input type="number" name="uid" class="form-control">
+                <input type="number" name="uid" value="{{ app('request')->input('uid') }}" class="form-control">
 
                 <label>School</label>
                 <select name="school_id" class="form-control">

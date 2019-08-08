@@ -32,6 +32,8 @@
                             <th> Country </th>
                             <th>Registered at</th>
                             <th> Last Seen at </th>
+                            <th>
+                            </th>
 
                         </tr>
                     </thead>
@@ -50,6 +52,8 @@
                                     class="flag-icon flag-icon-{{$user->country_code}}"></span></td>@endif
                             <td>{{$user->created_at}}</td>
                             <td>{{$user->updated_at}}</td>
+                            <td><a href="/admin/school/invite?uid={{$user->uid}}"> <button
+                                        class="btn btn-primary">Invite to School</button></a></td>
                         </tr>
 
                         @endforeach
