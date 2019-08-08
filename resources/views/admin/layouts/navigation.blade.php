@@ -34,14 +34,14 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+        <ul class="navbar-nav bg-gradient-success sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/admin">
                 <div class="sidebar-brand-icon rotate-n-15">
 
                 </div>
-                <div class="sidebar-brand-text mx-3">Premium Duels </div>
+                <div class="sidebar-brand-text mx-3">Premium Duels</div>
             </a>
 
             <!-- Divider -->
@@ -78,6 +78,10 @@
                         <a class="collapse-item" href="£">Create</a>
                         <a class="collapse-item" href="#">Edit</a>
                         <a class="collapse-item" href="#">View</a>
+
+                        <h6 class="collapse-header">Tournaments</h6>
+                        <a class="collapse-item" href="{{route('create-tournament')}}">Create</a>
+                        <a class="collapse-item" href="{{route('view-tournaments')}}">View</a>
 
                         <h6 class="collapse-header">Inventory System</h6>
                         <a class="collapse-item" href="£">Create</a>
@@ -122,9 +126,6 @@
                 </a>
                 <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Tournaments</h6>
-                        <a class="collapse-item" href="{{route('create-tournament')}}">Create</a>
-                        <a class="collapse-item" href="#">View</a>
 
 
                         <h6 class="collapse-header">Other</h6>
@@ -247,7 +248,7 @@
                 <footer class="sticky-footer bg-white">
                     <div class="container my-auto">
                         <div class="copyright text-center my-auto">
-                            <span>Copyright &copy; Premium Duels 2019</span>
+                            <span>AdminPanel v0.1a <br> Copyright &copy; Premium Duels 2019 </span>
                         </div>
                     </div>
                 </footer>

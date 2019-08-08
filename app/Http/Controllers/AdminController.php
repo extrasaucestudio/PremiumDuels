@@ -61,9 +61,9 @@ class AdminController extends Controller
         if ($request->value < 1)  return redirect()->back()->with('error', 'Failed. Value must be more than 0.');
         if ($user->value > 1000) return redirect()->back()->with('error', 'Failed. Value must be less than 0.');
 
-        if ($request->action_type = 'add') {
+        if ($request->action_type == 'add') {
             $user->increment('elo', $request->value);
-        } else if ($request->action_type = 'substract') {
+        } else if ($request->action_type == 'substract') {
             $user->decrement('elo', $request->value);
             if (($user->elo - $request->value) < 0) return redirect()->back()->with('error', 'Failed. User doesnt have enought elo.');
         }
@@ -78,11 +78,10 @@ class AdminController extends Controller
         if (!$user) return redirect()->back()->with('error', 'Failed. User with that uuid doesnt exist in our database.');
         if ($user->active == 0)  return redirect()->back()->with('error', 'Failed. User is not activated.');
         if ($request->value < 1)  return redirect()->back()->with('error', 'Failed. Value must be more than 0.');
-        if ($user->value > 1000) return redirect()->back()->with('error', 'Failed. Value must be less than 0.');
 
-        if ($request->action_type = 'add') {
+        if ($request->action_type == 'add') {
             $user->increment('currency', $request->value);
-        } else if ($request->action_type = 'substract') {
+        } else if ($request->action_type == 'substract') {
             $user->decrement('currency', $request->value);
         }
         $user->save();

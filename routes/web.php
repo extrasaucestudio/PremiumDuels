@@ -24,6 +24,7 @@ Route::get('/donate', 'PagesController@donate')->name('donate');
 Route::get('/settings', 'HomeController@user_settings');
 Route::post('/user/settings', 'HomeController@ChangeSettings');
 Route::get('/tournaments', 'PagesController@Tournaments');
+Route::get('/tournament/{id}', 'PagesController@Tournament');
 Route::get('/about', 'PagesController@School');
 Route::get('/school', 'PagesController@School');
 Route::get('/test', 'PagesController@test');
@@ -34,6 +35,12 @@ Route::get('/admin/elo-manipulation', 'AdminPagesController@elo_manipulation')->
 Route::get('/admin/currency-manipulation', 'AdminPagesController@currency_manipulation')->name('currency-editor');
 Route::get('/admin/user-list', 'AdminPagesController@user_list')->name('users-list');
 Route::get('admin/tournament/create', 'AdminPagesController@CreateTournament')->name('create-tournament');
+Route::get('admin/tournament/edit/{id}', 'AdminPagesController@EditTournament')->name('edit-tournament');
+Route::post('admin/tournament/edit', 'AdminApiController@EditTournament')->name('edit-tournament-api');
+Route::post('admin/tournament/create', 'AdminApiController@CreateTournament')->name('create-tournament-api');
+Route::get('admin/tournaments/view', 'AdminPagesController@View_teTournaments')->name('view-tournaments');
+Route::post('admin/tournament/delete', 'AdminApiController@DeleteTournament')->name('delete-tournament-api');
+Route::post('/admin/tournament/update/state', 'AdminApiController@UpdateTournamentState');
 
 
 Route::get('/admin/api/elo', 'AdminController@ChangeElo')->name('elo_edit_api');
