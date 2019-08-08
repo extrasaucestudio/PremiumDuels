@@ -72,4 +72,9 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\UserItems', 'user_id', 'id');
     }
+
+    public function School()
+    {
+        return $this->hasOne('App\SchoolMember', 'user_id', 'id');
+    }
 }

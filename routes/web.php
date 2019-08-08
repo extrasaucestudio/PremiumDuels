@@ -49,10 +49,18 @@ Route::get('/admin/item/edit/{id}', 'ItemController@display_edit');
 Route::post('/admin/item/edit', 'ItemController@edit')->name('item-edit');
 Route::get('/admin/item/give/{id}', 'ItemController@display_give');
 Route::post('/admin/item/give', 'ItemController@give')->name('item-give');
-
 Route::get('/admin/items', 'AdminPagesController@View_Items');
 
 
+
+//// School System
+Route::get('/admin/school/create', 'SchoolController@display_create');
+Route::post('/admin/school/create', 'SchoolController@create')->name('school-create');
+Route::get('/admin/schools', 'SchoolController@view_schools');
+Route::get('/admin/school/edit/{id}', 'SchoolController@display_edit');
+Route::post('/admin/school/edit', 'SchoolController@edit')->name('school-edit');
+Route::get('/admin/school/invite', 'SchoolInviteController@display_invite');
+Route::post('/admin/school/invite', 'SchoolInviteController@invite')->name('school-invite');
 
 
 

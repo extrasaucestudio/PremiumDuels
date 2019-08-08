@@ -75,9 +75,9 @@
                     <div class="bg-white py-2 collapse-inner rounded">
 
                         <h6 class="collapse-header">School System</h6>
-                        <a class="collapse-item" href="£">Create</a>
-                        <a class="collapse-item" href="#">Edit</a>
-                        <a class="collapse-item" href="#">View</a>
+                        <a class="collapse-item" href="/admin/school/create">Create</a>
+                        <a class="collapse-item" href="/admin/schools">View</a>
+                        <a class="collapse-item" href="/admin/school/invite">Invitations</a>
 
                         <h6 class="collapse-header">Tournaments</h6>
                         <a class="collapse-item" href="{{route('create-tournament')}}">Create</a>
