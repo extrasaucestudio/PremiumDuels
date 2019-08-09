@@ -25,6 +25,15 @@ class CreateUserItemsTable extends Migration
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('item_id')->references('id')->on('items');
         });
+
+        Schema::table('users', function ($table) {
+
+            $table->foreign('helmet')->references('id')->on('user_items');
+            $table->foreign('armor')->references('id')->on('user_items');
+            $table->foreign('gloves')->references('id')->on('user_items');
+            $table->foreign('boots')->references('id')->on('user_items');
+            $table->foreign('weapon')->references('id')->on('user_items');
+        });
     }
 
     /**

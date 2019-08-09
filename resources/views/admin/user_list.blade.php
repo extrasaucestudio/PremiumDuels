@@ -49,7 +49,8 @@
                             </td>
                             <td>@if($user->active == 1) True @else False @endif</td>
                             <td>@if($user->country_code != null) <span
-                                    class="flag-icon flag-icon-{{$user->country_code}}"></span></td>@endif
+                                    class="flag-icon flag-icon-{{$user->Country->country_code ?? 'Unknown'}}"></span>
+                            </td>@endif
                             <td>{{$user->created_at}}</td>
                             <td>{{$user->updated_at}}</td>
                             <td><a href="/admin/school/invite?uid={{$user->uid}}"> <button

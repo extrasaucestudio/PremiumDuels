@@ -23,9 +23,9 @@ class UsersTableSeeder extends Seeder
             'title_id' => 2,
             'elo' => 2500,
             'active' => true,
-            'country_code' => 'de',
             'golden_account' => true,
             'admin' => 1,
+            'country_id' => 1,
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
 
@@ -38,7 +38,7 @@ class UsersTableSeeder extends Seeder
             'title_id' => 2,
             'elo' => 2500,
             'active' => true,
-            'country_code' => 'ru',
+            'country_id' => 1,
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
 
         ]);

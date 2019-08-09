@@ -4,82 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Duel;
 use Illuminate\Http\Request;
+use Auth;
 
 class DuelController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function DuelHistory()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Duel  $duel
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Duel $duel)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Duel  $duel
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Duel $duel)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Duel  $duel
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Duel $duel)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Duel  $duel
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Duel $duel)
-    {
-        //
+        $user = Auth::user();
+        $LastDuels = Duel::Where('winner_id', $user->id)->orWhere('loser_id', $user->id)->orderBy('created_at', 'DESC')->get();
+        return view('user.pages.duel-history', compact('user', 'LastDuels'));
     }
 }

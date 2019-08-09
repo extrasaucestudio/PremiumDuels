@@ -15,7 +15,7 @@
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+
 Route::get('/user/{user}', 'HomeController@index')->name('users_profile');
 Route::get('/', 'PagesController@welcome');
 Route::get('/autocomplete', 'PagesController@fetch')->name('autocomplete');
@@ -29,7 +29,7 @@ Route::get('/about', 'PagesController@School');
 Route::get('/school', 'PagesController@School');
 Route::get('/test', 'PagesController@test');
 
-
+Route::get('/countries/update', 'CountryController@rank_countries');
 
 
 
@@ -77,4 +77,46 @@ Route::middleware(['auth', 'admin'])->group(function () {
     /// Manipulation
     Route::get('/admin/api/elo', 'AdminController@ChangeElo')->name('elo_edit_api');
     Route::get('/admin/api/currency', 'AdminController@ChangeCurrency')->name('currency_edit_api');
+});
+
+
+
+
+Route::middleware(['auth'])->group(function () {
+
+    Route::get('/home', 'UserDashboard@index')->name('home');
+    Route::get('/leaderboard', 'UserDashboard@leaderboard');
+    Route::get('/charts', 'UserDashboard@charts');
+
+
+
+
+
+    //// Titles
+
+    Route::get('/user/title/create', 'SpecialTitleController@display_create');
+    Route::post('/user/title/create', 'SpecialTitleController@create')->name('create-title');
+
+    Route::get('/user/title/switch', 'SpecialTitleController@display_switch');
+    Route::post('/user/title/switch', 'UserSpecialTitlesController@change')->name('switch-title');
+
+
+
+    //// Duel History
+
+    Route::get('/user/duels/history', 'DuelController@DuelHistory');
+
+
+
+    //// Inventory System
+
+
+    Route::get('/user/inventory/switch', 'UserItemsController@display_switch');
+    Route::post('/user/inventory/switch', 'UserItemsController@switch')->name('inventory-switch');
+
+
+
+    //// Charts
+
+
 });

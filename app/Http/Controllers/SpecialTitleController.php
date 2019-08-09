@@ -4,82 +4,53 @@ namespace App\Http\Controllers;
 
 use App\Special_Title;
 use Illuminate\Http\Request;
+use App\User;
+use \Auth;
+use App\user_special_titles;
 
 class SpecialTitleController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function display_create()
     {
-        //
+
+        $user = Auth::user();
+        return view('user.pages.title-create', compact('user'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function display_switch()
     {
-        //
+
+        $user = Auth::user();
+        return view('user.pages.title-switch', compact('user'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Special_Title  $special_Title
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Special_Title $special_Title)
+    public function create(Request $request)
     {
-        //
-    }
+        $validator = request()->validate([
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Special_Title  $special_Title
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Special_Title $special_Title)
-    {
-        //
-    }
+            'name' => 'required|min:3|max:12',
+        ]);
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Special_Title  $special_Title
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Special_Title $special_Title)
-    {
-        //
-    }
+        $user = Auth::user();
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Special_Title  $special_Title
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Special_Title $special_Title)
-    {
-        //
+        if (Special_Title::where('name', $request->name)->count() > 0) return redirect()->back()->with('error', 'Failed. Title with that name already exist.');
+
+        if ($user->currency < 500)  return redirect()->back()->with('error', 'Failed. You do not have enought money!');
+
+        $SpecialTitle = new Special_Title;
+        $SpecialTitle->name = $request->name;
+        $SpecialTitle->class = 'minor';
+        $SpecialTitle->save();
+
+        $UserSpecialTitle = new user_special_titles;
+        $UserSpecialTitle->special_title_id = $SpecialTitle->id;
+        $UserSpecialTitle->user_id = $user->id;
+        $UserSpecialTitle->save();
+
+        $user->decrement('currency', 500);
+        $user->save();
+
+        return redirect()->back()->with('success', 'Success. You have been created new minor title.');
     }
 }

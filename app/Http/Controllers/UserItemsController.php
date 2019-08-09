@@ -4,82 +4,77 @@ namespace App\Http\Controllers;
 
 use App\UserItems;
 use Illuminate\Http\Request;
+use App\User;
+use Auth;
+use App\Items;
 
 class UserItemsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function display_switch()
     {
-        //
+
+        $user = Auth::user();
+
+
+
+        return view('user.pages.inventory-switch', compact('user'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function switch(Request $request)
     {
-        //
-    }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\UserItems  $userItems
-     * @return \Illuminate\Http\Response
-     */
-    public function show(UserItems $userItems)
-    {
-        //
-    }
+        $user = Auth::user();
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\UserItems  $userItems
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(UserItems $userItems)
-    {
-        //
-    }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\UserItems  $userItems
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, UserItems $userItems)
-    {
-        //
-    }
+        $helmet_ = UserItems::find($request->helmet);
+        $armor_ = UserItems::find($request->armor);
+        $gloves_ = UserItems::find($request->gloves);
+        $boots_ = UserItems::find($request->boots);
+        $weapon_ = UserItems::find($request->weapon);
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\UserItems  $userItems
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(UserItems $userItems)
-    {
-        //
+
+        if ($helmet_ == null) {
+            $user->helmet = null;
+        } else if ($helmet_->user_id == $user->id) {
+            $user->helmet = $helmet_->id;
+        }
+
+
+        if ($armor_ == null) {
+
+            $user->armor = null;
+        } else if ($armor_->user_id == $user->id) {
+            $user->armor = $armor_->id;
+        }
+
+
+        if ($gloves_ == null) {
+            $user->gloves = null;
+        } else if ($gloves_->user_id == $user->id) {
+            $user->gloves = $gloves_->id;
+        }
+
+
+
+
+        if ($boots_ == null) {
+            $user->boots = null;
+        } else if ($boots_->user_id == $user->id) {
+            $user->boots = $boots_->id;
+        }
+
+
+
+        if ($weapon_ == null) {
+            $user->weapon = null;
+        } else if ($weapon_->user_id == $user->id) {
+            $user->weapon = $weapon_->id;
+        }
+
+        $user->save();
+
+
+        return redirect()->back()->with('success', 'Succes');
     }
 }

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSpecialTitlesTable extends Migration
+class CreateCountriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,12 @@ class CreateSpecialTitlesTable extends Migration
      */
     public function up()
     {
-        Schema::create('special__titles', function (Blueprint $table) {
-            $table->bigIncrements('id')->unsigned();
-            $table->string('name')->unique();
-            $table->string('class');
+        Schema::create('countries', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('name');
+            $table->string('country_code');
+            $table->bigInteger('elo')->default(0);
+            $table->bigInteger('members_num')->default(0);
             $table->timestamps();
         });
     }
@@ -28,6 +30,6 @@ class CreateSpecialTitlesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('special__titles');
+        Schema::dropIfExists('countries');
     }
 }

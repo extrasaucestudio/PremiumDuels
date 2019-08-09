@@ -125,7 +125,9 @@
                                 style="color: gold!important"
                                 @else style="color: white!important" @endif
                                 href="/user/{{$user->uid}}">{{$user->name}}
-                                <span class="flag-icon flag-icon-{{$user->country_code}}"></span></a></td>
+                                <span
+                                    class="flag-icon flag-icon-{{$user->Country->country_code ?? 'Unknown'}}"></span></a>
+                        </td>
                         <td>@if($user->SpecialTitle != null) <span
                                 style="color:white">{{$user->SpecialTitle->SpecialTitleData->name}} | </span>@endif<b
                                 style="color: {{$user->Title->color}}">{{$user->Title->name}}</b> &nbsp <img

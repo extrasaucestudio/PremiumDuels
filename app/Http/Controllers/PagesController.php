@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Title;
 use App\Duel;
+use App\Country;
 
 
 
@@ -105,9 +106,5 @@ class PagesController extends Controller
 
 
     public function test(Request $request)
-    {
-
-        $user = User::first();
-        dd($user->UserItems);
-    }
+    { }
 }

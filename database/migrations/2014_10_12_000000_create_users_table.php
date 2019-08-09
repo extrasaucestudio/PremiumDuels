@@ -22,7 +22,8 @@ class CreateUsersTable extends Migration
             $table->boolean('active')->default(false);
             $table->integer('kills')->default(0);
             $table->integer('deaths')->default(0);
-            $table->string('country_code')->default('pl');
+            $table->bigInteger('country_id')->nullable();
+            $table->string('ip')->nullable();
             $table->bigInteger('title_id')->unsigned()->default(1);
             $table->bigInteger('special_title_id')->nullable()->unsigned();
             $table->boolean('golden_account')->default(false);
@@ -33,6 +34,11 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('secret_key');
+            $table->bigInteger('helmet')->nullable()->unsigned();
+            $table->bigInteger('armor')->nullable()->unsigned();
+            $table->bigInteger('gloves')->nullable()->unsigned();
+            $table->bigInteger('boots')->nullable()->unsigned();
+            $table->bigInteger('weapon')->nullable()->unsigned();
             $table->rememberToken();
             $table->timestamps();
         });
