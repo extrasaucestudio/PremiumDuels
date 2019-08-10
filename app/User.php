@@ -14,6 +14,12 @@ class User extends Authenticatable
 
     protected $primaryKey = 'uid';
 
+
+    protected $dispatchesEvents = [
+        'created' => Events\NewUserEvent::class,
+        'updated' => Events\UserUpdatedEvent::class
+    ];
+
     /**
      * The attributes that are mass assignable.
      *
@@ -133,5 +139,12 @@ class User extends Authenticatable
     public function Country()
     {
         return $this->belongsTo('App\Country', 'country_id', 'id');
+    }
+
+    public function saveQuietly(array $options = [])
+    {
+        return static::withoutEvents(function () use ($options) {
+            return $this->save($options);
+        });
     }
 }

@@ -46,7 +46,9 @@ class CalculateElo extends Command
         function CountryElo($users)
         {
             \DB::table('countries')->update(['elo' => 0, 'members_num' => 0]);
+
             foreach ($users as $key => $user) {
+                if ($user->Country == null) continue;
                 $user->Country->increment('elo', $user->elo);
                 $user->Country->increment('members_num', 1);
                 $user->Country->save();

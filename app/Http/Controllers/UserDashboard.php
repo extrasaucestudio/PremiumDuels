@@ -17,7 +17,9 @@ class UserDashboard extends Controller
         $user = Auth::user();
 
         $duels = Duel::where('winner_id', $user->id)->orWhere('loser_id', $user->id)->get();
-        $nextRank = Title::Where('elo', '>', $user->elo)->orderBy('elo', 'DESC')->first();
+        $nextRank = Title::Where('elo', '>', $user->elo)->orderBy('elo', 'ASC')->Where('id', '!=', $user->title_id)->first();
+
+
 
         if (!$nextRank) {
             $nextRank = new stdClass;
@@ -26,13 +28,28 @@ class UserDashboard extends Controller
             $nextRank->color = 'gold';
         } else {
 
-            $nextRank->percent = floor(($user->elo / $nextRank->elo) * 100);
+            if ($user->Title->name == 'Red') {
+
+
+                $nextRank->percent = ($user->elo / $user->Title->elo) * 100;
+            } else {
+                $val1 = $nextRank->elo - $user->Title->elo;
+                $val2 = $user->Title->elo - $user->elo;
+
+
+                $nextRank->percent = ($val2 / $val1) * 100;
+
+                $nextRank->percent = abs($nextRank->percent);
+            }
         }
+
+
 
 
         $DuelWL = new stdClass;
         $DuelWL->loses = Duel::where('loser_id', $user->id)->count();
         $DuelWL->wins = Duel::where('winner_id', $user->id)->count();
+        $DuelWL->winratio = floor($DuelWL->wins / ($DuelWL->loses + $DuelWL->wins) * 100);
 
 
         function CalculatePlaceInLeaderboard1($user)
@@ -57,7 +74,7 @@ class UserDashboard extends Controller
     public function leaderboard()
     {
         $user = Auth::user();
-        $users = User::orderBy('elo', 'DESC')->get();
+        $users = User::where('active', 1)->orderBy('elo', 'DESC')->get();
         return view('user.pages.leaderboard', compact('user', 'users'));
     }
 

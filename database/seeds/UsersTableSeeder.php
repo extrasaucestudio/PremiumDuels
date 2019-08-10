@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use Carbon\Carbon;
+use App\User;
 
 class UsersTableSeeder extends Seeder
 {
@@ -13,34 +14,28 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
 
+        $user = new User;
+        $user->name = 'Pitch';
+        $user->email = Str::random(10) . '@none.com';
+        $user->password = bcrypt('password');
+        $user->secret_key = 'password';
+        $user->uid = 111;
+        $user->elo = 1000;
+        $user->active = false;
+        $user->golden_account = true;
+        $user->admin = 1;
+        $user->save();
 
-        DB::table('users')->insert([
-            'name' => Str::random(10),
-            'email' => Str::random(10) . '@gmail.com',
-            'password' => bcrypt('password'),
-            'secret_key' => 'password',
-            'uid' => 111,
-            'title_id' => 2,
-            'elo' => 2500,
-            'active' => true,
-            'golden_account' => true,
-            'admin' => 1,
-            'country_id' => 1,
-            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-        ]);
-
-        DB::table('users')->insert([
-            'name' => Str::random(10),
-            'email' => Str::random(10) . '@gmail.com',
-            'password' => bcrypt('password'),
-            'secret_key' => 'password',
-            'uid' => 112,
-            'title_id' => 2,
-            'elo' => 2500,
-            'active' => true,
-            'country_id' => 1,
-            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-
-        ]);
+        $user = new User;
+        $user->name = 'Not Pitch';
+        $user->email = Str::random(10) . '@none.com';
+        $user->password = bcrypt('password');
+        $user->secret_key = 'password';
+        $user->uid = 112;
+        $user->elo = 1000;
+        $user->active = false;
+        $user->golden_account = true;
+        $user->admin = 1;
+        $user->save();
     }
 }
