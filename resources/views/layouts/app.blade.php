@@ -47,6 +47,10 @@
                             Donate | Patreon
                         </a>
 
+                        <span id="online" class="uk-badge">0</span> &nbsp; &nbsp;
+                        <span class="uk-badge">{{ $users->count()}} Registered</span> &nbsp; &nbsp;
+                        <span class="uk-badge">{{ $duels->count()}} Duels Played</span> &nbsp; &nbsp;
+
                     </div>
 
                     <div class="uk-navbar-right">
@@ -106,5 +110,19 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
 </body>
+
+<script>
+    function OnlinePlayers()
+{
+    $.get( "{{ Request::root()}}/api/players-online", function( data ) {
+  $( "#online" ).html(data + ' Online');
+});
+}
+
+OnlinePlayers();
+
+</script>
+
+
 
 </html>

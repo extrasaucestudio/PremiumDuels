@@ -21,8 +21,16 @@
     <div class="bgimg-1">
         <div class="caption">
             <span class="border notransition">Premium Duels</span>
+
+
         </div>
+
+
     </div>
+
+
+
+
 
     <div style="color: #777;background-color:white;text-align:center;padding:50px 80px;text-align: justify;">
         <h3 style="text-align:center;">About</h3>
@@ -108,7 +116,7 @@
     <div class="bgimg-1">
 
         <div class="caption">
-            <span class="border" style="background-color:transparent;font-size:25px;color: white">Charts &&
+            <span class="border" style="background-color:transparent;font-size:25px;color: white">Charts &
                 Statistics</span>
 
         </div>

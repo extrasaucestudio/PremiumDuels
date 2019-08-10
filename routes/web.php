@@ -28,6 +28,7 @@ Route::get('/tournament/{id}', 'PagesController@Tournament');
 Route::get('/about', 'PagesController@School');
 Route::get('/school', 'PagesController@School');
 Route::get('/test', 'PagesController@test');
+Route::get('/api/players-online', 'PagesController@PlayersOnline');
 
 Route::get('/countries/update', 'CountryController@rank_countries');
 

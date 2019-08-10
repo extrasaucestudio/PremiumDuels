@@ -58,7 +58,7 @@ class UserDashboard extends Controller
 
         function CalculatePlaceInLeaderboard1($user)
         {
-            $users = User::orderBy('elo', 'DESC')->get();
+            $users = User::orderBy('elo', 'DESC')->where('active', 1)->get();
             $name = $user->name;
             $rank = $users->search(function ($person, $key) use ($name) {
                 return $person->name == $name;
@@ -130,7 +130,7 @@ class UserDashboard extends Controller
 
         function CalculatePlaceInLeaderboard2($user)
         {
-            $users = User::orderBy('elo', 'DESC')->get();
+            $users = User::orderBy('elo', 'DESC')->where('active', 1)->get();
             $name = $user->name;
             $rank = $users->search(function ($person, $key) use ($name) {
                 return $person->name == $name;

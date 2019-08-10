@@ -211,24 +211,28 @@ var goBackDays = 7;
         new Chart(document.getElementById("ComparisonOfElo"), {
   type: 'line',
   data: {
-    labels: [            'Now',
-            daysSorted[1],
-            daysSorted[2],
-            daysSorted[3],
-            daysSorted[4],
+    labels: [
+            daysSorted[6],
             daysSorted[5],
-            daysSorted[6]],
+            daysSorted[4],
+            daysSorted[3],
+            daysSorted[2],
+            daysSorted[1],
+            'Now'
+
+            
+        ],
     datasets: [{ 
-        data: [{!! $user->elo !!},@for ($i = 0; $i < 6; $i++)
+        data: [@for ($i = -6; $i < 0; $i++)
 {!! $user->EloHistory[$i]->elo ?? 1000 !!},
-@endfor],
+@endfor {!! $user->elo !!}],
         label: "You",
         borderColor: "#3e95cd",
         fill: false
       }, { 
-        data: [{!! $foreign_user->elo !!}, @for ($i = 0; $i < 6; $i++)
+        data: [@for ($i = -6; $i < 0; $i++)
 {!! $foreign_user->EloHistory[$i]->elo ?? 1000 !!},
-@endfor],
+@endfor {!! $foreign_user->elo !!}],
         label: "{{$foreign_user->name}}",
         borderColor: "#8e5ea2",
         fill: false

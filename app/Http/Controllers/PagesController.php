@@ -16,36 +16,14 @@ class PagesController extends Controller
 
     public function welcome()
     {
-        $users = User::Where('active', 1)->orderBy('elo', 'DESC')->get();
+        $users = User::orderBy('elo', 'DESC')->get();
         $duels = Duel::orderBy('created_at', 'DESC')->get();
 
 
-        function getPlayersOnServer()
-        {
-            $myFile = 'http://www.mnbcentral.net/min';
-
-            $str = 'MasterFrog_Vasilisa';
-
-            function getLineWithString($fileName, $str)
-            {
-                $lines = file($fileName);
-                foreach ($lines as $lineNumber => $line) {
-                    if (strpos($line, $str) !== false) {
-                        return $line;
-                    }
-                }
-                return -1;
-            }
-
-            $data = explode(",", getLineWithString($myFile, $str));
-            return $data;
-        }
 
 
-        $serverData = getPlayersOnServer();
 
-
-        return view('welcome_rebuild', compact('users', 'duels', 'serverData'));
+        return view('welcome_rebuild', compact('users', 'duels'));
     }
 
     public function search()
@@ -105,7 +83,34 @@ class PagesController extends Controller
         return view('School');
     }
 
+    public function PlayersOnline()
+    {
+        function getPlayersOnServer()
+        {
+            $myFile = 'http://www.mnbcentral.net/min';
 
+            $str = 'MasterFrog_Vasilisa';
+
+            function getLineWithString($fileName, $str)
+            {
+                $lines = file($fileName);
+                foreach ($lines as $lineNumber => $line) {
+                    if (strpos($line, $str) !== false) {
+                        return $line;
+                    }
+                }
+                return -1;
+            }
+
+            $data = explode(",", getLineWithString($myFile, $str));
+            return $data;
+        }
+
+
+        $serverData = getPlayersOnServer();
+
+        return $serverData[6];
+    }
 
 
     public function test(Request $request)

@@ -197,14 +197,13 @@ var myLineChart = new Chart(ctx, {
     type: "line",
     data: {
         labels: [
-
-            'Now',
-            daysSorted[1],
-            daysSorted[2],
-            daysSorted[3],
-            daysSorted[4],
+            daysSorted[6],
             daysSorted[5],
-            daysSorted[6]
+            daysSorted[4],
+            daysSorted[3],
+            daysSorted[2],
+            daysSorted[1],
+            'Now'
 
             
         ],
@@ -223,14 +222,14 @@ var myLineChart = new Chart(ctx, {
                 pointHitRadius: 10,
                 pointBorderWidth: 2,
                 data: [
-                    {!! $user->elo !!},
+                   
 
-                    @foreach ($user->EloHistory->take(6) as $obj)
+                    @foreach ($user->EloHistory->take(6)->reverse() as $obj)
                   
                     {!! $obj->elo !!},
                  
     @endforeach
-
+    {!! $user->elo !!},
                     
 
                 ]
