@@ -29,14 +29,14 @@ class WarbandApiController extends Controller
             $user->secret_key = $pass;
             $user->save();
 
-            return "1|{$request->player_id}|1|{$request->uid}|{$user->secret_key}";
+            return "1|1|{$request->player_id}|{$request->uid}|{$user->secret_key}";
         } else if (!$user->active) {
             $user->touch();
 
-            return "1|{$request->player_id}|2|{$user->uid}|{$user->secret_key}";
+            return "1|2|{$request->player_id}|{$user->uid}|{$user->secret_key}";
         } else {
             $user->touch();
-            return "1|{$request->player_id}|3|{$user->uid}|{$user->secret_key}|{$user->elo}";
+            return "1|3|{$request->player_id}|{$user->uid}|{$user->secret_key}|{$user->elo}";
         }
     }
 
@@ -50,9 +50,9 @@ class WarbandApiController extends Controller
         $winner = User::find($request->winner_uid);
         $loser = User::find($request->loser_uid);
 
-        if (!$winner || !$loser) return "2|{$request->player_id}|-3|One of participants doesnt have account";
-        if (!$winner->active) return "2|{$request->player_id}|-4|Winner of duel have inactive account";
-        if (!$loser->active) return "2|{$request->player_id}|-6|Loser of duel have inactive account";
+        if (!$winner || !$loser) return "2|-3|{$request->winner_id}|{$request->loser_id}|One of participants doesnt have account";
+        if (!$winner->active) return "2|-4|{$request->winner_id}|{$request->loser_id}|Winner of duel have inactive account";
+        if (!$loser->active) return "2|-6|{$request->winner_id}|{$request->loser_id}|Loser of duel have inactive account";
 
 
         $winner_player = new Player($winner->elo);
@@ -107,7 +107,6 @@ class WarbandApiController extends Controller
 
 
 
-
-        return "2|{$request->player_id}|{$request->player_id2}|5|{$winner->uid}|{$loser->uid}|{$elo_plus}|{$elo_minus}|{$winner->elo}|{$loser->elo}";
+        return "2|5|{$request->winner_id}|{$request->loser_id}|{$winner->uid}|{$loser->uid}|{$elo_plus}|{$elo_minus}|{$winner->elo}|{$loser->elo}";
     }
 }

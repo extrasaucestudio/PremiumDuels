@@ -49,8 +49,12 @@ class UserDashboard extends Controller
         $DuelWL = new stdClass;
         $DuelWL->loses = Duel::where('loser_id', $user->id)->count();
         $DuelWL->wins = Duel::where('winner_id', $user->id)->count();
-        $DuelWL->winratio = floor($DuelWL->wins / ($DuelWL->loses + $DuelWL->wins) * 100);
 
+        if ($DuelWL->wins > 0 && $DuelWL->loses > 0) {
+            $DuelWL->winratio = floor($DuelWL->wins / ($DuelWL->loses + $DuelWL->wins) * 100);
+        } else {
+            $DuelWL->winratio = 0;
+        }
 
         function CalculatePlaceInLeaderboard1($user)
         {
