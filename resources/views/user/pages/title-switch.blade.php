@@ -1,4 +1,4 @@
-@extends('user.layouts.navigation')
+@extends('user.layouts.navigation', ['user' => $user])
 
 @section('content')
 <!DOCTYPE html>

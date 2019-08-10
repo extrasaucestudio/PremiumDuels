@@ -7,6 +7,7 @@ use App\User;
 use App\Title;
 use App\Duel;
 use App\Country;
+use App\Tournament;
 
 
 
@@ -44,7 +45,7 @@ class PagesController extends Controller
         $serverData = getPlayersOnServer();
 
 
-        return view('welcome', compact('users', 'duels', 'serverData'));
+        return view('welcome_rebuild', compact('users', 'duels', 'serverData'));
     }
 
     public function search()
@@ -91,7 +92,9 @@ class PagesController extends Controller
 
     public function Tournaments()
     {
-        return view('Tournaments');
+
+        $tournaments = Tournament::orderBy('created_at', 'DESC')->get();
+        return view('Tournaments', compact('tournaments'));
     }
     public function About()
     {

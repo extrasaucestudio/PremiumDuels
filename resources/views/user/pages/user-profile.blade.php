@@ -6,13 +6,19 @@
 
 @section('content')
 
-<!-- Begin Page Content -->
+
 <div class="container-fluid">
 
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 @if($foreign_user->golden_account == true)
+            style="color: gold!important"
+            @endif class="h3 mb-0 text-gray-800">{{$foreign_user->name}}</h1>
 
+    </div>
 
     <!-- Content Row -->
     <div class="row">
+
 
         <!-- Earnings (Monthly) Card Example -->
         <div class="col-xl-3 col-md-6 mb-4">
@@ -23,8 +29,8 @@
                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Country
                             </div>
                             <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                {{$user->Country->name ?? 'Unknown' }} &nbsp;<span
-                                    class="flag-icon flag-icon-{{$user->Country->country_code ?? 'Unknown'}}"></span>
+                                {{$foreign_user->Country->name ?? 'Unknown' }} &nbsp;<span
+                                    class="flag-icon flag-icon-{{$foreign_user->Country->country_code ?? 'Unknown'}}"></span>
                             </div>
                         </div>
                         <div class="col-auto">
@@ -41,10 +47,10 @@
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">ELO / Place
+                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">ELO/Place
                             </div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{$user->elo}} / {!!
-                                $PlaceInLeaderboard!!}th</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{$foreign_user->elo}} /
+                                {{$PlaceInLeaderboard}}th</div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-arrow-alt-circle-up fa-2x text-gray-300"></i>
@@ -64,7 +70,8 @@
                             </div>
                             <div class="row no-gutters align-items-center">
                                 <div class="col-auto">
-                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{$user->title->name}}
+                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
+                                        {{$foreign_user->title->name}}
                                     </div>
                                 </div>
                                 <div class="col">
@@ -94,10 +101,10 @@
                             <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">School
                             </div>
                             <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                @if($user->School != null)
-                                <a href="/school/{{$user->School->id}}" style="  color:gray !important;
-                                    text-decoration:none;">
-                                    {{$user->School->MemberToSchool->name}}
+                                @if($foreign_user->School != null)
+                                <a href="/school/{{$foreign_user->School->id}}" style="  color:gray !important;
+                                text-decoration:none;">
+                                    {{$foreign_user->School->MemberToSchool->name}}
                                 </a>
                                 @else
                                 None
@@ -113,66 +120,77 @@
         </div>
     </div>
 
-    <!-- Content Row -->
 
-    <div class="row">
+</div>
 
-        <!-- Area Chart -->
-        <div class="col-xl-8 col-lg-7">
-            <div class="card shadow mb-4">
-                <!-- Card Header - Dropdown -->
-                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                    <h6 class="m-0 font-weight-bold text-primary">ELO Graph</h6>
 
-                </div>
-                <!-- Card Body -->
-                <div class="card-body">
-                    <div class="chart-area">
-                        <canvas id="myAreaChart"></canvas>
-                    </div>
-                </div>
+<div class="row">
+
+    <!-- Area Chart -->
+    <div class="col-xl-7 col-lg-7 ml-5">
+        <div class="card shadow mb-4">
+            <!-- Card Header - Dropdown -->
+            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <h6 class="m-0 font-weight-bold text-primary">ELO Graph</h6>
+
             </div>
-        </div>
-
-        <!-- Pie Chart -->
-        <div class="col-xl-4 col-lg-5">
-            <div class="card shadow mb-4">
-                <!-- Card Header - Dropdown -->
-                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                    <h6 class="m-0 font-weight-bold text-primary">Win Ratio</h6>
-
-                </div>
-                <!-- Card Body -->
-                <div class="card-body">
-                    <div class="chart-pie pt-4 pb-2">
-                        <canvas id="WinRatioChart"></canvas>
-                    </div>
-                    <div class="mt-4 text-center small">
-                        <span class="mr-2">
-                            <i class="fas fa-circle text-success"></i> Win
-                        </span>
-                        <span class="mr-2">
-                            <i class="fas fa-circle text-warning"></i> Loss
-                        </span>
-                    </div>
+            <!-- Card Body -->
+            <div class="card-body">
+                <div class="chart-area">
+                    <canvas id="ComparisonOfElo"></canvas>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- Pie Chart -->
+    <div class="col-xl-4 col-lg-5">
+        <div class="card shadow mb-4">
+            <!-- Card Header - Dropdown -->
 
+
+
+            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <h6 class="m-0 font-weight-bold text-primary">Win Ratio</h6>
+                <div class="dropdown no-arrow">
+                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                        aria-labelledby="dropdownMenuLink">
+                        <div class="dropdown-header">Select:</div>
+                        <a class="dropdown-item" href="{{Request::url()}}">Overall</a>
+                        <a class="dropdown-item" href="{{Request::url() . '?wl=me'}}">Against Me</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Card Body -->
+            <div class="card-body">
+                <div class="chart-pie pt-4 pb-2">
+                    <canvas id="WinRatioChart"></canvas>
+                </div>
+                <div class="mt-4 text-center small">
+                    <span class="mr-2">
+                        <i class="fas fa-circle text-success"></i> Win
+                    </span>
+                    <span class="mr-2">
+                        <i class="fas fa-circle text-warning"></i> Loss
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 </div>
-<!-- /.container-fluid -->
 
-</div>
-<!-- End of Main Content -->
 
 
 <script>
     window.onload = function() {
-   
+
         var days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 var goBackDays = 7;
 
@@ -189,54 +207,35 @@ var goBackDays = 7;
 
 
 
-
-
-var ctx = document.getElementById("myAreaChart");
-var myLineChart = new Chart(ctx, {
-    type: "line",
-    data: {
-        labels: [
-
-            'Now',
+   
+        new Chart(document.getElementById("ComparisonOfElo"), {
+  type: 'line',
+  data: {
+    labels: [            'Now',
             daysSorted[1],
             daysSorted[2],
             daysSorted[3],
             daysSorted[4],
             daysSorted[5],
-            daysSorted[6]
-
-            
-        ],
-        datasets: [
-            {
-                label: "Elo",
-                lineTension: 0.3,
-                backgroundColor: "rgba(78, 115, 223, 0.05)",
-                borderColor: "rgba(78, 115, 223, 1)",
-                pointRadius: 3,
-                pointBackgroundColor: "rgba(78, 115, 223, 1)",
-                pointBorderColor: "rgba(78, 115, 223, 1)",
-                pointHoverRadius: 3,
-                pointHoverBackgroundColor: "rgba(78, 115, 223, 1)",
-                pointHoverBorderColor: "rgba(78, 115, 223, 1)",
-                pointHitRadius: 10,
-                pointBorderWidth: 2,
-                data: [
-                    {!! $user->elo !!},
-
-                    @foreach ($user->EloHistory->take(6) as $obj)
-                  
-                    {!! $obj->elo !!},
-                 
-    @endforeach
-
-                    
-
-                ]
-            }
-        ]
-    },
-    options: {
+            daysSorted[6]],
+    datasets: [{ 
+        data: [{!! $user->elo !!},@for ($i = 0; $i < 6; $i++)
+{!! $user->EloHistory[$i]->elo ?? 1000 !!},
+@endfor],
+        label: "You",
+        borderColor: "#3e95cd",
+        fill: false
+      }, { 
+        data: [{!! $foreign_user->elo !!}, @for ($i = 0; $i < 6; $i++)
+{!! $foreign_user->EloHistory[$i]->elo ?? 1000 !!},
+@endfor],
+        label: "{{$foreign_user->name}}",
+        borderColor: "#8e5ea2",
+        fill: false
+      }
+    ]
+  },
+  options: {
         maintainAspectRatio: false,
         layout: {
             padding: {
@@ -312,8 +311,6 @@ var myLineChart = new Chart(ctx, {
         }
     }
 });
-
-
 
 ////////// WinRatio Chart
 var ctx = document.getElementById("WinRatioChart");

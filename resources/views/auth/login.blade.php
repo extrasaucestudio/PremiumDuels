@@ -46,9 +46,9 @@
 
                     <div class="uk-margin">
                         <button class="uk-button uk-button-primary" type="submit" name="button">Login</button>
-                        <a class="uk-float-right" href="{{ route('password.request') }}">
-                            Forgot Your Password?
-                        </a>
+                        {{-- <a class="uk-float-right" href="{{ route('password.request') }}">
+                        Forgot Your Password?
+                        </a> --}}
                     </div>
 
                 </form>

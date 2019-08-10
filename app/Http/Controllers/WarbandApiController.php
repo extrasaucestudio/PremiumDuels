@@ -13,7 +13,7 @@ class WarbandApiController extends Controller
     public function check(Request $request)
     {
 
-        if (!$request->uid || !$request->username) return '-2| Wrong query';
+        if (!$request->uid || !$request->username) return '1|-2| Wrong query';
 
         $user = User::find($request->uid);
 
@@ -29,13 +29,14 @@ class WarbandApiController extends Controller
             $user->secret_key = $pass;
             $user->save();
 
-            return '1|' . $request->uid . '|' . $user->secret_key;
+            return "1|{$request->player_id}|1|{$request->uid}|{$user->secret_key}";
         } else if (!$user->active) {
             $user->touch();
-            return '2|' . $user->uid . '|' . $user->secret_key;
+
+            return "1|{$request->player_id}|2|{$user->uid}|{$user->secret_key}";
         } else {
             $user->touch();
-            return '3|' . $user->uid . '|' . $user->secret_key . '|' . $user->elo;
+            return "1|{$request->player_id}|3|{$user->uid}|{$user->secret_key}|{$user->elo}";
         }
     }
 
@@ -44,14 +45,14 @@ class WarbandApiController extends Controller
     public function FT7(Request $request)
     {
 
-        if (!$request->winner_uid || !$request->loser_uid || !$request->winner_score || !$request->loser_score) return '-2| Wrong query';
+        if (!$request->winner_uid || !$request->loser_uid || !$request->winner_score || !$request->loser_score) return '2|-2| Wrong query';
 
         $winner = User::find($request->winner_uid);
         $loser = User::find($request->loser_uid);
 
-        if (!$winner || !$loser) return '-3|One of participants doesnt have account';
-        if (!$winner->active) return '-4|Winner of duel have inactive account';
-        if (!$loser->active) return '-6|Loser of duel have inactive account';
+        if (!$winner || !$loser) return "2|{$request->player_id}|-3|One of participants doesnt have account";
+        if (!$winner->active) return "2|{$request->player_id}|-4|Winner of duel have inactive account";
+        if (!$loser->active) return "2|{$request->player_id}|-6|Loser of duel have inactive account";
 
 
         $winner_player = new Player($winner->elo);
@@ -92,8 +93,8 @@ class WarbandApiController extends Controller
         $duel->save();
 
 
-        $winner->elo = $winner_rating;
-        $loser->elo = $loser_rating;
+        $winner->elo = floor($winner_rating);
+        $loser->elo = floor($loser_rating);
         $winner->increment('kills', $request->winner_score);
         $winner->increment('deaths', $request->loser_score);
         $loser->increment('kills', $request->loser_score);
@@ -104,6 +105,9 @@ class WarbandApiController extends Controller
         $winner->touch();
         $loser->touch();
 
-        return '5|' . $winner->uid . '|' . $loser->uid . '|' . $elo_plus . '|' . $elo_minus;
+
+
+
+        return "2|{$request->player_id}|{$request->player_id2}|5|{$winner->uid}|{$loser->uid}|{$elo_plus}|{$elo_minus}|{$winner->elo}|{$loser->elo}";
     }
 }

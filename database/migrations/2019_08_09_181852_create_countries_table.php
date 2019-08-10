@@ -21,6 +21,11 @@ class CreateCountriesTable extends Migration
             $table->bigInteger('members_num')->default(0);
             $table->timestamps();
         });
+
+        Schema::table('users', function ($table) {
+
+            $table->foreign('country_id')->references('id')->on('countries');
+        });
     }
 
     /**

@@ -17,13 +17,17 @@ class CreateSchoolsTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->integer('capacity')->default(5);
+            $table->integer('elo')->default(0);
+            $table->bigInteger('special_title_id')->nullable()->unsigned();
             $table->bigInteger('owner_id')->unsigned();
+            $table->text('body')->nullable();
             $table->timestamps();
         });
 
         Schema::table('schools', function ($table) {
 
             $table->foreign('owner_id')->references('id')->on('users');
+            $table->foreign('special_title_id')->references('id')->on('special__titles');
         });
     }
 

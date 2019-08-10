@@ -1,4 +1,4 @@
-@extends('user.layouts.navigation')
+@extends('user.layouts.navigation', ['user' => $user])
 
 
 
@@ -14,7 +14,7 @@
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Duel History</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Leaderboard</h6>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -29,22 +29,23 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($users as $user) <tr>
-                            <td><a class="uk-link-reset" @if($user->golden_account == true)
+                        @foreach ($users as $user_) <tr>
+                            <td><a class="uk-link-reset" @if($user_->golden_account == true)
                                     style="color: gold!important"
                                     @else style="color: black!important" @endif
-                                    href="/user/{{$user->uid}}">{{$user->name}}
+                                    href="/user/{{$user_->uid}}">{{$user_->name}}
                                     <span
-                                        class="flag-icon flag-icon-{{$user->Country->country_code ?? 'Unknown'}}"></span></a>
+                                        class="flag-icon flag-icon-{{$user_->Country->country_code ?? 'Unknown'}}"></span></a>
                             </td>
 
 
 
-                            <td>@if($user->SpecialTitle != null) <span
-                                    style="color:black">{{$user->SpecialTitle->SpecialTitleData->name}} |
-                                </span>@endif<b style="color: {{$user->Title->color}}">{{$user->Title->name}}</b> &nbsp
-                                <img class="rank_img_leaderboard" src="{{$user->Title->image}}"> </td>
-                            <td>{{$user->elo}}</td>
+                            <td>@if($user_->SpecialTitle != null) <span
+                                    style="color:black">{{$user_->SpecialTitle->SpecialTitleData->name}} |
+                                </span>@endif<b style="color: {{$user_->Title->color}}">{{$user_->Title->name}}</b>
+                                &nbsp
+                                <img class="rank_img_leaderboard" src="{{$user_->Title->image}}"> </td>
+                            <td>{{$user_->elo}}</td>
 
 
                         </tr>

@@ -1,4 +1,4 @@
-@extends('user.layouts.navigation')
+@extends('user.layouts.navigation', ['user' => $user])
 
 
 
@@ -27,6 +27,7 @@
                             <th>Score</th>
                             <th>Elo</th>
                             <th>Opponent</th>
+                            <th>Date</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -45,7 +46,7 @@
                             <td class="Username"><a href="/user/{{$duel->Duel_loser->uid}}">
                                     {{$duel->Duel_loser->name}}</a></td>
 
-
+                            <td>{{$duel->created_at}}</td>
                             @else
 
                             <td class="Username"><a href="/user/{{$duel->Duel_loser->uid}}">
@@ -57,7 +58,7 @@
                             <td>{{$duel->Duel_winner->elo}}</td>
                             <td class="Username"><a href="/user/{{$duel->Duel_winner->uid}}">
                                     {{$duel->Duel_winner->name}}</a></td>
-
+                            <td>{{$duel->created_at}}</td>
 
 
                             @endif

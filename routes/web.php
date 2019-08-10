@@ -16,7 +16,7 @@
 Auth::routes();
 
 
-Route::get('/user/{user}', 'HomeController@index')->name('users_profile');
+
 Route::get('/', 'PagesController@welcome');
 Route::get('/autocomplete', 'PagesController@fetch')->name('autocomplete');
 Route::get('HallOfFame', 'PagesController@HallOfFame');
@@ -85,8 +85,8 @@ Route::middleware(['auth', 'admin'])->group(function () {
 Route::middleware(['auth'])->group(function () {
 
     Route::get('/home', 'UserDashboard@index')->name('home');
-    Route::get('/leaderboard', 'UserDashboard@leaderboard');
-    Route::get('/charts', 'UserDashboard@charts');
+
+
 
 
 
@@ -118,5 +118,29 @@ Route::middleware(['auth'])->group(function () {
 
     //// Charts
 
+    Route::get('/user/charts', 'UserDashboard@charts');
 
+
+
+    //// School
+
+
+    Route::get('/user/school/create', 'UserSchoolControler@create_display');
+    Route::post('/user/school/create', 'UserSchoolControler@create')->name('create-school-user');
+    Route::get('/user/school/view', 'UserSchoolControler@display');
+    Route::get('/user/school/panel', 'UserSchoolControler@display_panel');
+    Route::post('/user/school/panel', 'UserSchoolControler@edit_school');
+    Route::get('/school/{schoolID}', 'UserSchoolControler@display');
+
+
+
+    //// Leaderboard
+    Route::get('/user/leaderboard', 'UserDashboard@leaderboard');
+
+
+
+    //// User Profile
+
+
+    Route::get('/user/{uid}', 'UserDashboard@foreign_profile')->name('users_profile');
 });

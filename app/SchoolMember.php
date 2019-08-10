@@ -10,4 +10,9 @@ class SchoolMember extends Model
     {
         return $this->belongsTo('App\School', 'school_id', 'id');
     }
+
+    public function User()
+    {
+        return $this->belongsTo('App\User', 'user_id', 'id');
+    }
 }

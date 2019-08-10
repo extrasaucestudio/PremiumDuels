@@ -50,7 +50,6 @@
 
                 url('/images/510892.jpg') no-repeat center fixed;
              !important;
-
             -webkit-background-size: cover;
             -moz-background-size: cover;
             -o-background-size: cover;
