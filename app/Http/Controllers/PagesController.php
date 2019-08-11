@@ -19,9 +19,7 @@ class PagesController extends Controller
         $users = User::orderBy('elo', 'DESC')->get();
         $duels = Duel::orderBy('created_at', 'DESC')->get();
         $tournaments = Tournament::where('state', 'awaiting')->count();
-        $LastDuels = Duel::orderBy('created_at', 'DESC')->get();
-
-
+        $LastDuels = Duel::Where('active', 1)->orderBy('created_at', 'DESC')->get();
 
         return view('welcome', compact('users', 'duels', 'tournaments', 'LastDuels'));
     }
