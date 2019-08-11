@@ -16,7 +16,7 @@ class PagesController extends Controller
 
     public function welcome()
     {
-        $users = User::orderBy('elo', 'DESC')->get();
+        $users = User::orderBy('elo', 'DESC')->Where('active', 1)->get();
         $duels = Duel::orderBy('created_at', 'DESC')->get();
         $tournaments = Tournament::where('state', 'awaiting')->count();
 
