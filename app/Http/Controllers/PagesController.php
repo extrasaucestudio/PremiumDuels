@@ -72,6 +72,14 @@ class PagesController extends Controller
         $tournaments = Tournament::orderBy('created_at', 'DESC')->get();
         return view('Tournaments', compact('tournaments'));
     }
+
+
+    public function Tournament($id)
+    {
+
+        $tournament = Tournament::find($id);
+        return view('Tournaments', compact('tournament'));
+    }
     public function About()
     {
         return view('About');
