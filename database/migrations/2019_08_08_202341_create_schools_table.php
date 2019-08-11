@@ -20,6 +20,8 @@ class CreateSchoolsTable extends Migration
             $table->integer('elo')->default(0);
             $table->bigInteger('special_title_id')->nullable()->unsigned();
             $table->bigInteger('owner_id')->unsigned();
+            $table->bigInteger('extra_gloves_id')->unsigned()->nullable();
+            $table->bigInteger('extra_boots_id')->unsigned()->nullable();
             $table->text('body')->nullable();
             $table->timestamps();
         });

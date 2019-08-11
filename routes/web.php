@@ -131,8 +131,11 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/user/school/view', 'UserSchoolControler@display');
     Route::get('/user/school/panel', 'UserSchoolControler@display_panel');
     Route::post('/user/school/panel', 'UserSchoolControler@edit_school');
-    Route::get('/school/{schoolID}', 'UserSchoolControler@display');
+    Route::get('/school/{schoolID?}', 'UserSchoolControler@display');
 
+
+    Route::post('/user/school/join', 'UserSchoolControler@join_school');
+    Route::post('/user/school/reject', 'UserSchoolControler@reject_school');
 
 
     //// Leaderboard
@@ -144,4 +147,10 @@ Route::middleware(['auth'])->group(function () {
 
 
     Route::get('/user/{uid}', 'UserDashboard@foreign_profile')->name('users_profile');
+
+
+
+    /// Notifications
+
+    Route::get('/user/notification/{id}', 'NotificationController@display');
 });

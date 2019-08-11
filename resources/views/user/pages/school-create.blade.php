@@ -44,6 +44,16 @@
                 <label>School Name</label>
                 <input type="text" name="name" maxlength="30" class="form-control" placeholder="Pro Elo School 9000">
                 <br>
+                <label>Gloves</label>
+                <select class="form-control" name="gloves_id">
+                    <option value="">1</option>
+                </select>
+                <br>
+                <label>Boots</label>
+                <select class="form-control" name="boots_id">
+                    <option value="">1</option>
+                </select>
+                <br>
                 <input id="button" type="submit" value="Create (2500$)" class="btn btn-success">
             </form>
 

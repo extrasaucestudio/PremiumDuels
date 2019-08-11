@@ -95,7 +95,7 @@
                             </div>
                             <div class="h5 mb-0 font-weight-bold text-gray-800">
                                 @if($user->School != null)
-                                <a href="/school/{{$user->School->id}}" style="  color:gray !important;
+                                <a href="/school/{{$user->School->MemberToSchool->id}}" style="  color:gray !important;
                                     text-decoration:none;">
                                     {{$user->School->MemberToSchool->name}}
                                 </a>

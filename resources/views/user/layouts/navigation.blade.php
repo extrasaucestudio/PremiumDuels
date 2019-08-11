@@ -192,7 +192,8 @@
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-bell fa-fw"></i>
                                 <!-- Counter - Alerts -->
-                                <span class="badge badge-danger badge-counter">{{$user->Invitations->count()}}</span>
+                                <span
+                                    class="badge badge-danger badge-counter">{{$user->unreadNotifications->count()}}</span>
                             </a>
                             <!-- Dropdown - Alerts -->
                             <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -200,21 +201,28 @@
                                 <h6 class="dropdown-header">
                                     Alerts Center
                                 </h6>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                @foreach ($user->unreadNotifications->take(3) as $notif)
+                                @if($notif->type == 'App\Notifications\NewSchoolInvite')
+                                <a class="dropdown-item d-flex align-items-center"
+                                    href="/user/notification/{{$notif->id}}">
                                     <div class="mr-3">
                                         <div class="icon-circle bg-primary">
                                             <i class="fas fa-file-alt text-white"></i>
                                         </div>
                                     </div>
                                     <div>
-                                        <div class="small text-gray-500">December 12, 2019</div>
-                                        <span class="font-weight-bold">Comming Soon...!</span>
+                                        <div class="small text-gray-500">{{$notif->created_at}}</div>
+                                        <span class="font-weight-bold">You have been invited to
+                                            <b>{{$notif->data['school_name']}}!</b></span>
                                     </div>
                                 </a>
-
-                                <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
+                                @endif
+                                <a class="dropdown-item text-center small text-gray-500" href="/user/notifications">Show
+                                    All
+                                    Alerts</a>
                             </div>
                         </li>
+                        @endforeach
 
                         <!-- Nav Item - Messages -->
                         <li class="nav-item dropdown no-arrow mx-1">

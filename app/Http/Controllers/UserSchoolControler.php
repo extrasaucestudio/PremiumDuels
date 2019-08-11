@@ -7,7 +7,10 @@ use App\School;
 use App\User;
 use Auth;
 use App\SchoolMember;
+use App\user_special_titles;
+use App\School_Invite;
 use Illuminate\Support\Facades\Redirect;
+use stdClass;
 
 class UserSchoolControler extends Controller
 {
@@ -43,6 +46,8 @@ class UserSchoolControler extends Controller
 
         if (School::where('name', $request->name)->count() > 0) return redirect()->back()->with('error', 'Failed. School with that name already exist.');
 
+
+
         if ($user->currency < 2500)  return redirect()->back()->with('error', 'Failed. You do not have enought money!');
 
         $school = new School;
@@ -63,21 +68,50 @@ class UserSchoolControler extends Controller
     }
 
 
-    public function display($schoolID = -1)
+    public function display($schoolID = null)
     {
         $user = Auth::user();
+        $Addionaldata = new stdClass;
 
-        if ($user->School == null) return Redirect::to('/home');
+        $Addionaldata->GoldSchool = 0;
+        if ($schoolID == null) {
 
-        if ($schoolID = -1) {
+            if ($user->School == null) {
+                return Redirect::to('/home');
+            } else if ($user->School->id == 1 && user_special_titles::where('special_title_id', 1)->count() == 0) { } else if ($user->School->MemberToSchool->id == 1) {
+                $ChampionOwner = user_special_titles::where('special_title_id', 1)->first();
+
+                $Addionaldata->GoldSchool = 1;
+                $Addionaldata->Owner = $ChampionOwner->SpecialTitleOwner->name;
+                $Addionaldata->Owner_uid = $ChampionOwner->SpecialTitleOwner->uid;
+            }
+
             $school = $user->School->MemberToSchool;
         } else {
+
             $school = School::find($schoolID);
+
+            if ($school == null) {
+                return Redirect::to('/home');
+            } else if ($school->id == 1 && user_special_titles::where('special_title_id', 1)->count() == 0) {
+                return Redirect::to('/home');
+            } else if ($school->id == 1) {
+                $ChampionOwner = user_special_titles::where('special_title_id', 1)->first();
+                $Addionaldata->GoldSchool = 1;
+                $Addionaldata->Owner = $ChampionOwner->SpecialTitleOwner->name;
+                $Addionaldata->Owner_uid = $ChampionOwner->SpecialTitleOwner->uid;
+            }
+        }
+
+
+        if ($schoolID == null) {    //// Empty school ID
+            if ($user->School == null) return Redirect::to('/home');
+            $school = $user->School->MemberToSchool;
         }
 
 
 
-        return view('user.pages.school-view', compact('user', 'school'));
+        return view('user.pages.school-view', compact('user', 'school', 'Addionaldata'));
     }
 
 
@@ -144,5 +178,27 @@ class UserSchoolControler extends Controller
         $school->save();
 
         return Redirect::to('/user/school/view');
+    }
+
+
+    public function join_school(Request $request)
+    {
+        $user = Auth::user();
+
+
+
+        $invite = School_Invite::find($request->invite_id);
+
+        if ($invite == null || $invite->user_id != $user->id || $user->School != null) return \Redirect::to('/home');
+
+
+        $SchoolMember = new SchoolMember;
+        $SchoolMember->school_id = $invite->school_id;
+        $SchoolMember->user_id = $user->id;
+        $SchoolMember->save();
+
+        $invite->delete();
+
+        return \Redirect::to('/school');
     }
 }

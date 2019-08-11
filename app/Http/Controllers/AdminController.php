@@ -12,7 +12,7 @@ class AdminController extends Controller
 {
     public function index()
     {
-        $user = User::first();
+        $user = auth()->user();
         $Users = User::all();
         $NewUsersWeekly = User::where('created_at', '>=', new \DateTime('-1 week'))->count();
         $DuelsWeekly = Duel::where('created_at', '>=', new \DateTime('-1 week'))->count();

@@ -15,7 +15,7 @@ class UsersTableSeeder extends Seeder
     {
 
         $user = new User;
-        $user->name = 'Pitch';
+        $user->name = 'Developer | Pitch';
         $user->email = Str::random(10) . '@none.com';
         $user->password = bcrypt('password');
         $user->secret_key = 'password';
@@ -27,7 +27,7 @@ class UsersTableSeeder extends Seeder
         $user->save();
 
         $user = new User;
-        $user->name = 'Not Pitch';
+        $user->name = 'Developer';
         $user->email = Str::random(10) . '@none.com';
         $user->password = bcrypt('password');
         $user->secret_key = 'password';

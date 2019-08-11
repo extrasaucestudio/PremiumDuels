@@ -6,6 +6,7 @@ use App\School_Invite;
 use Illuminate\Http\Request;
 use App\User;
 use App\School;
+use App\Notifications\NewSchoolInvite;
 
 class SchoolInviteController extends Controller
 {
@@ -30,6 +31,10 @@ class SchoolInviteController extends Controller
         $invite->user_id = $user->id;
         $invite->school_id = $school->id;
         $invite->save();
+
+        $user->notify(new NewSchoolInvite($user, $school, $invite));
+
+
         return \Redirect::to('/');
     }
 }

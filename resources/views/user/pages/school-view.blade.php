@@ -89,7 +89,13 @@
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Owner
                             </div>
+                            @if($Addionaldata->GoldSchool == 0)
+
                             <div class="h5 mb-0 font-weight-bold text-gray-800">{{$school->SchoolOwner->name}}</div>
+                            @else
+
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{$Addionaldata->Owner}}</div>
+                            @endif
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-crown fa-2x text-gray-300"></i>
