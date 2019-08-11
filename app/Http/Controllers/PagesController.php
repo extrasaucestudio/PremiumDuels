@@ -78,7 +78,7 @@ class PagesController extends Controller
     {
 
         $tournament = Tournament::find($id);
-        return view('Tournaments', compact('tournament'));
+        return view('Tournament', compact('tournament'));
     }
     public function About()
     {
