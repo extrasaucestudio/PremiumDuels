@@ -11,6 +11,8 @@ use App\user_special_titles;
 use App\School_Invite;
 use Illuminate\Support\Facades\Redirect;
 use stdClass;
+use App\Item;
+use App\UserItems;
 
 class UserSchoolControler extends Controller
 {
@@ -22,7 +24,13 @@ class UserSchoolControler extends Controller
         $user = Auth::user();
 
         if ($user->School != null) return \Redirect::to('/home');
-        return view('user.pages.school-create', compact('user'));
+
+        $gloves = Item::where('type', 'gloves')->get();
+
+        $boots = Item::where('type', 'boots')->get();
+
+
+        return view('user.pages.school-create', compact('user', 'gloves', 'boots'));
     }
 
 
@@ -41,6 +49,12 @@ class UserSchoolControler extends Controller
         $user = Auth::user();
 
 
+        $boots = Item::find($request->boots_id);
+        $gloves = Item::find($request->gloves_id);
+
+
+        if ($boots->type != 'boots' || $gloves->type != 'gloves') return redirect()->back()->with('error', 'Fatal error. Wrong item');
+
         if ($user->School != null) return redirect()->back()->with('error', 'Failed. You are already in the school');
 
 
@@ -53,6 +67,8 @@ class UserSchoolControler extends Controller
         $school = new School;
         $school->name = $request->name;
         $school->owner_id = $user->id;
+        $school->extra_gloves_id = $gloves->id;
+        $school->extra_boots_id = $boots->id;
         $school->save();
 
 
@@ -189,7 +205,13 @@ class UserSchoolControler extends Controller
 
         $invite = School_Invite::find($request->invite_id);
 
-        if ($invite == null || $invite->user_id != $user->id || $user->School != null) return \Redirect::to('/home');
+        $school = School::find($invite->school_id);
+
+        if ($invite == null || $invite->user_id != $user->id || $user->School != null || $school == null)  return \Redirect::to('/home');
+
+
+        if (SchoolMember::where('school_id', $school->id)->count() >= $school->capacity)  return \Redirect::to('/home');
+
 
 
         $SchoolMember = new SchoolMember;
@@ -199,6 +221,39 @@ class UserSchoolControler extends Controller
 
         $invite->delete();
 
+        $gloves = new UserItems;
+        $gloves->user_id = $user->id;
+        $gloves->item_id = $school->extra_gloves_id;
+        $gloves->from_school = true;
+        $gloves->save();
+
+
+
+        $boots = new UserItems;
+        $boots->user_id = $user->id;
+        $boots->item_id = $school->extra_boots_id;
+        $boots->from_school = true;
+        $boots->save();
+
+
         return \Redirect::to('/school');
+    }
+
+
+    public function leave_school(Request $request)
+    {
+        $user = Auth::user();
+
+
+        if ($user->School == null) return \Redirect::to('/home');
+
+        $schoolMember = SchoolMember::where('user_id', $user->id)->first();
+
+        if ($schoolMember == null) return \Redirect::to('/home');
+
+        $schoolMember->delete();
+
+        $UserItemsToDelete = $user->UserItems->where('from_school', true)->delete();
+        return \Redirect::to('/home');
     }
 }

@@ -43,5 +43,20 @@ class ItemTableSeeder extends Seeder
             'image' => 'test',
             'type' => 'weapon',
         ]);
+
+
+        DB::table('items')->insert([
+            'game_id' => 26645,
+            'name' => 'For Test Gloves',
+            'image' => 'test',
+            'type' => 'gloves',
+        ]);
+
+        DB::table('items')->insert([
+            'game_id' => 2645,
+            'name' => 'For Test Boots',
+            'image' => 'test',
+            'type' => 'boots',
+        ]);
     }
 }

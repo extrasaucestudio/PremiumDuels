@@ -55,7 +55,7 @@ class WarbandApiController extends Controller
     public function FT7(Request $request)
     {
 
-        if (!$request->winner_uid || !$request->loser_uid || !$request->winner_score || !$request->loser_score) return '2|-2| Wrong query';
+        if ($request->winner_uid == null || $request->loser_uid == null || $request->winner_score == null || $request->loser_score == null) return '2|-2| Wrong query';
 
         $winner = User::find($request->winner_uid);
         $loser = User::find($request->loser_uid);

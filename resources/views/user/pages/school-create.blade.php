@@ -46,12 +46,18 @@
                 <br>
                 <label>Gloves</label>
                 <select class="form-control" name="gloves_id">
-                    <option value="">1</option>
+                    @foreach ($gloves as $item)
+                    <option value="{{$item->id}}">{{$item->name}}</option>
+                    @endforeach
+
                 </select>
                 <br>
                 <label>Boots</label>
                 <select class="form-control" name="boots_id">
-                    <option value="">1</option>
+                    @foreach ($boots as $item_)
+                    <option value="{{$item_->id}}">{{$item_->name}}</option>
+                    @endforeach
+
                 </select>
                 <br>
                 <input id="button" type="submit" value="Create (2500$)" class="btn btn-success">
