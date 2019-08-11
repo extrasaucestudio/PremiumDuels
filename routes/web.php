@@ -25,8 +25,8 @@ Route::get('/settings', 'HomeController@user_settings');
 Route::post('/user/settings', 'HomeController@ChangeSettings');
 Route::get('/tournaments', 'PagesController@Tournaments');
 Route::get('/tournament/{id}', 'PagesController@Tournament');
-Route::get('/about', 'PagesController@School');
-Route::get('/school', 'PagesController@School');
+Route::get('/about', 'PagesController@About');
+
 Route::get('/test', 'PagesController@test');
 Route::get('/api/players-online', 'PagesController@PlayersOnline');
 

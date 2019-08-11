@@ -33,6 +33,11 @@
                             href="{{ url('/') }}">
                             {{ config('app.name', 'Premium Duels') }}
                         </a>
+                        <a class="uk-navbar-item " style="font-family: 'Saira Stencil One', cursive"
+                            href="{{ url('/about') }}">
+                            About
+                        </a>
+
                         <a class="uk-navbar-item " style="font-family: 'Saira Stencil One', cursive; color: gold"
                             href="{{ url('/HallOfFame') }}">
                             Hall of Fame

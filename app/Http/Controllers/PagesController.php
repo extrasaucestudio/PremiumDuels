@@ -21,7 +21,7 @@ class PagesController extends Controller
         $tournaments = Tournament::where('state', 'awaiting')->count();
         $LastDuels = Duel::orderBy('created_at', 'DESC')->get();
 
-        return view('welcome_rebuild', compact('users', 'duels', 'tournaments', 'LastDuels'));
+        return view('welcome', compact('users', 'duels', 'tournaments', 'LastDuels'));
     }
 
     public function search()
@@ -80,10 +80,18 @@ class PagesController extends Controller
         $tournament = Tournament::find($id);
         return view('Tournament', compact('tournament'));
     }
+
     public function About()
     {
-        return view('About');
+        $users = User::orderBy('elo', 'DESC')->get();
+        $duels = Duel::orderBy('created_at', 'DESC')->get();
+        $tournaments = Tournament::where('state', 'awaiting')->count();
+        $LastDuels = Duel::orderBy('created_at', 'DESC')->get();
+
+        return view('welcome_rebuild', compact('users', 'duels', 'tournaments', 'LastDuels'));
     }
+
+
     public function School()
     {
         return view('School');
