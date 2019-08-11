@@ -18,7 +18,7 @@ class CreateTournamentsTable extends Migration
             $table->string('title');
             $table->text('body');
             $table->text('image');
-            $table->string('state')->default('awaiting');   /// queue - played -- ended
+            $table->string('state')->default('awaiting');   /// awaiting - played -- ended
             $table->integer('price')->default(0);
             $table->integer('elo_min')->default(0);
             $table->integer('elo_max')->default(0);

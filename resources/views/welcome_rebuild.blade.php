@@ -14,13 +14,14 @@
 
 
 
+
 <body>
 
 
 
     <div class="bgimg-1">
         <div class="caption">
-            <span class="border notransition">Premium Duels</span>
+            <a class="uk-link-reset" href="/home"><span class="border notransition">Premium Duels</span></a>
 
 
         </div>
@@ -54,6 +55,10 @@
             Morbi vitae semper arcu, a aliquet quam. Maecenas efficitur tincidunt elit vitae hendrerit. Vivamus
             tincidunt pretium lectus at pulvinar.</p>
     </div>
+
+
+
+
 
     <div class="bgimg-2">
         <div class="caption">
@@ -248,5 +253,10 @@
     .notransition {
         -webkit-transform: none !important;
         transform: none !important;
+    }
+
+    .golden_account {
+        font-weight: bold;
+        color: gold !important;
     }
 </style>

@@ -33,6 +33,8 @@
 </div>
 
 <style>
+    body {}
+
     .tournament {
         background-color: rgba(255, 255, 255, 0.644);
         border: white solid 2px;

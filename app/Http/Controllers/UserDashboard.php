@@ -142,6 +142,8 @@ class UserDashboard extends Controller
 
         $PlaceInLeaderboard = CalculatePlaceInLeaderboard2($foreign_user);
 
-        return view('user.pages.user-profile', compact('user', 'foreign_user', 'nextRank', 'DuelWL', 'rank', 'PlaceInLeaderboard'));
+        $LastDuels = Duel::Where('winner_id', $foreign_user->id)->orWhere('loser_id', $foreign_user->id)->orderBy('created_at', 'DESC')->get();
+
+        return view('user.pages.user-profile', compact('user', 'foreign_user', 'nextRank', 'DuelWL', 'rank', 'PlaceInLeaderboard', 'LastDuels'));
     }
 }

@@ -18,12 +18,10 @@ class PagesController extends Controller
     {
         $users = User::orderBy('elo', 'DESC')->get();
         $duels = Duel::orderBy('created_at', 'DESC')->get();
+        $tournaments = Tournament::where('state', 'awaiting')->count();
+        $LastDuels = Duel::orderBy('created_at', 'DESC')->get();
 
-
-
-
-
-        return view('welcome_rebuild', compact('users', 'duels'));
+        return view('welcome_rebuild', compact('users', 'duels', 'tournaments', 'LastDuels'));
     }
 
     public function search()
@@ -109,7 +107,7 @@ class PagesController extends Controller
 
         $serverData = getPlayersOnServer();
 
-        return $serverData[6];
+        return $serverData[6] ?? -1;
     }
 
 

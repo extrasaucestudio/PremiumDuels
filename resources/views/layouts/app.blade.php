@@ -47,9 +47,15 @@
                             Donate | Patreon
                         </a>
 
-                        <span id="online" class="uk-badge">0</span> &nbsp; &nbsp;
-                        <span class="uk-badge">{{ $users->count()}} Registered</span> &nbsp; &nbsp;
-                        <span class="uk-badge">{{ $duels->count()}} Duels Played</span> &nbsp; &nbsp;
+                        @if(Request::is('/'))
+
+                        <span class="uk-badge">Registered: {{ $users->count()}}</span> &nbsp; &nbsp;
+                        <span class="uk-badge">Duels Played: {{ $duels->count()}}</span> &nbsp; &nbsp;
+                        <span class="uk-badge">Open Tournaments: {{ $tournaments }}</span> &nbsp; &nbsp;
+                        <span style="visibility: hidden;" id="online" class="uk-badge">0</span>
+
+
+                        @endif
 
                     </div>
 
@@ -76,7 +82,7 @@
                                                 Logout
                                             </a>
                                             <a href="/home">
-                                                Profile
+                                                User Panel
                                             </a>
                                             {{-- <a href="/settings">
                                                 Settings <i class="fas fa-cogs"></i>
@@ -115,12 +121,18 @@
     function OnlinePlayers()
 {
     $.get( "{{ Request::root()}}/api/players-online", function( data ) {
-  $( "#online" ).html(data + ' Online');
+        if(data == -1) {
+            $( "#online" ).html('Server Offline');
+        } else {
+            $( "#online" ).html('Online: ' + data);
+        }
+ 
+  $("#online").css("visibility", "visible");
 });
 }
-
+@if(Request::is('/'))
 OnlinePlayers();
-
+@endif
 </script>
 
 
