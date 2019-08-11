@@ -22,7 +22,7 @@ class UserSpecialTitlesController extends Controller
             $user->save();
         } else {
 
-            $exist = user_special_titles::find($request->title);
+            $exist = user_special_titles::where('id', $request->title)->where('user_id', $user->id)->first();
             if (!$exist)  return redirect()->back();
 
             $user->special_title_id = $exist->id;
@@ -30,7 +30,10 @@ class UserSpecialTitlesController extends Controller
         }
 
 
-
-        return redirect()->back();
+        if ($request->title == 'none') {
+            return redirect()->back()->with('success', 'You have select your title as blank!');
+        } else {
+            return redirect()->back()->with('success', 'You have been switched title to <b>' . $exist->SpecialTitleData->name . '</b>!');
+        }
     }
 }

@@ -15,7 +15,7 @@ class CreateSpecialTitlesTable extends Migration
     {
         Schema::create('special__titles', function (Blueprint $table) {
             $table->bigIncrements('id')->unsigned();
-            $table->string('name');
+            $table->string('name')->unique();
             $table->string('class');
             $table->timestamps();
         });

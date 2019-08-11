@@ -82,13 +82,13 @@
 
             </h1>
             <li>
-                @foreach ($duels->take(3) as $duel)
+                @foreach ($LastDuels->take(3) as $duel)
                 <h1 style="color: #FFFF40" style="    overflow: hidden;
                 white-space: nowrap;">
                     <div href="#"
                         class="duel_winner @if($duel->Duel_winner->golden_account == true) golden_account @endif"><span
                             style="margin-right: 25px"
-                            class="flag-icon flag-icon-{{$duel->Duel_winner->country_code}}"></span><a
+                            class="flag-icon flag-icon-{{$duel->Duel_winner->Country->country_code ?? 'unknown'}}"></span><a
                             class="uk-link-reset"
                             href="/user/{{$duel->Duel_winner->uid}}">{{$duel->Duel_winner->name}}</a>
                     </div><img src="images/vs.png" class="vsIcon">
@@ -96,7 +96,8 @@
                         class="duel_loser @if($duel->Duel_loser->golden_account == true) golden_account @endif"><a
                             class="uk-link-reset" href="/user/{{$duel->Duel_loser->uid}}">
                             {{$duel->Duel_loser->name}}</a><span style="margin-left: 25px"
-                            class="flag-icon flag-icon-{{$duel->Duel_loser->country_code}}"></span></div>
+                            class="flag-icon flag-icon-{{$duel->Duel_loser->Country->country_code ?? 'unknown'}}"></span>
+                    </div>
                 </h1>
                 @endforeach
 
@@ -125,7 +126,9 @@
                                 style="color: gold!important"
                                 @else style="color: white!important" @endif
                                 href="/user/{{$user->uid}}">{{$user->name}}
-                                <span class="flag-icon flag-icon-{{$user->country_code}}"></span></a></td>
+                                <span
+                                    class="flag-icon flag-icon-{{$user->Country->country_code ?? 'Unknown'}}"></span></a>
+                        </td>
                         <td>@if($user->SpecialTitle != null) <span
                                 style="color:white">{{$user->SpecialTitle->SpecialTitleData->name}} | </span>@endif<b
                                 style="color: {{$user->Title->color}}">{{$user->Title->name}}</b> &nbsp <img

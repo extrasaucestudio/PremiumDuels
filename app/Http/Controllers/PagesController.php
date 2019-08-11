@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Title;
 use App\Duel;
+use App\Country;
+use App\Tournament;
 
 
 
@@ -14,36 +16,22 @@ class PagesController extends Controller
 
     public function welcome()
     {
-        $users = User::Where('active', 1)->orderBy('elo', 'DESC')->get();
+        $users = User::orderBy('elo', 'DESC')->Where('active', 1)->get();
         $duels = Duel::orderBy('created_at', 'DESC')->get();
+        $tournaments = Tournament::where('state', 'awaiting')->count();
 
 
-        function getPlayersOnServer()
-        {
-            $myFile = 'http://www.mnbcentral.net/min';
-
-            $str = 'MasterFrog_Vasilisa';
-
-            function getLineWithString($fileName, $str)
-            {
-                $lines = file($fileName);
-                foreach ($lines as $lineNumber => $line) {
-                    if (strpos($line, $str) !== false) {
-                        return $line;
-                    }
-                }
-                return -1;
-            }
-
-            $data = explode(",", getLineWithString($myFile, $str));
-            return $data;
-        }
+        $LastDuels = Duel::orderBy('created_at', 'DESC')->whereHas('Duel_winner', function ($query) {
+            $query->where('active', 1);
+        })
+            ->whereHas('Duel_loser', function ($query) {
+                $query->where('active', 1);
+            })
+            ->get();
 
 
-        $serverData = getPlayersOnServer();
 
-
-        return view('welcome', compact('users', 'duels', 'serverData'));
+        return view('welcome', compact('users', 'duels', 'tournaments', 'LastDuels'));
     }
 
     public function search()
@@ -90,24 +78,65 @@ class PagesController extends Controller
 
     public function Tournaments()
     {
-        return view('Tournaments');
+
+        $tournaments = Tournament::orderBy('created_at', 'DESC')->get();
+        return view('Tournaments', compact('tournaments'));
     }
+
+
+    public function Tournament($id)
+    {
+
+        $tournament = Tournament::find($id);
+        return view('Tournament', compact('tournament'));
+    }
+
     public function About()
     {
-        return view('About');
+        $users = User::orderBy('elo', 'DESC')->get();
+        $duels = Duel::orderBy('created_at', 'DESC')->get();
+        $tournaments = Tournament::where('state', 'awaiting')->count();
+        $LastDuels = Duel::orderBy('created_at', 'DESC')->get();
+
+        return view('welcome_rebuild', compact('users', 'duels', 'tournaments', 'LastDuels'));
     }
+
+
     public function School()
     {
         return view('School');
     }
 
+    public function PlayersOnline()
+    {
+        function getPlayersOnServer()
+        {
+            $myFile = 'http://www.mnbcentral.net/min';
 
+            $str = 'MasterFrog_Vasilisa';
+
+            function getLineWithString($fileName, $str)
+            {
+                $lines = file($fileName);
+                foreach ($lines as $lineNumber => $line) {
+                    if (strpos($line, $str) !== false) {
+                        return $line;
+                    }
+                }
+                return -1;
+            }
+
+            $data = explode(",", getLineWithString($myFile, $str));
+            return $data;
+        }
+
+
+        $serverData = getPlayersOnServer();
+
+        return $serverData[5] ?? -1;
+    }
 
 
     public function test(Request $request)
-    {
-
-        $user = User::first();
-        dd($user->SpecialTitle);
-    }
+    { }
 }

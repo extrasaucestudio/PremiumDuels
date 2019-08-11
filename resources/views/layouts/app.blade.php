@@ -33,10 +33,11 @@
                             href="{{ url('/') }}">
                             {{ config('app.name', 'Premium Duels') }}
                         </a>
-                        <a class="uk-navbar-item " style="font-family: 'Saira Stencil One', cursive;"
+                        <a class="uk-navbar-item " style="font-family: 'Saira Stencil One', cursive"
                             href="{{ url('/about') }}">
                             About
                         </a>
+
                         <a class="uk-navbar-item " style="font-family: 'Saira Stencil One', cursive; color: gold"
                             href="{{ url('/HallOfFame') }}">
                             Hall of Fame
@@ -45,14 +46,21 @@
                             href="{{ url('/tournaments') }}">
                             Tournaments
                         </a>
-                        <a class="uk-navbar-item " style="font-family: 'Saira Stencil One', cursive"
-                            href="{{ url('/school') }}">
-                            School
-                        </a>
+
                         <a class="uk-navbar-item " style="font-family: 'Saira Stencil One', cursive;"
                             href="{{ url('/donate') }}">
                             Donate | Patreon
                         </a>
+
+                        @if(Request::is('/'))
+
+                        <span class="uk-badge">Registered: {{ $users->count()}}</span> &nbsp; &nbsp;
+                        <span class="uk-badge">Duels Played: {{ $duels->count()}}</span> &nbsp; &nbsp;
+                        <span class="uk-badge">Open Tournaments: {{ $tournaments }}</span> &nbsp; &nbsp;
+                        <span style="visibility: hidden;" id="online" class="uk-badge">0</span>
+
+
+                        @endif
 
                     </div>
 
@@ -79,11 +87,16 @@
                                                 Logout
                                             </a>
                                             <a href="/home">
-                                                Profile
+                                                User Panel
                                             </a>
-                                            <a href="/settings">
+                                            {{-- <a href="/settings">
                                                 Settings <i class="fas fa-cogs"></i>
+                                            </a> --}}
+                                            @if(Auth::user()->admin)
+                                            <a href="/admin">
+                                                Admin Panel <i class="fas fa-cogs"></i>
                                             </a>
+                                            @endif
                                             <form id="logout-form" action="{{ route('logout') }}" method="POST"
                                                 style="display: none;">
                                                 {{ csrf_field() }}
@@ -108,5 +121,25 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
 </body>
+
+<script>
+    function OnlinePlayers()
+{
+    $.get( "{{ Request::root()}}/api/players-online", function( data ) {
+        if(data == -1) {
+            $( "#online" ).html('Server Offline');
+        } else {
+            $( "#online" ).html('Online: ' + data);
+        }
+ 
+  $("#online").css("visibility", "visible");
+});
+}
+@if(Request::is('/'))
+OnlinePlayers();
+@endif
+</script>
+
+
 
 </html>

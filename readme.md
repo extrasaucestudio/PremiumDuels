@@ -25,7 +25,7 @@ If user is already registered but unactivated, response looks like this:
 `2|333|dssdasad`  
 `status|unique id|password`
 
-If user is already registered anf activated, response looks like this:
+If user is already registered and activated, response looks like this:
 `3|333|dssdasad|1500`  
 `status|unique id|password|elo`
 

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Carbon\Carbon;
 
 class DuelsTableSeeder extends Seeder
 {
@@ -18,6 +19,7 @@ class DuelsTableSeeder extends Seeder
             'loser_score' => 1,
             'winner_elo_plus' => 1,
             'loser_elo_minus' => -1,
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
 
 
@@ -28,6 +30,7 @@ class DuelsTableSeeder extends Seeder
             'loser_score' => 3,
             'winner_elo_plus' => 1,
             'loser_elo_minus' => -1,
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
 
         DB::table('duels')->insert([
@@ -37,6 +40,17 @@ class DuelsTableSeeder extends Seeder
             'loser_score' => 2,
             'winner_elo_plus' => 1,
             'loser_elo_minus' => -1,
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+        ]);
+
+        DB::table('duels')->insert([
+            'winner_id' => 1,
+            'loser_id' => 2,
+            'winner_score' => 5,
+            'loser_score' => 2,
+            'winner_elo_plus' => 1,
+            'loser_elo_minus' => -1,
+            'created_at' => new \DateTime('-4 day'),
         ]);
     }
 }

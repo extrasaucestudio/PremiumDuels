@@ -26068,6 +26068,7 @@ iframe.uk-cover {
 body {
   background: url("/images/bg.png") no-repeat center fixed;
   background-size: cover;
+  height: 100% !important;
 }
 
 .latest_duels {

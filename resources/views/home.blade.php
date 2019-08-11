@@ -15,7 +15,7 @@
                 <h1 @if($user->golden_account == true)class="golden_account" @endif style="text-align: center;
                     color: white;font-family: 'Merriweather', serif;"">
                     {{$user->name}} <span style=" margin-left: 25px"
-                        class="flag-icon flag-icon-{{$user->country_code}}"></span> <br>
+                        class="flag-icon flag-icon-{{$user->Country->country_code ?? 'Unknown'}}"></span> <br>
                     @if($user->special_title_id != null)
 
                     <br>
