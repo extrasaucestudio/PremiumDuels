@@ -35,8 +35,16 @@ class WarbandApiController extends Controller
 
             return "1|2|{$request->player_id}|{$user->uid}|{$user->secret_key}";
         } else {
+
+            $helmet = $user->User_Helmet->ItemData->game_id ?? -1;
+            $armor = $user->User_Armor->ItemData->game_id ?? -1;
+            $gloves = $user->User_Glove->ItemData->game_id ?? -1;
+            $boots = $user->User_Boot->ItemData->game_id ?? -1;
+            $weapon = $user->User_Weapon->ItemData->game_id ?? -1;
+
+
             $user->touch();
-            return "1|3|{$request->player_id}|{$user->uid}|{$user->secret_key}|{$user->elo}";
+            return "1|3|{$request->player_id}|{$user->uid}|{$user->secret_key}|{$user->elo}|{$helmet}|{$armor}|{$gloves}|{$boots}|{$weapon}|Welcome message string there";
         }
     }
 

@@ -99,6 +99,9 @@ class User extends Authenticatable
     }
 
 
+
+
+
     public function User_Helmets()
     {
 
@@ -146,5 +149,30 @@ class User extends Authenticatable
         return static::withoutEvents(function () use ($options) {
             return $this->save($options);
         });
+    }
+
+    public function User_Helmet()
+    {
+        return $this->hasOne('App\UserItems', 'id', 'helmet');
+    }
+
+    public function User_Armor()
+    {
+        return $this->hasOne('App\UserItems', 'id', 'armor');
+    }
+
+    public function User_Glove()
+    {
+        return $this->hasOne('App\UserItems', 'id', 'gloves');
+    }
+
+    public function User_Boot()
+    {
+        return $this->hasOne('App\UserItems', 'id', 'boots');
+    }
+
+    public function User_Weapon()
+    {
+        return $this->hasOne('App\UserItems', 'id', 'weapon');
     }
 }
