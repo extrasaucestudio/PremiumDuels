@@ -82,7 +82,7 @@
 
             </h1>
             <li>
-                @foreach ($duels->take(3) as $duel)
+                @foreach ($LastDuels->take(3) as $duel)
                 <h1 style="color: #FFFF40" style="    overflow: hidden;
                 white-space: nowrap;">
                     <div href="#"

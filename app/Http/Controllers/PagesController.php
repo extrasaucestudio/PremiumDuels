@@ -21,13 +21,15 @@ class PagesController extends Controller
         $tournaments = Tournament::where('state', 'awaiting')->count();
 
 
-        $LastDuels = Duel::whereHas('Duel_winner', function ($query) {
-            $query->where('active', '=', 1);
+        $LastDuels = Duel::orderBy('created_at', 'DESC')->whereHas('Duel_winner', function ($query) {
+            $query->where('active', 1);
         })
             ->whereHas('Duel_loser', function ($query) {
-                $query->where('active', '=', 1);
+                $query->where('active', 1);
             })
             ->get();
+
+
 
         return view('welcome', compact('users', 'duels', 'tournaments', 'LastDuels'));
     }
