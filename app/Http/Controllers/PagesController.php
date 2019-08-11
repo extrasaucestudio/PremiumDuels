@@ -115,7 +115,7 @@ class PagesController extends Controller
 
         $serverData = getPlayersOnServer();
 
-        return $serverData[6] ?? -1;
+        return $serverData[5] ?? -1;
     }
 
 
