@@ -43,6 +43,8 @@ class UserSchoolControler extends Controller
 
         if (School::where('name', $request->name)->count() > 0) return redirect()->back()->with('error', 'Failed. School with that name already exist.');
 
+        if ($user->currency < 2500)  return redirect()->back()->with('error', 'Failed. You do not have enought money!');
+
         $school = new School;
         $school->name = $request->name;
         $school->owner_id = $user->id;
@@ -53,6 +55,9 @@ class UserSchoolControler extends Controller
         $schoolMember->school_id = $school->id;
         $schoolMember->user_id = $user->id;
         $schoolMember->save();
+
+        $user->decrement('currency', 2500);
+        $user->save();
 
         return \Redirect::to('/home');
     }
