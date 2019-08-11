@@ -36,15 +36,26 @@ class WarbandApiController extends Controller
             return "1|2|{$request->player_id}|{$user->uid}|{$user->secret_key}";
         } else {
 
-            $helmet = $user->User_Helmet->ItemData->game_id ?? -1;
-            $armor = $user->User_Armor->ItemData->game_id ?? -1;
-            $gloves = $user->User_Glove->ItemData->game_id ?? -1;
-            $boots = $user->User_Boot->ItemData->game_id ?? -1;
+            $helmet = $user->User_Helmet->ItemData->game_id ?? 0;
+
+            $gloves = $user->User_Glove->ItemData->game_id ?? 0;
+            $boots = $user->User_Boot->ItemData->game_id ?? 170;  /// itm_ankle_boots = 170
             $weapon = $user->User_Weapon->ItemData->game_id ?? -1;
+            $armor = $user->User_Armor->ItemData->game_id ?? -9999;
+
+            if ($armor == -9999) {
+
+                if ($user->Title->name == 'Red')  $armor = 59;
+                if ($user->Title->name == 'Green') $armor = 61;
+                if ($user->Title->name == 'Yellow') $armor = 62;
+                if ($user->Title->name == 'Blue') $armor = 60;
+                if ($user->Title->name == 'White') $armor = 58;
+                if ($armor == -9999) $armor = -1;
+            }
 
 
             $user->touch();
-            return "1|3|{$request->player_id}|{$user->uid}|{$user->secret_key}|{$user->elo}|{$helmet}|{$armor}|{$gloves}|{$boots}|{$weapon}|Welcome message string there";
+            return "1|3|{$request->player_id}|{$user->uid}|{$user->secret_key}|{$user->elo}|{$helmet}|{$armor}|{$gloves}|{$boots}|{$weapon}|Joining message string there";
         }
     }
 

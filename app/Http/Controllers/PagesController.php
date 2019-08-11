@@ -21,6 +21,8 @@ class PagesController extends Controller
         $tournaments = Tournament::where('state', 'awaiting')->count();
         $LastDuels = Duel::orderBy('created_at', 'DESC')->get();
 
+
+
         return view('welcome', compact('users', 'duels', 'tournaments', 'LastDuels'));
     }
 
