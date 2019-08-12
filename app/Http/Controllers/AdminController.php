@@ -16,6 +16,8 @@ class AdminController extends Controller
         $Users = User::all();
         $NewUsersWeekly = User::where('created_at', '>=', new \DateTime('-1 week'))->count();
         $DuelsWeekly = Duel::where('created_at', '>=', new \DateTime('-1 week'))->count();
+
+     
         $DuelWeekArrayGraph = array();
         $UserWeekArrayGraph = array();
 
@@ -25,7 +27,7 @@ class AdminController extends Controller
             array_push($DuelWeekArrayGraph, Duel::whereDate('created_at', new \DateTime('-' . $x .  'day'))->orderBy('created_at', 'DESC')->count());
             array_push($UserWeekArrayGraph, User::whereDate('created_at', new \DateTime('-' . $x .  'day'))->orderBy('created_at', 'DESC')->count());
         }
-
+   
 
         $AccountTypes = new stdClass;
         $AccountTypes->registered = User::where('active', 0)->count();
