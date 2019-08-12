@@ -11,14 +11,8 @@ class UserSpecialTitlesTable extends Seeder
      */
     public function run()
     {
-        DB::table('user_special_titles')->insert([
-            'special_title_id' => 2,
-            'user_id' => 2,
 
-        ]);
-
-
-        DB::table('user_special_titles')->insert([
+        DB::table('user_special_titles')->insert([   //// Champion
             'special_title_id' => 1,
             'user_id' => 1,
 

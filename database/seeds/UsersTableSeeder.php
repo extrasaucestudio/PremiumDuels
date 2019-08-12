@@ -14,7 +14,7 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         $user = new User;
-        $user->name = 'Champion Owner | Admin';
+        $user->name = 'Champion Owner';
         $user->email = Str::random(10) . '@none.com';
         $user->password = bcrypt('password');
         $user->secret_key = 'password';
@@ -27,7 +27,7 @@ class UsersTableSeeder extends Seeder
 
 
         $user = new User;
-        $user->name = 'Developer | Pitch';
+        $user->name = 'Developer';
         $user->email = Str::random(10) . '@none.com';
         $user->password = bcrypt('password');
         $user->secret_key = 'password';
@@ -41,7 +41,7 @@ class UsersTableSeeder extends Seeder
 
 
         $user = new User;
-        $user->name = 'New user';
+        $user->name = 'Admin';
         $user->email = Str::random(10) . '@none.com';
         $user->password = bcrypt('password');
         $user->secret_key = 'password';
