@@ -89,6 +89,7 @@ class UserSchoolControler extends Controller
         $user = Auth::user();
         $Addionaldata = new stdClass;
 
+
         $Addionaldata->GoldSchool = 0;
         if ($schoolID == null) {
 
@@ -108,8 +109,10 @@ class UserSchoolControler extends Controller
             $school = School::find($schoolID);
 
             if ($school == null) {
+                dd(3);
                 return Redirect::to('/home');
             } else if ($school->id == 1 && user_special_titles::where('special_title_id', 1)->count() == 0) {
+
                 return Redirect::to('/home');
             } else if ($school->id == 1) {
                 $ChampionOwner = user_special_titles::where('special_title_id', 1)->first();
@@ -120,8 +123,10 @@ class UserSchoolControler extends Controller
         }
 
 
-        if ($schoolID == null) {    //// Empty school ID
+        if ($schoolID == null) {
+            //// Empty school ID
             if ($user->School == null) return Redirect::to('/home');
+
             $school = $user->School->MemberToSchool;
         }
 
@@ -244,6 +249,7 @@ class UserSchoolControler extends Controller
     {
         $user = Auth::user();
 
+        if ($user->isChampion->count() > 0) return \Redirect::to('/home');
 
         if ($user->School == null) return \Redirect::to('/home');
 
@@ -253,7 +259,29 @@ class UserSchoolControler extends Controller
 
         $schoolMember->delete();
 
-        $UserItemsToDelete = $user->UserItems->where('from_school', true)->delete();
+        $UserItemsToDelete = $user->UserItems->where('from_school', true);
+
+        foreach ($UserItemsToDelete as $key => $item) {
+            $item->delete();
+        }
+        return \Redirect::to('/home');
+    }
+
+    public function invite_to_school(Request $request)
+    {
+        $user = Auth::user();
+        $foreign_user = User::find($request->foreign_user_id);
+
+        if ($user->School == null | $foreign_user == null || $foreign_user->School != null || $user->School->MemberToSchool->owner_id != $user->id) return \Redirect::to('/home');
+
+        if ($user->School->MemberToSchool->Members->count() >= $user->School->MemberToSchool->capacity) return \Redirect::to('/home');
+
+        $invite = new School_Invite;
+        $invite->inviter_id = $user->id;
+        $invite->school_id = $user->School->MemberToSchool->id;
+        $invite->user_id = $foreign_user->id;
+        $invite->save();
+
         return \Redirect::to('/home');
     }
 }

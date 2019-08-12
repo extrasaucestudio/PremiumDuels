@@ -14,6 +14,15 @@
             style="color: gold!important"
             @endif class="h3 mb-0 text-gray-800">{{$foreign_user->name}}</h1>
 
+        @if($foreign_user->isChampion->count() < 1 && $foreign_user->School == null && $user->School != null &&
+            $user->School->MemberToSchool->owner_id ==
+            $user->id)
+            <form action="/user/school/invite" method="post">
+                @csrf
+                <button type="submit" class="btn btn-success">Invite To School</button>
+                <input type="hidden" name="foreign_user_id" value="{{$foreign_user->id}}">
+            </form>
+            @endif
     </div>
 
     <!-- Content Row -->
@@ -102,7 +111,7 @@
                             </div>
                             <div class="h5 mb-0 font-weight-bold text-gray-800">
                                 @if($foreign_user->School != null)
-                                <a href="/school/{{$foreign_user->School->id}}" style="  color:gray !important;
+                                <a href="/school/{{$foreign_user->School->MemberToSchool->id}}" style="  color:gray !important;
                                 text-decoration:none;">
                                     {{$foreign_user->School->MemberToSchool->name}}
                                 </a>

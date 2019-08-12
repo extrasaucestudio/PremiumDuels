@@ -175,4 +175,10 @@ class User extends Authenticatable
     {
         return $this->hasOne('App\UserItems', 'id', 'weapon');
     }
+
+
+    public function isChampion()
+    {
+        return $this->hasMany('App\user_special_titles', 'user_id', 'id')->where('special_title_id', 1);
+    }
 }

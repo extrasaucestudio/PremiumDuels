@@ -19,7 +19,7 @@
           <canvas id="myBarChart"></canvas>
         </div>
         <hr>
-        Last updated at: <code>{{$countries[0]->updated_at}}</code>
+        Last updated at: <code>{{$countries[0]->updated_at}} CEST</code>
       </div>
     </div>
 
@@ -74,7 +74,7 @@ var myBarChart = new Chart(ctx, {
         ticks: {
           maxTicksLimit: 5,
           padding: 10,
-          suggestedMin: 1000, 
+          suggestedMin: 0, 
           // Include a dollar sign in the ticks
           callback: function(value, index, values) {
             return number_format(value);

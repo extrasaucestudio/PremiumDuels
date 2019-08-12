@@ -135,8 +135,9 @@ Route::middleware(['auth'])->group(function () {
 
 
     Route::post('/user/school/join', 'UserSchoolControler@join_school');
-    Route::get('/user/school/leave', 'UserSchoolControler@leave_school');
+    Route::post('/user/school/leave', 'UserSchoolControler@leave_school');
     Route::post('/user/school/reject', 'UserSchoolControler@reject_school');
+    Route::post('/user/school/invite', 'UserSchoolControler@invite_to_school');
 
 
     //// Leaderboard

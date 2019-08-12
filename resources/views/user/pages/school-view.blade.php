@@ -34,7 +34,8 @@
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Members
                             </div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{$school->Members->count()}}</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                {{$school->Members->count()}}/{{$school->capacity}}</div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-user-friends fa-2x text-gray-300"></i>
@@ -144,7 +145,16 @@
                         @endforeach
 
                     </tbody>
+
                 </table>
+                <br>
+                @if($user->School != null && $user->School->MemberToSchool->id == $school->id &&
+                !$user->isChampion->count() > 0) <form action="/user/school/leave" method="post">
+                    @csrf
+                    <button type="submit" class="btn btn-danger">Leave</button>
+                </form>
+
+                @endif
             </div>
         </div>
 
