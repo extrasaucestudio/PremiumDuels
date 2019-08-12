@@ -39,7 +39,7 @@
                         </a>
 
                         <a class="uk-navbar-item " style="font-family: 'Saira Stencil One', cursive; color: gold"
-                            href="{{ url('/HallOfFame') }}">
+                            href="#">
                             Hall of Fame
                         </a>
                         <a class="uk-navbar-item " style="font-family: 'Saira Stencil One', cursive"

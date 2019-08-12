@@ -53,13 +53,7 @@
             </div>
             <div>
                 <div class="uk-card uk-card-secondary uk-card-body uk-animation-scale-up ">
-                    @if(!empty($serverData[3]))
-                    <h3 class="uk-card-title">Online</h3>
-                    <p>{{$serverData[0]}}, {{$serverData[3]}}</p>
-                    <p>{{$serverData[5]}}/{{$serverData[6]}}</p>
-                    @else
-                    <h3 class="uk-card-title">Offline</h3>
-                    @endif
+                   <h3 id="online_second"></h3>
                 </div>
             </div>
         </div>
@@ -232,5 +226,23 @@ animateValue("PlayersNum", 0, {{$users->count()}}, 200);
 animateValue("DuelsNum", 0, {{$duels->count()}}, 200);
 
 $('.searchPlayers').val('');
+
+
+
+    function OnlinePlayers()
+{
+    $.get( "{{ Request::root()}}/api/players-online", function( data ) {
+        if(data == -1) {
+            $( "#online_second" ).html('Server Offline');
+        } else {
+            $( "#online_second" ).html('Online: ' + data);
+        }
+ 
+  $("#online_second").css("visibility", "visible");
+});
+}
+
+OnlinePlayers();
+
 
 </script>
