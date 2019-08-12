@@ -201,7 +201,7 @@
                                 <h6 class="dropdown-header">
                                     Alerts Center
                                 </h6>
-                                @foreach ($user->unreadNotifications->take(3) as $notif)
+                                @foreach ($user->unreadNotifications->take(5) as $notif)
                                 @if($notif->type == 'App\Notifications\NewSchoolInvite')
                                 <a class="dropdown-item d-flex align-items-center"
                                     href="/user/notification/{{$notif->id}}">
@@ -217,12 +217,13 @@
                                     </div>
                                 </a>
                                 @endif
+                                @endforeach
                                 <a class="dropdown-item text-center small text-gray-500" href="/user/notifications">Show
                                     All
                                     Alerts</a>
                             </div>
                         </li>
-                        @endforeach
+                   
 
                         <!-- Nav Item - Messages -->
                         <li class="nav-item dropdown no-arrow mx-1">

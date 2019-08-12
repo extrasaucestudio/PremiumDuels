@@ -149,7 +149,7 @@
                 </table>
                 <br>
                 @if($user->School != null && $user->School->MemberToSchool->id == $school->id &&
-                !$user->isChampion->count() > 0) <form action="/user/school/leave" method="post">
+                !$user->isChampion->count() > 0 && $user->School->MemberToSchool->owner_id != $user->id) <form action="/user/school/leave" method="post">
                     @csrf
                     <button type="submit" class="btn btn-danger">Leave</button>
                 </form>

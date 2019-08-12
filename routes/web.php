@@ -78,6 +78,13 @@ Route::middleware(['auth', 'admin'])->group(function () {
     /// Manipulation
     Route::get('/admin/api/elo', 'AdminController@ChangeElo')->name('elo_edit_api');
     Route::get('/admin/api/currency', 'AdminController@ChangeCurrency')->name('currency_edit_api');
+
+
+    //// Title Champion
+
+    Route::get('/admin/title/champion/switch', 'UserSpecialTitlesController@ChangeChampion_display');
+    Route::post('/admin/title/champion/switch', 'UserSpecialTitlesController@ChangeChampion');
+
 });
 
 

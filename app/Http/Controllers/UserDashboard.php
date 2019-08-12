@@ -19,8 +19,6 @@ class UserDashboard extends Controller
         $duels = Duel::where('winner_id', $user->id)->orWhere('loser_id', $user->id)->get();
         $nextRank = Title::Where('elo', '>', $user->elo)->orderBy('elo', 'ASC')->Where('id', '!=', $user->title_id)->first();
 
-
-
         if (!$nextRank) {
             $nextRank = new stdClass;
             $nextRank->name = 'None';

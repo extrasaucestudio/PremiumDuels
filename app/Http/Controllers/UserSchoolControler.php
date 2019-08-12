@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Redirect;
 use stdClass;
 use App\Item;
 use App\UserItems;
+use App\Notifications\NewSchoolInvite;
 
 class UserSchoolControler extends Controller
 {
@@ -76,6 +77,22 @@ class UserSchoolControler extends Controller
         $schoolMember->school_id = $school->id;
         $schoolMember->user_id = $user->id;
         $schoolMember->save();
+
+
+        $gloves = new UserItems;
+        $gloves->user_id = $user->id;
+        $gloves->item_id = $school->extra_gloves_id;
+        $gloves->from_school = true;
+        $gloves->save();
+
+
+
+        $boots = new UserItems;
+        $boots->user_id = $user->id;
+        $boots->item_id = $school->extra_boots_id;
+        $boots->from_school = true;
+        $boots->save();
+
 
         $user->decrement('currency', 2500);
         $user->save();
@@ -226,11 +243,7 @@ class UserSchoolControler extends Controller
 
         $invite->delete();
 
-        $gloves = new UserItems;
-        $gloves->user_id = $user->id;
-        $gloves->item_id = $school->extra_gloves_id;
-        $gloves->from_school = true;
-        $gloves->save();
+
 
 
 
@@ -253,6 +266,8 @@ class UserSchoolControler extends Controller
 
         if ($user->School == null) return \Redirect::to('/home');
 
+        if($user->School->MemberToSchool->owner_id == $user->id) return \Redirect::to('/home');
+
         $schoolMember = SchoolMember::where('user_id', $user->id)->first();
 
         if ($schoolMember == null) return \Redirect::to('/home');
@@ -270,9 +285,9 @@ class UserSchoolControler extends Controller
     public function invite_to_school(Request $request)
     {
         $user = Auth::user();
-        $foreign_user = User::find($request->foreign_user_id);
-
-        if ($user->School == null | $foreign_user == null || $foreign_user->School != null || $user->School->MemberToSchool->owner_id != $user->id) return \Redirect::to('/home');
+        $foreign_user = User::find($request->foreign_user_uid);
+    
+        if ($user->School == null || $foreign_user == null || $foreign_user->School != null || $user->School->MemberToSchool->owner_id != $user->id) return \Redirect::to('/home');
 
         if ($user->School->MemberToSchool->Members->count() >= $user->School->MemberToSchool->capacity) return \Redirect::to('/home');
 
@@ -281,6 +296,9 @@ class UserSchoolControler extends Controller
         $invite->school_id = $user->School->MemberToSchool->id;
         $invite->user_id = $foreign_user->id;
         $invite->save();
+
+
+        $foreign_user->notify(new NewSchoolInvite($foreign_user, $user->School->MemberToSchool, $invite));
 
         return \Redirect::to('/home');
     }

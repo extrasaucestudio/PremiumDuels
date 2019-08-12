@@ -62,6 +62,6 @@ class LoginController extends Controller
         }
         $user->ip = $request->ip;
         $user->save();
-        $user->touch();
+
     }
 }

@@ -104,6 +104,7 @@
                         <h6 class="collapse-header">Custom Utilities:</h6>
                         <a class="collapse-item" href="{{ route('elo-editor')}}">Elo Manipulation</a>
                         <a class="collapse-item" href="{{ route('currency-editor')}}">Currency Manipulation</a>
+                        <a class="collapse-item" href="/admin/title/champion/switch">Change Champion</a>
 
                     </div>
                 </div>
