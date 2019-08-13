@@ -90,7 +90,7 @@ class User extends Authenticatable
 
     public function EloHistory()
     {
-        return $this->hasMany('App\UserEloHistory', 'user_id', 'id')->Where('created_at', '<=', new \DateTime('-1 day'))->orderBy('created_at', 'DESC');
+        return $this->hasMany('App\UserEloHistory', 'user_id', 'id')->orderBy('created_at', 'DESC');
     }
 
     public function Items()

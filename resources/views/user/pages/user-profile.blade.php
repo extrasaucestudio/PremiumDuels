@@ -15,14 +15,14 @@
             @endif class="h3 mb-0 text-gray-800">{{$foreign_user->name}}</h1>
 
         @if($foreign_user->isChampion->count() == 0 && $foreign_user->School == null && $user->School != null &&
-            $user->School->MemberToSchool->owner_id ==
-            $user->id)
-            <form action="/user/school/invite" method="post">
-                @csrf
-                <button type="submit" class="btn btn-success">Invite To School</button>
-                <input type="hidden" name="foreign_user_uid" value="{{$foreign_user->uid}}">
-            </form>
-            @endif
+        $user->School->MemberToSchool->owner_id ==
+        $user->id)
+        <form action="/user/school/invite" method="post">
+            @csrf
+            <button type="submit" class="btn btn-success">Invite To School</button>
+            <input type="hidden" name="foreign_user_uid" value="{{$foreign_user->uid}}">
+        </form>
+        @endif
     </div>
 
     <!-- Content Row -->
@@ -309,16 +309,34 @@ var goBackDays = 7;
             
         ],
     datasets: [{ 
-        data: [@for ($i = -6; $i < 0; $i++)
-{!! $user->EloHistory[$i]->elo ?? 1000 !!},
-@endfor {!! $user->elo !!}],
+        data: [
+                   
+
+                   @foreach ($user->EloHistory->take(6)->reverse() as $obj)
+                 
+                   {!! $obj->elo !!},
+                
+   @endforeach
+   {!! $user->elo !!},
+                   
+
+               ],
         label: "You",
         borderColor: "#3e95cd",
         fill: false
       }, { 
-        data: [@for ($i = -6; $i < 0; $i++)
-{!! $foreign_user->EloHistory[$i]->elo ?? 1000 !!},
-@endfor {!! $foreign_user->elo !!}],
+        data: [
+                   
+
+                   @foreach ($foreign_user->EloHistory->take(6)->reverse() as $obj)
+                 
+                   {!! $obj->elo !!},
+                
+   @endforeach
+   {!! $foreign_user->elo !!},
+                   
+
+               ],
         label: "{{$foreign_user->name}}",
         borderColor: "#8e5ea2",
         fill: false
