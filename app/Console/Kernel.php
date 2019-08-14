@@ -29,7 +29,7 @@ class Kernel extends ConsoleKernel
         // $schedule->command('inspire')
         //          ->hourly();
 
-        $schedule->command('elo:calculate')->everyMinute();
+        $schedule->command('elo:calculate')->everyTenMinutes();
 
         $schedule->command('EloHistoryLog')->dailyAt('1:00');
     }

@@ -87,6 +87,10 @@
                         <a class="collapse-item" href="/admin/item/create">Create</a>
                         <a class="collapse-item" href="#">Give</a>
                         <a class="collapse-item" href="/admin/items">View</a>
+
+                        <h6 class="collapse-header">Titles:</h6>
+                        <a class="collapse-item" href="/admin/title/create">Create</a>
+                        <a class="collapse-item" href="/admin/title/give">Give</a>
                     </div>
                 </div>
             </li>

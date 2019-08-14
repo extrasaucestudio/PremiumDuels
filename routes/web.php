@@ -85,6 +85,17 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin/title/champion/switch', 'UserSpecialTitlesController@ChangeChampion_display');
     Route::post('/admin/title/champion/switch', 'UserSpecialTitlesController@ChangeChampion');
 
+
+
+    ///// Title
+
+
+    Route::get('/admin/title/create', 'SpecialTitleController@display_create');
+    Route::post('/admin/title/create', 'SpecialTitleController@create')->name('create-title');
+
+
+    Route::get('/admin/title/give', 'SpecialTitleController@display_give');
+    Route::post('/admin/title/give', 'SpecialTitleController@give')->name('give-title');;
 });
 
 
@@ -102,8 +113,7 @@ Route::middleware(['auth'])->group(function () {
 
     //// Titles
 
-    Route::get('/user/title/create', 'SpecialTitleController@display_create');
-    Route::post('/user/title/create', 'SpecialTitleController@create')->name('create-title');
+
 
     Route::get('/user/title/switch', 'SpecialTitleController@display_switch');
     Route::post('/user/title/switch', 'UserSpecialTitlesController@change')->name('switch-title');

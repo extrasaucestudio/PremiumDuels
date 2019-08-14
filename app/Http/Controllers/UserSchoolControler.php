@@ -63,7 +63,7 @@ class UserSchoolControler extends Controller
 
 
 
-        if ($user->currency < 2500)  return redirect()->back()->with('error', 'Failed. You do not have enought money!');
+        if ($user->currency < 15000)  return redirect()->back()->with('error', 'Failed. You do not have enought money!');
 
         $school = new School;
         $school->name = $request->name;
@@ -94,7 +94,7 @@ class UserSchoolControler extends Controller
         $boots->save();
 
 
-        $user->decrement('currency', 2500);
+        $user->decrement('currency', 15000);
         $user->save();
 
         return \Redirect::to('/home');
@@ -227,9 +227,12 @@ class UserSchoolControler extends Controller
 
         $invite = School_Invite::find($request->invite_id);
 
+        if ($invite == null)   return \Redirect::to('/home');
+
         $school = School::find($invite->school_id);
 
-        if ($invite == null || $invite->user_id != $user->id || $user->School != null || $school == null)  return \Redirect::to('/home');
+
+        if ($invite->user_id != $user->id || $user->School != null || $school == null)  return \Redirect::to('/home');
 
 
         if (SchoolMember::where('school_id', $school->id)->count() >= $school->capacity)  return \Redirect::to('/home');
@@ -258,6 +261,19 @@ class UserSchoolControler extends Controller
     }
 
 
+    public function reject_school(Request $request)
+    {
+        $user = Auth::user();
+
+        $invite = School_Invite::find($request->invite_id);
+
+        if ($invite == null || $invite->user_id != $user->id)  return \Redirect::to('/home');
+
+        $invite->delete();
+
+        return \Redirect::to('/home');
+    }
+
     public function leave_school(Request $request)
     {
         $user = Auth::user();
@@ -266,7 +282,7 @@ class UserSchoolControler extends Controller
 
         if ($user->School == null) return \Redirect::to('/home');
 
-        if($user->School->MemberToSchool->owner_id == $user->id) return \Redirect::to('/home');
+        if ($user->School->MemberToSchool->owner_id == $user->id) return \Redirect::to('/home');
 
         $schoolMember = SchoolMember::where('user_id', $user->id)->first();
 
@@ -286,7 +302,7 @@ class UserSchoolControler extends Controller
     {
         $user = Auth::user();
         $foreign_user = User::find($request->foreign_user_uid);
-    
+
         if ($user->School == null || $foreign_user == null || $foreign_user->School != null || $user->School->MemberToSchool->owner_id != $user->id) return \Redirect::to('/home');
 
         if ($user->School->MemberToSchool->Members->count() >= $user->School->MemberToSchool->capacity) return \Redirect::to('/home');

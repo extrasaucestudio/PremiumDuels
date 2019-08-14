@@ -60,7 +60,7 @@
 
                 </select>
                 <br>
-                <input id="button" type="submit" value="Create (2500$)" class="btn btn-success">
+                <input id="button" type="submit" value="Create (15000)" class="btn btn-success">
             </form>
 
         </div>

@@ -103,7 +103,7 @@
                         <h6 class="collapse-header">Custom Utilities:</h6>
                         <a class="collapse-item" href="/user/duels/history">Duel History</a>
                         <h6 class="collapse-header">Titles:</h6>
-                        <a class="collapse-item" href="/user/title/create">Create</a>
+                        {{-- <a class="collapse-item" href="/user/title/create">Create</a> --}}
                         <a class="collapse-item" href="/user/title/switch">Switch</a>
                     </div>
                 </div>
@@ -190,6 +190,7 @@
                         <li class="nav-item dropdown no-arrow mx-1">
                             <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
                                 <i class="fas fa-bell fa-fw"></i>
                                 <!-- Counter - Alerts -->
                                 <span
@@ -223,7 +224,7 @@
                                     Alerts</a>
                             </div>
                         </li>
-                   
+
 
                         <!-- Nav Item - Messages -->
                         {{-- <li class="nav-item dropdown no-arrow mx-1">
@@ -291,6 +292,7 @@
 
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
+
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 
@@ -303,12 +305,13 @@
                                 <img class="img-profile rounded-circle"
                                     src="https://cdn.discordapp.com/emojis/596847826479349760.png?v=1">
                             </a>
+
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
                                 <a class="dropdown-item" href="#">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Profile
+                                    Profile [<b>{{$user->currency}}$</b>]
                                 </a>
                                 {{-- <a class="dropdown-item" href="#">
                                     <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
