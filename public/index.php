@@ -1,5 +1,4 @@
 <?php
-
 header_remove();
 function set_content_length($output)
 {
@@ -7,9 +6,6 @@ function set_content_length($output)
     return $output;
 }
 ob_start("set_content_length");
-
-
-
 /**
  * Laravel - A PHP Framework For Web Artisans
  *
