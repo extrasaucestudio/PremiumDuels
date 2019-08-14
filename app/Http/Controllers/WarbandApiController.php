@@ -1,7 +1,5 @@
 <?php
 
-
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -14,9 +12,6 @@ class WarbandApiController extends Controller
 {
     public function check(Request $request)
     {
-
-
-
 
         if (!$request->uid || !$request->username) return '1|-2| Wrong query';
 
@@ -51,8 +46,7 @@ class WarbandApiController extends Controller
 
 
             $user->touch();
-
-            echo "|1|3|{$request->player_id}|{$user->uid}|{$user->secret_key}|{$user->elo}|{$helmet}|{$armor}|{$gloves}|{$boots}|{$weapon}|Joining message string there|";
+            return "1|3|{$request->player_id}|{$user->uid}|{$user->secret_key}|{$user->elo}|{$helmet}|{$armor}|{$gloves}|{$boots}|{$weapon}|Joining message string there";
         }
     }
 

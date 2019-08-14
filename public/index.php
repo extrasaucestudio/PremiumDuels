@@ -1,5 +1,15 @@
 <?php
 
+header_remove();
+function set_content_length($output)
+{
+    header("Content-Length: " . strlen($output));
+    return $output;
+}
+ob_start("set_content_length");
+
+
+
 /**
  * Laravel - A PHP Framework For Web Artisans
  *
@@ -21,7 +31,7 @@ define('LARAVEL_START', microtime(true));
 |
 */
 
-require __DIR__.'/../vendor/autoload.php';
+require __DIR__ . '/../vendor/autoload.php';
 
 /*
 |--------------------------------------------------------------------------
@@ -35,7 +45,7 @@ require __DIR__.'/../vendor/autoload.php';
 |
 */
 
-$app = require_once __DIR__.'/../bootstrap/app.php';
+$app = require_once __DIR__ . '/../bootstrap/app.php';
 
 /*
 |--------------------------------------------------------------------------
