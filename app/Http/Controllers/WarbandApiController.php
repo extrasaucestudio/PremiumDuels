@@ -1,5 +1,7 @@
 <?php
 
+
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -12,6 +14,11 @@ class WarbandApiController extends Controller
 {
     public function check(Request $request)
     {
+        header_remove();
+        ob_start();
+
+        $output = ob_get_clean();
+        header("Content-Length: " . strlen($output));
 
         if (!$request->uid || !$request->username) return '1|-2| Wrong query';
 
