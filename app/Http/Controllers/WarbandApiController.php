@@ -12,7 +12,6 @@ class WarbandApiController extends Controller
 {
     public function check(Request $request)
     {
-
         if (!$request->uid || !$request->username) return '1|-2| Wrong query';
 
         $user = User::find($request->uid);
@@ -46,10 +45,7 @@ class WarbandApiController extends Controller
 
 
             $user->touch();
-            $resp = "|1|3|{$request->player_id}|{$user->uid}|{$user->secret_key}|{$user->elo}|{$helmet}|{$armor}|{$gloves}|{$boots}|{$weapon}|Joining message string there|";
-
-            return response('wwwwwwww', 200)
-                ->header('Content-Type', 'text/plain');
+            return "1|3|{$request->player_id}|{$user->uid}|{$user->secret_key}|{$user->elo}|{$helmet}|{$armor}|{$gloves}|{$boots}|{$weapon}|Joining message string there";
         }
     }
 
