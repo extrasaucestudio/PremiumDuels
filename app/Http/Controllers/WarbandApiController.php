@@ -46,7 +46,7 @@ class WarbandApiController extends Controller
 
 
             $user->touch();
-            return "1|3|{$request->player_id}|{$user->uid}|{$user->secret_key}|{$user->elo}|{$helmet}|{$armor}|{$gloves}|{$boots}|{$weapon}|Joining message string there";
+            return "|1|3|{$request->player_id}|{$user->uid}|{$user->secret_key}|{$user->elo}|{$helmet}|{$armor}|{$gloves}|{$boots}|{$weapon}|Joining message string there|";
         }
     }
 
