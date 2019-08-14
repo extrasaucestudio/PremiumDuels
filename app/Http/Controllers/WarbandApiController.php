@@ -14,7 +14,11 @@ class WarbandApiController extends Controller
 {
     public function check(Request $request)
     {
-        header_remove();
+        if (!headers_sent()) {
+            foreach (headers_list() as $header)
+                header_remove($header);
+        }
+
         ob_start();
 
         $output = ob_get_clean();
