@@ -14,7 +14,7 @@ class SpecialTitleController extends Controller
     {
 
         $user = Auth::user();
-        return view('user.pages.title-create', compact('user'));
+        return view('admin.Pages.title-create', compact('user'));
     }
 
     public function display_switch()
@@ -29,14 +29,14 @@ class SpecialTitleController extends Controller
     {
         $validator = request()->validate([
 
-            'name' => 'required|min:3|max:12',
+            'name' => 'required|min:3|max:25',
         ]);
 
         $user = Auth::user();
 
         if (Special_Title::where('name', $request->name)->count() > 0) return redirect()->back()->with('error', 'Failed. Title with that name already exist.');
 
-        if ($user->currency < 500)  return redirect()->back()->with('error', 'Failed. You do not have enought money!');
+
 
         $SpecialTitle = new Special_Title;
         $SpecialTitle->name = $request->name;
@@ -48,9 +48,40 @@ class SpecialTitleController extends Controller
         $UserSpecialTitle->user_id = $user->id;
         $UserSpecialTitle->save();
 
-        $user->decrement('currency', 500);
         $user->save();
 
         return redirect()->back()->with('success', 'Success. You have been created new minor title.');
+    }
+
+    public function display_give()
+    {
+        $user = Auth::user();
+        $titles = Special_Title::where('name', '!=', 'Champion')->get();
+
+
+        return view('admin.Pages.title-give', compact('user', 'titles'));
+    }
+
+
+    public function give(Request $request)
+    {
+
+        $user = User::find($request->user_uid);
+        $SpecialTitle = Special_Title::find($request->title_id);
+
+        if ($user == null) return redirect()->back()->with('error', 'There is no such user with this uid.');
+        if ($SpecialTitle == null) return redirect()->back()->with('error', 'Something went wrong...');
+        if ($SpecialTitle->name == 'Champion') return redirect()->back()->with('error', 'There can be only one champion.');
+
+
+        if ($user->SpecialTitles->where('special_title_id', $SpecialTitle->id)->count() > 0) return redirect()->back()->with('error', 'User already have that title!');
+
+        $UserSpecialTitle = new user_special_titles;
+        $UserSpecialTitle->special_title_id = $SpecialTitle->id;
+        $UserSpecialTitle->user_id = $user->id;
+        $UserSpecialTitle->save();
+
+
+        return \Redirect::to('/admin');
     }
 }

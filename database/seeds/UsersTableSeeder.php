@@ -13,9 +13,21 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
+        $user = new User;
+        $user->name = 'Champion Owner';
+        $user->email = Str::random(10) . '@none.com';
+        $user->password = bcrypt('password');
+        $user->secret_key = 'password';
+        $user->uid = 112;
+        $user->elo = 1000;
+        $user->active = false;
+        $user->golden_account = true;
+        $user->admin = 1;
+        $user->save();
+
 
         $user = new User;
-        $user->name = 'Pitch';
+        $user->name = 'Developer';
         $user->email = Str::random(10) . '@none.com';
         $user->password = bcrypt('password');
         $user->secret_key = 'password';
@@ -26,15 +38,17 @@ class UsersTableSeeder extends Seeder
         $user->admin = 1;
         $user->save();
 
+
+
         $user = new User;
-        $user->name = 'Not Pitch';
+        $user->name = 'Admin';
         $user->email = Str::random(10) . '@none.com';
         $user->password = bcrypt('password');
         $user->secret_key = 'password';
-        $user->uid = 112;
+        $user->uid = 555;
         $user->elo = 1000;
         $user->active = false;
-        $user->golden_account = true;
+
         $user->admin = 1;
         $user->save();
     }

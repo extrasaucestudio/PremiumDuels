@@ -17,6 +17,7 @@ class CreateUserItemsTable extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('user_id')->unsigned();
             $table->bigInteger('item_id')->unsigned();
+            $table->boolean('from_school')->default(false);
             $table->timestamps();
         });
 

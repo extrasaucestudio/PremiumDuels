@@ -44,7 +44,23 @@
                 <label>School Name</label>
                 <input type="text" name="name" maxlength="30" class="form-control" placeholder="Pro Elo School 9000">
                 <br>
-                <input id="button" type="submit" value="Create (2500$)" class="btn btn-success">
+                <label>Gloves</label>
+                <select class="form-control" name="gloves_id">
+                    @foreach ($gloves as $item)
+                    <option value="{{$item->id}}">{{$item->name}}</option>
+                    @endforeach
+
+                </select>
+                <br>
+                <label>Boots</label>
+                <select class="form-control" name="boots_id">
+                    @foreach ($boots as $item_)
+                    <option value="{{$item_->id}}">{{$item_->name}}</option>
+                    @endforeach
+
+                </select>
+                <br>
+                <input id="button" type="submit" value="Create (15000)" class="btn btn-success">
             </form>
 
         </div>

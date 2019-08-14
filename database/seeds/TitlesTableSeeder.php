@@ -13,38 +13,38 @@ class TitlesTableSeeder extends Seeder
     {
         DB::table('titles')->insert([
             'name' => 'Red',
-            'elo' => 1499,
-            'image' => '/images/newbie.png',
+            'elo' => 1399,
+            'image' => '/images/ranks/red.png',
             'color' => 'red',
 
         ]);
         DB::table('titles')->insert([
             'name' => 'Green',
-            'elo' => 1500,
-            'image' => '/images/master.png',
+            'elo' => 1400,
+            'image' => '/images/ranks/green.png',
             'color' => 'green',
 
         ]);
 
         DB::table('titles')->insert([
             'name' => 'Yellow',
-            'elo' => 2000,
-            'image' => '/images/grandmaster.png',
+            'elo' => 1600,
+            'image' => '/images/ranks/yellow.png',
             'color' => 'yellow',
 
         ]);
 
         DB::table('titles')->insert([
             'name' => 'Blue',
-            'elo' => 2500,
-            'image' => '/images/grandmaster.png',
+            'elo' => 1800,
+            'image' => '/images/ranks/blue.png',
             'color' => 'blue',
 
         ]);
         DB::table('titles')->insert([
             'name' => 'White',
-            'elo' => 3000,
-            'image' => '/images/grandmaster.png',
+            'elo' => 2000,
+            'image' => '/images/ranks/white.png',
             'color' => 'white',
 
         ]);

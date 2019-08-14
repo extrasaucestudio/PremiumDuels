@@ -1,4 +1,4 @@
-@extends('user.layouts.navigation', ['user' => $user])
+@extends('admin.layouts.navigation', ['user' => $user])
 
 @section('content')
 <!DOCTYPE html>
@@ -42,9 +42,9 @@
             <form method="post" action="{{route('create-title')}}" enctype="multipart/form-data">
                 @csrf
                 <label>Title Name</label>
-                <input type="text" name="name" maxlength="12" class="form-control" placeholder="Knight">
+                <input type="text" name="name" maxlength="25" class="form-control" placeholder="Knight">
                 <br>
-                <input id="button" type="submit" value="Create (500$)" class="btn btn-success">
+                <input id="button" type="submit" value="Create" class="btn btn-success">
             </form>
 
         </div>

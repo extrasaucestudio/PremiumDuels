@@ -49,8 +49,24 @@
                 <label>School Name</label>
                 <input type="text" name="name" class="form-control" placeholder="Best School !!!!">
                 <br>
-                <label>Owner ID</label>
+                <label>Owner UID</label>
                 <input type="number" name="uid" class="form-control">
+                <br>
+                <label>Gloves</label>
+                <select class="form-control" name="gloves_id">
+                    @foreach ($gloves as $item)
+                    <option value="{{$item->id}}">{{$item->name}}</option>
+                    @endforeach
+
+                </select>
+                <br>
+                <label>Boots</label>
+                <select class="form-control" name="boots_id">
+                    @foreach ($boots as $item_)
+                    <option value="{{$item_->id}}">{{$item_->name}}</option>
+                    @endforeach
+
+                </select>
                 <br>
                 <input id="button" type="submit" value="Create" class="btn btn-success">
             </form>

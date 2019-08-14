@@ -182,13 +182,13 @@ var myLineChart = new Chart(ctx, {
     type: "line",
     data: {
         labels: [
-            daysSorted[0],
-            daysSorted[1],
-            daysSorted[2],
-            daysSorted[3],
-            daysSorted[4],
+            daysSorted[6],
             daysSorted[5],
-            daysSorted[6]
+            daysSorted[4],
+            daysSorted[3],
+            daysSorted[2],
+            daysSorted[1],
+            daysSorted[0]
 
             
         ],
@@ -207,13 +207,13 @@ var myLineChart = new Chart(ctx, {
                 pointHitRadius: 10,
                 pointBorderWidth: 2,
                 data: [
-                    {{$UserWeekArrayGraph[0]}},
-                    {{$UserWeekArrayGraph[1]}},
-                    {{$UserWeekArrayGraph[2]}},
-                    {{$UserWeekArrayGraph[3]}},
-                    {{$UserWeekArrayGraph[4]}},
-                    {{$UserWeekArrayGraph[5]}},
-                    {{$UserWeekArrayGraph[6]}},
+                    {{$DuelWeekArrayGraph[6]}},
+                    {{$DuelWeekArrayGraph[5]}},
+                    {{$DuelWeekArrayGraph[4]}},
+                    {{$DuelWeekArrayGraph[3]}},
+                    {{$DuelWeekArrayGraph[2]}},
+                    {{$DuelWeekArrayGraph[1]}},
+                    {{$DuelWeekArrayGraph[0]}},
 
                 ]
             }
@@ -302,13 +302,13 @@ var myLineChart = new Chart(ctx, {
     type: "line",
     data: {
         labels: [
-            daysSorted[0],
-            daysSorted[1],
-            daysSorted[2],
-            daysSorted[3],
-            daysSorted[4],
+            daysSorted[6],
             daysSorted[5],
-            daysSorted[6]
+            daysSorted[4],
+            daysSorted[3],
+            daysSorted[2],
+            daysSorted[1],
+            daysSorted[0]
 
             
         ],
@@ -327,13 +327,13 @@ var myLineChart = new Chart(ctx, {
                 pointHitRadius: 10,
                 pointBorderWidth: 2,
                 data: [
-                    {{$DuelWeekArrayGraph[0]}},
-                    {{$DuelWeekArrayGraph[1]}},
-                    {{$DuelWeekArrayGraph[2]}},
-                    {{$DuelWeekArrayGraph[3]}},
-                    {{$DuelWeekArrayGraph[4]}},
-                    {{$DuelWeekArrayGraph[5]}},
-                    {{$DuelWeekArrayGraph[6]}},
+                    {{$UserWeekArrayGraph[6]}},
+                    {{$UserWeekArrayGraph[5]}},
+                    {{$UserWeekArrayGraph[4]}},
+                    {{$UserWeekArrayGraph[3]}},
+                    {{$UserWeekArrayGraph[2]}},
+                    {{$UserWeekArrayGraph[1]}},
+                    {{$UserWeekArrayGraph[0]}}
 
                 ]
             }

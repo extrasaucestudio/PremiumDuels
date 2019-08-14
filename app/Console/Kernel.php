@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -14,6 +15,7 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         Commands\CalculateElo::class,
+        Commands\EloHistoryLog::class,
     ];
 
     /**
@@ -26,6 +28,10 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')
         //          ->hourly();
+
+        $schedule->command('elo:calculate')->everyTenMinutes();
+
+        $schedule->command('EloHistoryLog')->dailyAt('1:00');
     }
 
     /**

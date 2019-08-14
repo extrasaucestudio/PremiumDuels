@@ -18,7 +18,7 @@ class CreateUsersTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->integer('uid')->unique();
-            $table->integer('elo')->default(1000);
+            $table->integer('elo')->default(1200);
             $table->boolean('active')->default(false);
             $table->integer('kills')->default(0);
             $table->integer('deaths')->default(0);

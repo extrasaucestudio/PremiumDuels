@@ -8,7 +8,6 @@ use App\Tournament;
 use App\Item;
 
 
-
 class AdminPagesController extends Controller
 {
 
@@ -27,9 +26,11 @@ class AdminPagesController extends Controller
     {
 
         $user = auth()->user();
-        $users = User::all();
+        $users_ = User::all();
 
-        return view('admin.user_list', compact('user', 'users'));
+
+
+        return view('admin.user_list', compact('user', 'users_'));
     }
 
 
