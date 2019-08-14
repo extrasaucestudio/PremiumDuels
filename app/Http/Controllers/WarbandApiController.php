@@ -14,6 +14,7 @@ class WarbandApiController extends Controller
 {
     public function check(Request $request)
     {
+
         if (!headers_sent()) {
             foreach (headers_list() as $header)
                 header_remove($header);
@@ -23,6 +24,7 @@ class WarbandApiController extends Controller
 
         $output = ob_get_clean();
         header("Content-Length: " . strlen($output));
+
 
         if (!$request->uid || !$request->username) return '1|-2| Wrong query';
 
@@ -57,7 +59,9 @@ class WarbandApiController extends Controller
 
 
             $user->touch();
-            return "1|3|{$request->player_id}|{$user->uid}|{$user->secret_key}|{$user->elo}|{$helmet}|{$armor}|{$gloves}|{$boots}|{$weapon}|Joining message string there";
+
+            echo "1|3|{$request->player_id}|{$user->uid}|{$user->secret_key}|{$user->elo}|{$helmet}|{$armor}|{$gloves}|{$boots}|{$weapon}|Joining message string there";
+            return;
         }
     }
 
