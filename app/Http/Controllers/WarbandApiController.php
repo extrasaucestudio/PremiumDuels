@@ -60,8 +60,12 @@ class WarbandApiController extends Controller
 
             $user->touch();
 
-            echo "1|3|{$request->player_id}|{$user->uid}|{$user->secret_key}|{$user->elo}|{$helmet}|{$armor}|{$gloves}|{$boots}|{$weapon}|Joining message string there";
-            return;
+            $resp = "1|3|{$request->player_id}|{$user->uid}|{$user->secret_key}|{$user->elo}|{$helmet}|{$armor}|{$gloves}|{$boots}|{$weapon}|Joining message string there";
+            return response($resp)
+                ->withHeaders([
+                    'Content-Type' => 'text/plain'
+
+                ]);
         }
     }
 
