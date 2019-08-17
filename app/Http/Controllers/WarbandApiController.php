@@ -12,7 +12,6 @@ class WarbandApiController extends Controller
 {
     public function check(Request $request)
     {
-
         if (!$request->uid || !$request->username) return '1|-2| Wrong query';
 
         $user = User::find($request->uid);
