@@ -297,7 +297,8 @@
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 
                                 @if($user->golden_account)
-                                <span style="color: gold!important"
+                                <span style="color: gold!important; font-weight: 1000; text-shadow: -1px -1px 0 #000, 1px
+                                -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;"
                                     class="mr-2 d-none d-lg-inline text-gray-600 small">{{$user->name}}</span>
                                 @else
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{$user->name}}</span>

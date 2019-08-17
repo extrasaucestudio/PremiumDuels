@@ -53,7 +53,7 @@
             </div>
             <div>
                 <div class="uk-card uk-card-secondary uk-card-body uk-animation-scale-up ">
-                   <h3 id="online_second"></h3>
+                    <h3 id="online_second"></h3>
                 </div>
             </div>
         </div>
@@ -105,6 +105,7 @@
                 class=" uk-table uk-table-hover uk-table-divider ">
                 <thead>
                     <tr>
+                        <th></th>
                         <th>Username</th>
                         <th></th>
                         <th>ELO</th>
@@ -115,7 +116,7 @@
                     @foreach ($users as $user)
 
                     <tr style="border: 1px solid white; background-color: #131212;" class="uk-animation-scale-up">
-
+                        <td style="color: white!important">{{$loop->index+1}}</td>
                         <td><a class="uk-link-reset" @if($user->golden_account == true)
                                 style="color: gold!important"
                                 @else style="color: white!important" @endif

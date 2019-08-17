@@ -22,6 +22,7 @@
                     id="dataTable" width="100%" cellspacing="0">
                     <thead>
                         <tr>
+                            <th></th>
                             <th>Username</th>
                             <th></th>
                             <th>Elo Rating</th>
@@ -30,8 +31,10 @@
                     </thead>
                     <tbody>
                         @foreach ($users as $user_) <tr>
+                            <td>{{$loop->index+1}}</td>
                             <td><a class="uk-link-reset" @if($user_->golden_account == true)
-                                    style="color: gold!important"
+                                    style="color: gold!important; font-weight: 1000; text-shadow: -1px -1px 0 #000, 1px
+                                    -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;"
                                     @else style="color: black!important" @endif
                                     href="/user/{{$user_->uid}}">{{$user_->name}}
                                     <span
