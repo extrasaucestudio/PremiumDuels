@@ -26,6 +26,9 @@ Route::filter('localCallOnly', function () {
 
 
 
+
+
+
 Route::get('/', 'PagesController@welcome');
 Route::get('/autocomplete', 'PagesController@fetch')->name('autocomplete');
 Route::get('HallOfFame', 'PagesController@HallOfFame');
@@ -41,12 +44,14 @@ Route::get('/api/players-online', 'PagesController@PlayersOnline');
 
 Route::get('/countries/update', 'CountryController@rank_countries');
 
-
-Route::get('/api/check', array('before' => 'localCallOnly', 'uses' => 'WarbandApiController@check'));
-Route::get('/api/ft7', array('before' => 'localCallOnly', 'uses' => 'WarbandApiController@FT7'));
-
 Route::post('api/title/change', 'UserSpecialTitlesController@change')->name('title_change');
 
+
+Route::middleware(['localhostOnly'])->group(function () {
+
+    Route::get('/api/check', 'WarbandApiController@check');
+    Route::get('/api/ft7', 'WarbandApiController@FT7');
+});
 
 
 Route::middleware(['auth', 'admin'])->group(function () {
