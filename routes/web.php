@@ -16,6 +16,15 @@
 Auth::routes();
 
 
+Route::filter('localCallOnly', function () {
+    //if IPs don't match - 404
+    if (Request::server('SERVER_ADDR') != Request::server('REMOTE_ADDR')) {
+        return App::abort(404);
+    }
+});
+
+
+
 
 
 
@@ -34,7 +43,6 @@ Route::get('/test', 'PagesController@test');
 Route::get('/api/players-online', 'PagesController@PlayersOnline');
 
 Route::get('/countries/update', 'CountryController@rank_countries');
-
 
 Route::post('api/title/change', 'UserSpecialTitlesController@change')->name('title_change');
 
