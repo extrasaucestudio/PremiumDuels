@@ -113,7 +113,9 @@ class PagesController extends Controller
         {
             $myFile = 'http://www.mnbcentral.net/min';
 
-            $str = 'PremiumDuels';
+
+            $str = 'Premium_Duels';
+
 
             function getLineWithString($fileName, $str)
             {
