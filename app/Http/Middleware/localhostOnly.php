@@ -17,7 +17,7 @@ class localhostOnly
     {
 
         if (\Request::server('SERVER_ADDR') != \Request::server('REMOTE_ADDR')) {
-            return App::abort(404);
+            return \App::abort(404);
         } else {
             return $next($request);
         }
