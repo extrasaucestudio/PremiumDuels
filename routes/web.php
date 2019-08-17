@@ -16,19 +16,6 @@
 Auth::routes();
 
 
-Route::filter('localCallOnly', function () {
-    //if IPs don't match - 404
-    if (Request::server('SERVER_ADDR') != Request::server('REMOTE_ADDR')) {
-        return App::abort(404);
-    }
-});
-
-
-
-
-
-
-
 Route::get('/', 'PagesController@welcome');
 Route::get('/autocomplete', 'PagesController@fetch')->name('autocomplete');
 Route::get('HallOfFame', 'PagesController@HallOfFame');
