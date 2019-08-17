@@ -16,6 +16,15 @@
 Auth::routes();
 
 
+Route::filter('localCallOnly', function () {
+    //if IPs don't match - 404
+    if (Request::server('SERVER_ADDR') != Request::server('REMOTE_ADDR')) {
+        return App::abort(404);
+    }
+});
+
+
+
 
 Route::get('/', 'PagesController@welcome');
 Route::get('/autocomplete', 'PagesController@fetch')->name('autocomplete');
@@ -33,9 +42,9 @@ Route::get('/api/players-online', 'PagesController@PlayersOnline');
 Route::get('/countries/update', 'CountryController@rank_countries');
 
 
+Route::get('/api/check', array('before' => 'localCallOnly', 'uses' => 'WarbandApiController@check'));
+Route::get('/api/ft7', array('before' => 'localCallOnly', 'uses' => 'WarbandApiController@FT7'));
 
-Route::get('/api/check', 'WarbandApiController@check');
-Route::get('/api/ft7', 'WarbandApiController@FT7');
 Route::post('api/title/change', 'UserSpecialTitlesController@change')->name('title_change');
 
 
