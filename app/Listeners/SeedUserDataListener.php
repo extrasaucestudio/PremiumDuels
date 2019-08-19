@@ -31,7 +31,7 @@ class SeedUserDataListener
         for ($i = 1; $i < 10; $i++) {
 
             \DB::table('user_elo_histories')->insert([
-                'elo' => 1000,
+                'elo' => 1200,
                 'user_id' => $id,
                 'created_at' => new \DateTime("-{$i} day"),
 

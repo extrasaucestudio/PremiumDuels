@@ -109,33 +109,16 @@ class PagesController extends Controller
 
     public function PlayersOnline()
     {
-        function getPlayersOnServer()
-        {
-            $myFile = 'http://www.mnbcentral.net/min';
 
 
-            $str = 'PremiumDuels';
+        $text = file_get_contents('http://premiumduels.com:7240/');
 
-
-            function getLineWithString($fileName, $str)
-            {
-                $lines = file($fileName);
-                foreach ($lines as $lineNumber => $line) {
-                    if (strpos($line, $str) !== false) {
-                        return $line;
-                    }
-                }
-                return -1;
-            }
-
-            $data = explode(",", getLineWithString($myFile, $str));
-            return $data;
+        if ($text != null) {
+            $xml = simplexml_load_string($text);
         }
 
 
-        $serverData = getPlayersOnServer();
-
-        return $serverData[5] ?? -1;
+        return $xml->NumberOfActivePlayers ?? -1;
     }
 
 
