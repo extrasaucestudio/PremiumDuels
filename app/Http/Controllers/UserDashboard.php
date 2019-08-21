@@ -29,7 +29,7 @@ class UserDashboard extends Controller
             if ($user->Title->name == 'Red') {
 
 
-                $nextRank->percent = floor(($user->elo / $user->Title->elo) * 100);
+                $nextRank->percent = floor(($user->elo / $nextRank->elo) * 100);
             } else {
                 $val1 = $nextRank->elo - $user->Title->elo;
                 $val2 = $user->Title->elo - $user->elo;
@@ -104,7 +104,9 @@ class UserDashboard extends Controller
         if ($foreign_user->id == $user->id) return \Redirect::to('/home');
 
 
-        $nextRank = Title::Where('elo', '>', $foreign_user->elo)->orderBy('elo', 'DESC')->first();
+        $nextRank = Title::Where('elo', '>', $foreign_user->elo)->orderBy('elo', 'ASC')->Where('id', '!=', $foreign_user->title_id)->first();
+
+
 
         if (!$nextRank) {
             $nextRank = new stdClass;
@@ -112,8 +114,23 @@ class UserDashboard extends Controller
             $nextRank->percent = 100;
             $nextRank->color = 'gold';
         } else {
+            if ($foreign_user->Title->name == 'Red') {
 
-            $nextRank->percent = floor(($foreign_user->elo / $nextRank->elo) * 100);
+
+
+                $nextRank->percent = floor(($foreign_user->elo / $nextRank->elo) * 100);
+            } else {
+
+                $val1 = $nextRank->elo - $foreign_user->Title->elo;
+                $val2 = $foreign_user->Title->elo - $foreign_user->elo;
+
+
+                $nextRank->percent = ($val2 / $val1) * 100;
+
+
+
+                $nextRank->percent = abs($nextRank->percent);
+            }
         }
 
         $DuelWL = new stdClass;
