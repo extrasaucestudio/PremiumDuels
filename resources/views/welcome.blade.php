@@ -113,7 +113,7 @@
                 </thead>
                 <tbody style="border: 1px solid white; background-color: #131212;">
 
-                    @foreach ($users as $user)
+                    @foreach ($users->take(10) as $user)
 
                     <tr style="border: 1px solid white; background-color: #131212;" class="uk-animation-scale-up">
                         <td style="color: white!important">{{$loop->index+1}}</td>
