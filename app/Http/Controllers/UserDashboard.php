@@ -39,7 +39,7 @@ class UserDashboard extends Controller
 
 
 
-                $nextRank->percent = abs($nextRank->percent);
+                $nextRank->percent = floor(abs($nextRank->percent));
             }
         }
 
@@ -129,7 +129,7 @@ class UserDashboard extends Controller
 
 
 
-                $nextRank->percent = abs($nextRank->percent);
+                $nextRank->percent = floor(abs($nextRank->percent));
             }
         }
 
