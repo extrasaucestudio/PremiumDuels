@@ -29,13 +29,15 @@ class UserDashboard extends Controller
             if ($user->Title->name == 'Red') {
 
 
-                $nextRank->percent = ($user->elo / $user->Title->elo) * 100;
+                $nextRank->percent = floor(($user->elo / $user->Title->elo) * 100);
             } else {
                 $val1 = $nextRank->elo - $user->Title->elo;
                 $val2 = $user->Title->elo - $user->elo;
 
 
                 $nextRank->percent = ($val2 / $val1) * 100;
+
+
 
                 $nextRank->percent = abs($nextRank->percent);
             }
