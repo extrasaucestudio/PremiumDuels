@@ -1,3 +1,11 @@
+# Repository of premiumduels.com
+## Notice: This is old project.
+### Made for client.
+### Web application integrated with video game.
+### Visual Part wasn't most important.
+
+
+
 Endpoints
 
 ## domain.com/api/check
