@@ -1,0 +1,4 @@
+[01:04:01] WSE v4.7.3 by cmpxchg8b, K700, AgentSmith (Build date: Jul 30 2019 15:11:50)
+[01:04:01] WSE path: Z:\root\warband\server\
+[01:04:01] WSE netcode version: 9
+[01:04:01] Warband version: dedicated server
